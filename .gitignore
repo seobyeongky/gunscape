@@ -2,3 +2,8 @@ build\
 build-d\
 temp\
 dep\
+*.suo
+sound\bgm.wav
+sound\bgm2.wav
+sound\bgm3.wav
+sound\bgm4.wav
