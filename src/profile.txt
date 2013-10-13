@@ -1,0 +1,10 @@
+  Ave :   Min :   Max :   # : Profile Name
+--------------------------------------------
+ 76.4 :  71.1 :  82.2 :   1 : Loop
+  0.3 :   0.0 :  48.6 :   1 :    Window_Manager::PeekMessage
+  0.4 :   0.0 :   6.7 :   1 :    Window_Manager::StartLoop()
+  0.1 :   0.0 :   6.1 :   1 :       Key_Manager::Loop()
+  0.0 :   0.0 :   5.0 :   1 :       Game_Manager::Loop()
+  6.7 :   0.3 :  20.5 :   1 :       Direct_Manager::DrawLoop()
+  1.9 :   0.0 :   9.5 :   1 :          Game_Manager::Draw()
+ 15.1 :   5.9 :  38.7 :   1 :          fontdraw

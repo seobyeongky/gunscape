@@ -1,0 +1,13 @@
+  Ave :   Min :   Max :   # : Profile Name
+--------------------------------------------
+  0.1 :   0.0 :   4.5 :   1 : Loop
+  0.2 :   0.0 :  10.8 :   1 :    Window_Manager::PeekMessage
+  0.6 :   0.0 :   7.0 :   1 :    Window_Manager::StartLoop()
+  0.3 :   0.0 :   6.5 :   1 :       Key_Manager::Loop()
+  0.1 :   0.0 :   9.8 :   1 :       Game_Manager::Loop()
+ 84.1 :  64.3 :  94.5 :   1 :       Direct_Manager::DrawLoop()
+  1.2 :   0.0 :   6.6 :   1 :          Game_Manager::Draw()
+ 13.4 :   0.4 :  30.6 :   1 :          fontdraw
+
+
+맨 처음 기본 테스트

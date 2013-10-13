@@ -1,0 +1,26 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// 파일이름: abil_.h
+//
+// 내용: 능력 구현쉽게 하기위한 틀
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+#ifndef  __ABIL__H__
+#define  __ABIL__H__
+
+#include "ability.h"
+
+class Abil_ : public Ability 
+{
+
+public:
+	Abil_(int level_);
+	virtual ~Abil_();
+
+	virtual Ability* Clone(int level_);
+
+	virtual const char* GetInfor();
+};
+
+#endif // __ABIL__H__

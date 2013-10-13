@@ -1,0 +1,27 @@
+HpDraw Start
+> 받은 패러미터 = -2d <
+> 추가 입력받은 패러미터 갯수 = 3 <
+> sizeof(char) = 1 <
+> 완성된 버퍼 =  1 <
+첫번째 버퍼는  
+첫번째 버퍼는 1
+첫번째 버퍼는 for(int i=0;i<len;i++)
+va_end
+delete[] buf
+HpDraw continue
+tex_system_heart
+> 받은 패러미터 = -3d/-3d <
+> 추가 입력받은 패러미터 갯수 = 8 <
+> sizeof(char) = 1 <
+> 완성된 버퍼 = 100/100 <
+첫번째 버퍼는 1
+첫번째 버퍼는 0
+첫번째 버퍼는 0
+첫번째 버퍼는 /
+첫번째 버퍼는 1
+첫번째 버퍼는 0
+첫번째 버퍼는 0
+첫번째 버퍼는 for(int i=0;i<len;i++)
+va_end
+delete[] buf
+HpDraw end
