@@ -14,21 +14,18 @@
     <ProjectGuid>{240E9A58-AE1E-4E95-B104-6CC3C8872FF6}</ProjectGuid>
     <RootNamespace>new_game</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <UseOfMfc>Static</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
     <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -41,19 +38,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)build-d\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)temp\$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)build\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)temp\$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)dep\audiere\include\;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)dep\audiere\lib\;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\;$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)dep\audiere\include\;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)dep\audiere\lib\;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\;$(LibraryPath)</LibraryPath>
-    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</EmbedManifest>
-    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</EmbedManifest>
+    <_ProjectFileVersion>11.0.60610.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -61,9 +56,8 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
@@ -78,10 +72,9 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -94,135 +87,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="abil_antibug.cpp" />
-    <ClCompile Include="abil_antizombie.cpp" />
-    <ClCompile Include="abil_berserker.cpp" />
-    <ClCompile Include="abil_bloodreload.cpp" />
-    <ClCompile Include="abil_bulletbonus.cpp" />
-    <ClCompile Include="abil_bulletup.cpp" />
-    <ClCompile Include="abil_chaininvi.cpp" />
-    <ClCompile Include="abil_critical.cpp" />
-    <ClCompile Include="abil_cry.cpp" />
-    <ClCompile Include="abil_dash.cpp" />
-    <ClCompile Include="abil_deathbomb.cpp" />
-    <ClCompile Include="abil_escape_forget.cpp" />
-    <ClCompile Include="abil_hack_slash.cpp" />
-    <ClCompile Include="abil_immortal.cpp" />
-    <ClCompile Include="abil_instant_bullet.cpp" />
-    <ClCompile Include="abil_instant_heal.cpp" />
-    <ClCompile Include="abil_killstamina.cpp" />
-    <ClCompile Include="abil_map.cpp" />
-    <ClCompile Include="abil_marathoner.cpp" />
-    <ClCompile Include="abil_mirror_damage.cpp" />
-    <ClCompile Include="abil_murder.cpp" />
-    <ClCompile Include="abil_post.cpp" />
-    <ClCompile Include="abil_repress.cpp" />
-    <ClCompile Include="abil_sleep.cpp" />
-    <ClCompile Include="abil_vaccine.cpp" />
-    <ClCompile Include="abil_whirlwind.cpp" />
-    <ClCompile Include="adrenalin.cpp" />
-    <ClCompile Include="ai_sniper.cpp" />
-    <ClCompile Include="bow.cpp" />
-    <ClCompile Include="bullet_pack.cpp" />
-    <ClCompile Include="burrow2.cpp" />
-    <ClCompile Include="button.cpp" />
-    <ClCompile Include="config.cpp" />
-    <ClCompile Include="dart.cpp" />
-    <ClCompile Include="debug.cpp" />
-    <ClCompile Include="double_pistol.cpp" />
-    <ClCompile Include="effect_last_message.cpp" />
-    <ClCompile Include="effect_warning_message.cpp" />
-    <ClCompile Include="fire_cloth.cpp" />
-    <ClCompile Include="grenade_gun.cpp" />
-    <ClCompile Include="hammer.cpp" />
-    <ClCompile Include="ice.cpp" />
-    <ClCompile Include="job_archer.cpp" />
-    <ClCompile Include="job_mercenary.cpp" />
-    <ClCompile Include="job_politician.cpp" />
-    <ClCompile Include="abil_shadow.cpp" />
-    <ClCompile Include="abil_speedreload.cpp" />
-    <ClCompile Include="abil_stealth.cpp" />
-    <ClCompile Include="abil_vampire.cpp" />
-    <ClCompile Include="ai_fly_bug.cpp" />
-    <ClCompile Include="ai_stalker.cpp" />
-    <ClCompile Include="barricade.cpp" />
-    <ClCompile Include="bazooka_ap.cpp" />
-    <ClCompile Include="dark_cloak.cpp" />
-    <ClCompile Include="effect_fog.cpp" />
-    <ClCompile Include="effect_house.cpp" />
-    <ClCompile Include="fire2.cpp" />
-    <ClCompile Include="job_berserker.cpp" />
-    <ClCompile Include="job_sniper.cpp" />
-    <ClCompile Include="job_teemo.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mon_alert_robot.cpp" />
-    <ClCompile Include="mon_big_zombie.cpp" />
-    <ClCompile Include="mon_bug_ant_lion.cpp" />
-    <ClCompile Include="mon_bug_beetle.cpp" />
-    <ClCompile Include="mon_bug_child_fly.cpp" />
-    <ClCompile Include="mon_bug_fling.cpp" />
-    <ClCompile Include="mon_bug_fly2.cpp" />
-    <ClCompile Include="mon_bug_spider.cpp" />
-    <ClCompile Include="mon_sf_man.cpp" />
-    <ClCompile Include="mon_spy.cpp" />
-    <ClCompile Include="mon_stalker.cpp" />
-    <ClCompile Include="mon_zombie_boomer.cpp" />
-    <ClCompile Include="mon_zombie_ghost.cpp" />
-    <ClCompile Include="mon_zombie_noise.cpp" />
-    <ClCompile Include="mon_zombie_small.cpp" />
-    <ClCompile Include="mon_zombie_virus.cpp" />
-    <ClCompile Include="named_assasin.cpp" />
-    <ClCompile Include="named_berserker.cpp" />
-    <ClCompile Include="named_bug_drill.cpp" />
-    <ClCompile Include="named_jack.cpp" />
-    <ClCompile Include="named_list.cpp" />
-    <ClCompile Include="named_looter.cpp" />
-    <ClCompile Include="named_robot.cpp" />
-    <ClCompile Include="named_scream.cpp" />
-    <ClCompile Include="named_select.cpp" />
-    <ClCompile Include="named_sniper.cpp" />
-    <ClCompile Include="named_virus.cpp" />
-    <ClCompile Include="name_fly_boss.cpp" />
-    <ClCompile Include="networkclient.cpp" />
-    <ClCompile Include="networkmanager.cpp" />
-    <ClCompile Include="network_memberkey.cpp" />
-    <ClCompile Include="no_weapon.cpp" />
-    <ClCompile Include="obj_barricade.cpp" />
-    <ClCompile Include="running_shoes.cpp" />
-    <ClCompile Include="shield.cpp" />
-    <ClCompile Include="shot_ap_missle.cpp" />
     <ClCompile Include="shot_base.cpp" />
-    <ClCompile Include="shot_bomb.cpp" />
-    <ClCompile Include="shot_bug.cpp" />
-    <ClCompile Include="shot_fire.cpp" />
-    <ClCompile Include="shot_grenade.cpp" />
-    <ClCompile Include="shot_gun.cpp" />
-    <ClCompile Include="shot_hammer.cpp" />
-    <ClCompile Include="shot_ice.cpp" />
-    <ClCompile Include="shot_melee.cpp" />
-    <ClCompile Include="shot_missile.cpp" />
-    <ClCompile Include="shot_net.cpp" />
+    <ClCompile Include="shot_base_fire.cpp" />
+    <ClCompile Include="shot_base_grenade.cpp" />
+    <ClCompile Include="shot_base_gun.cpp" />
+    <ClCompile Include="shot_base_melee.cpp" />
+    <ClCompile Include="shot_base_missile.cpp" />
+    <ClCompile Include="shot_base_net.cpp" />
     <ClCompile Include="effect_message.cpp" />
     <ClCompile Include="effect_piece.cpp" />
     <ClCompile Include="ai.cpp" />
     <ClCompile Include="char_make.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="shot_normal.cpp" />
-    <ClCompile Include="shot_poison.cpp" />
-    <ClCompile Include="shot_refle_fire.cpp" />
-    <ClCompile Include="shot_rock.cpp" />
-    <ClCompile Include="shot_smoke.cpp" />
-    <ClCompile Include="shot_smoke_bomb.cpp" />
-    <ClCompile Include="shot_sniper.cpp" />
-    <ClCompile Include="shot_trap.cpp" />
-    <ClCompile Include="shot_virus.cpp" />
-    <ClCompile Include="shot_virus_shot.cpp" />
-    <ClCompile Include="shot_water.cpp" />
-    <ClCompile Include="silencer.cpp" />
-    <ClCompile Include="smoke_grenade.cpp" />
-    <ClCompile Include="sniper.cpp" />
-    <ClCompile Include="throw_knife.cpp" />
-    <ClCompile Include="trap.cpp" />
     <ClCompile Include="unit.cpp" />
     <ClCompile Include="box.cpp" />
     <ClCompile Include="burrow.cpp" />
@@ -258,7 +135,6 @@
     <ClCompile Include="d3dx_class.cpp" />
     <ClCompile Include="gamemanager.cpp" />
     <ClCompile Include="keyinput.cpp" />
-    <ClCompile Include="water.cpp" />
     <ClCompile Include="window_class.cpp" />
     <ClCompile Include="stage.cpp" />
     <ClCompile Include="image.cpp" />
@@ -301,130 +177,18 @@
     <ClCompile Include="rect.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="abil_antibug.h" />
-    <ClInclude Include="abil_antizombie.h" />
-    <ClInclude Include="abil_berserker.h" />
-    <ClInclude Include="abil_bloodreload.h" />
-    <ClInclude Include="abil_bulletbonus.h" />
-    <ClInclude Include="abil_bulletup.h" />
-    <ClInclude Include="abil_chaininvi.h" />
-    <ClInclude Include="abil_critical.h" />
-    <ClInclude Include="abil_cry.h" />
-    <ClInclude Include="abil_dash.h" />
-    <ClInclude Include="abil_deathbomb.h" />
-    <ClInclude Include="abil_escape_forget.h" />
-    <ClInclude Include="abil_hack_slash.h" />
-    <ClInclude Include="abil_immortal.h" />
-    <ClInclude Include="abil_instant_bullet.h" />
-    <ClInclude Include="abil_instant_heal.h" />
-    <ClInclude Include="abil_killstamina.h" />
-    <ClInclude Include="abil_map.h" />
-    <ClInclude Include="abil_marathoner.h" />
-    <ClInclude Include="abil_mirror_damage.h" />
-    <ClInclude Include="abil_murder.h" />
-    <ClInclude Include="abil_post.h" />
-    <ClInclude Include="abil_repress.h" />
-    <ClInclude Include="abil_sleep.h" />
-    <ClInclude Include="abil_vaccine.h" />
-    <ClInclude Include="abil_whirlwind.h" />
-    <ClInclude Include="adrenalin.h" />
-    <ClInclude Include="ai_sniper.h" />
-    <ClInclude Include="bow.h" />
-    <ClInclude Include="bullet_pack.h" />
-    <ClInclude Include="burrow2.h" />
-    <ClInclude Include="button.h" />
-    <ClInclude Include="config.h" />
-    <ClInclude Include="dart.h" />
-    <ClInclude Include="debug.h" />
-    <ClInclude Include="double_pistol.h" />
-    <ClInclude Include="effect_last_message.h" />
-    <ClInclude Include="effect_warning_message.h" />
-    <ClInclude Include="fire_cloth.h" />
-    <ClInclude Include="grenade_gun.h" />
-    <ClInclude Include="hammer.h" />
-    <ClInclude Include="ice.h" />
-    <ClInclude Include="job_archer.h" />
-    <ClInclude Include="job_mercenary.h" />
-    <ClInclude Include="job_politician.h" />
-    <ClInclude Include="abil_shadow.h" />
-    <ClInclude Include="abil_speedreload.h" />
-    <ClInclude Include="abil_stealth.h" />
-    <ClInclude Include="abil_vampire.h" />
-    <ClInclude Include="ai_fly_bug.h" />
-    <ClInclude Include="ai_stalker.h" />
-    <ClInclude Include="barricade.h" />
-    <ClInclude Include="bazooka_ap.h" />
-    <ClInclude Include="dark_cloak.h" />
-    <ClInclude Include="effect_fog.h" />
-    <ClInclude Include="effect_house.h" />
-    <ClInclude Include="fire2.h" />
-    <ClInclude Include="job_berserker.h" />
-    <ClInclude Include="job_sniper.h" />
-    <ClInclude Include="job_teemo.h" />
-    <ClInclude Include="mon_alert_robot.h" />
-    <ClInclude Include="mon_big_zombie.h" />
-    <ClInclude Include="mon_bug_ant_lion.h" />
-    <ClInclude Include="mon_bug_beetle.h" />
-    <ClInclude Include="mon_bug_child_fly.h" />
-    <ClInclude Include="mon_bug_fling.h" />
-    <ClInclude Include="mon_bug_fly2.h" />
-    <ClInclude Include="mon_bug_spider.h" />
-    <ClInclude Include="mon_sf_man.h" />
-    <ClInclude Include="mon_spy.h" />
-    <ClInclude Include="mon_stalker.h" />
-    <ClInclude Include="mon_zombie_boomer.h" />
-    <ClInclude Include="mon_zombie_ghost.h" />
-    <ClInclude Include="mon_zombie_noise.h" />
-    <ClInclude Include="mon_zombie_small.h" />
-    <ClInclude Include="mon_zombie_virus.h" />
-    <ClInclude Include="named_assasin.h" />
-    <ClInclude Include="named_berserker.h" />
-    <ClInclude Include="named_bug_drill.h" />
-    <ClInclude Include="named_fly_boss.h" />
-    <ClInclude Include="named_jack.h" />
-    <ClInclude Include="named_looter.h" />
-    <ClInclude Include="named_robot.h" />
-    <ClInclude Include="named_scream.h" />
-    <ClInclude Include="named_sniper.h" />
-    <ClInclude Include="named_virus.h" />
-    <ClInclude Include="networkmanager.h" />
-    <ClInclude Include="no_weapon.h" />
-    <ClInclude Include="obj_barricade.h" />
-    <ClInclude Include="running_shoes.h" />
-    <ClInclude Include="shield.h" />
-    <ClInclude Include="shot_ap_missle.h" />
     <ClInclude Include="shot_base.h" />
-    <ClInclude Include="shot_bomb.h" />
-    <ClInclude Include="shot_bug.h" />
-    <ClInclude Include="shot_fire.h" />
-    <ClInclude Include="shot_grenade.h" />
-    <ClInclude Include="shot_gun.h" />
-    <ClInclude Include="shot_hammer.h" />
-    <ClInclude Include="shot_ice.h" />
-    <ClInclude Include="shot_melee.h" />
-    <ClInclude Include="shot_missile.h" />
-    <ClInclude Include="shot_net.h" />
+    <ClInclude Include="shot_base_fire.h" />
+    <ClInclude Include="shot_base_grenade.h" />
+    <ClInclude Include="shot_base_gun.h" />
+    <ClInclude Include="shot_base_melee.h" />
+    <ClInclude Include="shot_base_missile.h" />
+    <ClInclude Include="shot_base_net.h" />
     <ClInclude Include="effect_message.h" />
     <ClInclude Include="effect_piece.h" />
     <ClInclude Include="ai.h" />
     <ClInclude Include="char_make.h" />
     <ClInclude Include="player.h" />
-    <ClInclude Include="shot_normal.h" />
-    <ClInclude Include="shot_poison.h" />
-    <ClInclude Include="shot_refle_fire.h" />
-    <ClInclude Include="shot_rock.h" />
-    <ClInclude Include="shot_smoke.h" />
-    <ClInclude Include="shot_smoke_bomb.h" />
-    <ClInclude Include="shot_sniper.h" />
-    <ClInclude Include="shot_trap.h" />
-    <ClInclude Include="shot_virus.h" />
-    <ClInclude Include="shot_virus_shot.h" />
-    <ClInclude Include="shot_water.h" />
-    <ClInclude Include="silencer.h" />
-    <ClInclude Include="smoke_grenade.h" />
-    <ClInclude Include="sniper.h" />
-    <ClInclude Include="throw_knife.h" />
-    <ClInclude Include="trap.h" />
     <ClInclude Include="unit.h" />
     <ClInclude Include="box.h" />
     <ClInclude Include="burrow.h" />
@@ -500,11 +264,7 @@
     <ClInclude Include="d3dx_class.h" />
     <ClInclude Include="gamemanager.h" />
     <ClInclude Include="keyinput.h" />
-    <ClInclude Include="water.h" />
     <ClInclude Include="window_class.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

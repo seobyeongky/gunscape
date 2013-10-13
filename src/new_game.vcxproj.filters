@@ -6,147 +6,129 @@
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="소스 파일\shot_class">
-      <UniqueIdentifier>{3705c679-a755-43f6-a5cc-4b4fd57b73a3}</UniqueIdentifier>
+      <UniqueIdentifier>{0b132e60-c3b3-4ceb-9a83-cf7b923976dc}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\shot_class\effect">
-      <UniqueIdentifier>{44417e7d-0b2b-4e85-af88-1f15f4097d49}</UniqueIdentifier>
+      <UniqueIdentifier>{8d051dc2-c61c-41d5-ba77-4749b0043d1c}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\unit">
-      <UniqueIdentifier>{d9255d27-f7aa-4a46-ae46-cb8f260cb6db}</UniqueIdentifier>
+      <UniqueIdentifier>{58582ee8-9521-4e87-81ed-204289c90cd4}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\unit\monster">
-      <UniqueIdentifier>{3a9c3415-538c-4042-8dcd-60bcfbcaf2cc}</UniqueIdentifier>
+      <UniqueIdentifier>{3f26f1a7-dfa7-4c7d-a87c-1c9e7cbb977e}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\unit\job">
-      <UniqueIdentifier>{4c6c9b30-4aa2-47a5-9230-5a86bb19dbdc}</UniqueIdentifier>
+      <UniqueIdentifier>{da189b1d-a4eb-43d3-89f2-7e85091e4565}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\item">
-      <UniqueIdentifier>{6f848df7-0235-4e31-a223-8e1dbab3e991}</UniqueIdentifier>
+      <UniqueIdentifier>{1ac5f35d-cb33-4f38-80b0-af3776d15465}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\item\main_weapon">
-      <UniqueIdentifier>{58410ed7-79b5-4a49-90c0-1c02da8d209b}</UniqueIdentifier>
+      <UniqueIdentifier>{92918fd6-786e-4ed5-8d3c-97d13cede3d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\item\sub_weapon">
-      <UniqueIdentifier>{112521fc-b0e5-44fd-afef-434d9ff4a1f0}</UniqueIdentifier>
+      <UniqueIdentifier>{e6519ea2-7594-4ee2-b596-7cd90214cf50}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\item\melee_weapon">
-      <UniqueIdentifier>{56c2bb15-9c8f-4042-88c4-2f245bd285e7}</UniqueIdentifier>
+      <UniqueIdentifier>{673bdbcc-ed19-4c1f-8d20-9194435c866f}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\item\instant">
-      <UniqueIdentifier>{51591cfc-d49a-4026-8064-662103cf2393}</UniqueIdentifier>
+      <UniqueIdentifier>{c949814a-b47b-4674-9682-ffc03e3c0d24}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\item\other">
-      <UniqueIdentifier>{38658a80-a9c8-4567-bffe-c2c652cda6e7}</UniqueIdentifier>
+      <UniqueIdentifier>{870c5b24-90d8-45b1-9785-16fbbc1513be}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\manager">
-      <UniqueIdentifier>{c4065c70-f8d0-4b64-a42b-474eae7335bf}</UniqueIdentifier>
+      <UniqueIdentifier>{4360ec17-0845-4716-bc84-3815281635c2}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\manager\stage">
-      <UniqueIdentifier>{774b6a4f-aa1f-4cfc-bf4f-7bbf7f9e6f86}</UniqueIdentifier>
+      <UniqueIdentifier>{db789bec-efff-4bf7-bafd-96e17725db76}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\image">
-      <UniqueIdentifier>{a9d549cf-bedf-4c5a-b10a-5218c826efcc}</UniqueIdentifier>
+      <UniqueIdentifier>{94a3bacc-550d-4aed-b809-70dc4df9fba3}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\profiler">
-      <UniqueIdentifier>{e9a109de-8487-4f92-a793-088920e185fa}</UniqueIdentifier>
+      <UniqueIdentifier>{acc6eb73-09a4-4064-956a-f632c78ef68d}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\other">
-      <UniqueIdentifier>{332899b0-a039-401c-a144-89e1c1498227}</UniqueIdentifier>
+      <UniqueIdentifier>{5ab381ac-5470-4f2c-9925-47ef459938fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\ability">
-      <UniqueIdentifier>{46dbe255-2b96-4db7-b429-7417e526d661}</UniqueIdentifier>
+      <UniqueIdentifier>{33886105-af13-4a40-8159-06b7bb05a761}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\ability\passive">
-      <UniqueIdentifier>{b2a22bc4-d517-41c9-9c2b-24f73c9103a4}</UniqueIdentifier>
+      <UniqueIdentifier>{f045005e-520a-4b55-81f8-9c4c9c37769e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ability\use">
+      <UniqueIdentifier>{cf193944-262c-4882-9fcf-0305ee20b7cd}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\map">
-      <UniqueIdentifier>{3196954d-359a-450b-8177-fa141d13ba84}</UniqueIdentifier>
+      <UniqueIdentifier>{8bb58968-34b9-472e-ac8f-2431814f46fa}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="헤더 파일\shot_class">
-      <UniqueIdentifier>{7a0f66bb-3d14-42a1-93ca-9bcbf1fbc1f8}</UniqueIdentifier>
+      <UniqueIdentifier>{ceafe7f6-612a-4ebc-9ad8-729703be60c5}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\shot_class\effect">
-      <UniqueIdentifier>{57dcfef2-edf9-48ce-991f-001930f9e552}</UniqueIdentifier>
+      <UniqueIdentifier>{aab2eceb-8f76-4861-90a2-7838e8bdffaa}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\unit">
-      <UniqueIdentifier>{6e567039-68a1-4de3-8661-607e41db33bd}</UniqueIdentifier>
+      <UniqueIdentifier>{4476b32f-fa1f-4945-bde6-e97fb79f0a81}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\unit\monster">
-      <UniqueIdentifier>{4fc89f7a-dbba-4bab-aa38-a2d242fa6f48}</UniqueIdentifier>
+      <UniqueIdentifier>{fbf54cce-5488-4874-b534-04920f76a60f}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\unit\job">
-      <UniqueIdentifier>{29385424-9074-4233-9deb-f20dd163fa53}</UniqueIdentifier>
+      <UniqueIdentifier>{155ab8d7-93e5-4ef0-b117-c18e69036721}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\item">
-      <UniqueIdentifier>{6838a812-3fd6-445c-b345-5e499bd5ca7e}</UniqueIdentifier>
+      <UniqueIdentifier>{663c0d1a-dabc-488f-a5a7-373578502fe1}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\item\main_weapon">
-      <UniqueIdentifier>{112ce586-f163-4686-be9c-9ed4dda08acb}</UniqueIdentifier>
+      <UniqueIdentifier>{8662cedc-a933-49a8-a3e9-fec85573d760}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\item\sub_weapon">
-      <UniqueIdentifier>{24bff981-5632-4bd5-8c57-f25a769d1ce2}</UniqueIdentifier>
+      <UniqueIdentifier>{4e3fbb4a-a23a-48f1-981b-82fb94e9c901}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\item\melee_weapon">
-      <UniqueIdentifier>{86fb5176-4867-45db-a244-92d334085cc8}</UniqueIdentifier>
+      <UniqueIdentifier>{241f1929-86da-4694-858c-c01980a148f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\item\instant">
-      <UniqueIdentifier>{7e430f0f-6577-4ca5-8ad2-46db3fa39b51}</UniqueIdentifier>
+      <UniqueIdentifier>{d0a30239-ccb3-4334-bb1a-88dcbe4bd616}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\item\other">
-      <UniqueIdentifier>{9e83ab6f-1b1e-4758-aa83-476a90d1d3eb}</UniqueIdentifier>
+      <UniqueIdentifier>{d14f5c22-c9c1-4591-8964-0b1003d9e2b8}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\map">
-      <UniqueIdentifier>{2cebddaa-ffe3-4b81-b6f0-9a7fcaa26fc0}</UniqueIdentifier>
+      <UniqueIdentifier>{a393e98d-cf7f-422c-b7bc-065e71d2f888}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\image">
-      <UniqueIdentifier>{45fd727c-10e0-4874-b66c-dbaf34d7f982}</UniqueIdentifier>
+      <UniqueIdentifier>{27fdb639-f737-4468-9193-7a2613e7839b}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\profiler">
-      <UniqueIdentifier>{2342f055-9172-4a06-b2c6-3ba447b53fb2}</UniqueIdentifier>
+      <UniqueIdentifier>{3821b86f-f855-43a4-804b-4582cfa2896b}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\other">
-      <UniqueIdentifier>{03083363-2765-4779-a8a5-dda61f839c98}</UniqueIdentifier>
+      <UniqueIdentifier>{9b8ea6df-5e30-4a8f-aa1b-08d8b7a30e57}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\ability">
-      <UniqueIdentifier>{7d6ede5b-3d40-4a7c-ad40-63406ff1fd4e}</UniqueIdentifier>
+      <UniqueIdentifier>{cc4eeba2-a9aa-4a6b-9256-fa3fd257fc0b}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\ability\passive">
-      <UniqueIdentifier>{5aab1710-1562-443c-b80a-9c2fcca79814}</UniqueIdentifier>
+      <UniqueIdentifier>{cea54805-debe-45c5-9f02-428876270881}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\ability\use">
-      <UniqueIdentifier>{3862de99-e0f5-44af-adcb-9ed40f5b38a9}</UniqueIdentifier>
+      <UniqueIdentifier>{8e90d6b1-b161-4823-9511-7e02db513c3e}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\manager">
-      <UniqueIdentifier>{dfee1969-d09c-4ba2-b061-a4cefb24a0f6}</UniqueIdentifier>
+      <UniqueIdentifier>{665e9cb6-5e6f-47bf-8192-93e1ff3f5447}</UniqueIdentifier>
     </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일\unit\monster\named">
-      <UniqueIdentifier>{23c62c88-9575-4bad-8970-4ddc7a4e8ad0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\unit\monster\named">
-      <UniqueIdentifier>{97b82487-3dee-400f-9581-56e32dc41620}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\unit\monster\ai">
-      <UniqueIdentifier>{7047fe64-2277-429f-9566-691f93014259}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\unit\monster\ai">
-      <UniqueIdentifier>{70a95bdd-6b40-49bb-8986-7ca5d7e9213c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\ability\instant">
-      <UniqueIdentifier>{0bdd2b8f-e644-4c3f-90f3-860f2cb49d2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\ability\instant">
-      <UniqueIdentifier>{43a08b99-e40c-46cb-805e-b48f6bd9adef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\ability\use">
-      <UniqueIdentifier>{8c12436c-0db2-4e1d-92aa-f4708a0b59f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,11 +138,32 @@
     <ClCompile Include="shot_base.cpp">
       <Filter>소스 파일\shot_class</Filter>
     </ClCompile>
+    <ClCompile Include="shot_base_fire.cpp">
+      <Filter>소스 파일\shot_class</Filter>
+    </ClCompile>
+    <ClCompile Include="shot_base_grenade.cpp">
+      <Filter>소스 파일\shot_class</Filter>
+    </ClCompile>
+    <ClCompile Include="shot_base_gun.cpp">
+      <Filter>소스 파일\shot_class</Filter>
+    </ClCompile>
+    <ClCompile Include="shot_base_melee.cpp">
+      <Filter>소스 파일\shot_class</Filter>
+    </ClCompile>
+    <ClCompile Include="shot_base_missile.cpp">
+      <Filter>소스 파일\shot_class</Filter>
+    </ClCompile>
+    <ClCompile Include="shot_base_net.cpp">
+      <Filter>소스 파일\shot_class</Filter>
+    </ClCompile>
     <ClCompile Include="effect_message.cpp">
       <Filter>소스 파일\shot_class\effect</Filter>
     </ClCompile>
     <ClCompile Include="effect_piece.cpp">
       <Filter>소스 파일\shot_class\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="ai.cpp">
+      <Filter>소스 파일\unit</Filter>
     </ClCompile>
     <ClCompile Include="char_make.cpp">
       <Filter>소스 파일\unit</Filter>
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="monster_list.cpp">
       <Filter>소스 파일\unit\monster</Filter>
+    </ClCompile>
+    <ClCompile Include="job.cpp">
+      <Filter>소스 파일\unit\job</Filter>
     </ClCompile>
     <ClCompile Include="job_artillery.cpp">
       <Filter>소스 파일\unit\job</Filter>
@@ -387,387 +393,30 @@
     <ClCompile Include="mini_map.cpp">
       <Filter>소스 파일\map</Filter>
     </ClCompile>
-    <ClCompile Include="mon_zombie_boomer.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_zombie_virus.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_zombie_ghost.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_sf_man.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="smoke_grenade.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_fire.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_grenade.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_gun.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_melee.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_missile.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_net.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_smoke.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_smoke_bomb.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_virus.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_virus_shot.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_water.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="water.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_spy.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_refle_fire.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="fire2.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_bug_fly2.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_bug_ant_lion.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_bug_beetle.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_zombie_small.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_zombie_noise.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="dark_cloak.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="running_shoes.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="barricade.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="obj_barricade.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="shield.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_normal.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="throw_knife.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="named_jack.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="named_list.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
     <ClCompile Include="rect.cpp">
-      <Filter>소스 파일\other</Filter>
-    </ClCompile>
-    <ClCompile Include="named_select.cpp">
-      <Filter>소스 파일\manager\stage</Filter>
-    </ClCompile>
-    <ClCompile Include="named_looter.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_marathoner.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_berserker.cpp">
-      <Filter>소스 파일\ability\use</Filter>
-    </ClCompile>
-    <ClCompile Include="job_berserker.cpp">
-      <Filter>소스 파일\unit\job</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_vampire.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_antibug.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_bloodreload.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_shadow.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_immortal.cpp">
-      <Filter>소스 파일\ability\use</Filter>
-    </ClCompile>
-    <ClCompile Include="networkmanager.cpp">
-      <Filter>소스 파일\manager</Filter>
-    </ClCompile>
-    <ClCompile Include="networkclient.cpp">
-      <Filter>소스 파일\manager</Filter>
-    </ClCompile>
-    <ClCompile Include="network_memberkey.cpp">
-      <Filter>소스 파일\manager</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_escape_forget.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="no_weapon.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_stalker.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="ai.cpp">
-      <Filter>소스 파일\unit\monster\ai</Filter>
-    </ClCompile>
-    <ClCompile Include="ai_stalker.cpp">
-      <Filter>소스 파일\unit\monster\ai</Filter>
-    </ClCompile>
-    <ClCompile Include="sniper.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="job_sniper.cpp">
-      <Filter>소스 파일\unit\job</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_sniper.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="job.cpp">
-      <Filter>소스 파일\unit\job</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_map.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="effect_fog.cpp">
-      <Filter>소스 파일\shot_class\effect</Filter>
-    </ClCompile>
-    <ClCompile Include="effect_house.cpp">
-      <Filter>소스 파일\shot_class\effect</Filter>
-    </ClCompile>
-    <ClCompile Include="ai_fly_bug.cpp">
-      <Filter>소스 파일\unit\monster\ai</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_speedreload.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_bulletup.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_bulletbonus.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_dash.cpp">
-      <Filter>소스 파일\ability\use</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_stealth.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_killstamina.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_deathbomb.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_bomb.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_instant_heal.cpp">
-      <Filter>소스 파일\ability\instant</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_instant_bullet.cpp">
-      <Filter>소스 파일\ability\instant</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_mirror_damage.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="bazooka_ap.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_ap_missle.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="job_politician.cpp">
-      <Filter>소스 파일\unit\job</Filter>
-    </ClCompile>
-    <ClCompile Include="double_pistol.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="ice.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_ice.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="bow.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="bullet_pack.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_whirlwind.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="named_robot.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="grenade_gun.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="effect_last_message.cpp">
-      <Filter>소스 파일\shot_class\effect</Filter>
-    </ClCompile>
-    <ClCompile Include="button.cpp">
-      <Filter>소스 파일\item\other</Filter>
-    </ClCompile>
-    <ClCompile Include="burrow2.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_bug_spider.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_critical.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_chaininvi.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="job_archer.cpp">
-      <Filter>소스 파일\unit\job</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_vaccine.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="debug.cpp">
-      <Filter>소스 파일\other</Filter>
-    </ClCompile>
-    <ClCompile Include="config.cpp">
-      <Filter>소스 파일\other</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_hack_slash.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_repress.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_post.cpp">
-      <Filter>소스 파일\ability\use</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_cry.cpp">
-      <Filter>소스 파일\ability\use</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_antizombie.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_murder.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_big_zombie.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_rock.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="hammer.cpp">
-      <Filter>소스 파일\item\melee_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_hammer.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_alert_robot.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_bug_fling.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="fire_cloth.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="adrenalin.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="silencer.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="trap.cpp">
-      <Filter>소스 파일\item\sub_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_trap.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="abil_sleep.cpp">
-      <Filter>소스 파일\ability\passive</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_poison.cpp">
-      <Filter>소스 파일\shot_class</Filter>
-    </ClCompile>
-    <ClCompile Include="dart.cpp">
-      <Filter>소스 파일\item\main_weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="job_teemo.cpp">
-      <Filter>소스 파일\unit\job</Filter>
-    </ClCompile>
-    <ClCompile Include="job_mercenary.cpp">
-      <Filter>소스 파일\unit\job</Filter>
-    </ClCompile>
-    <ClCompile Include="name_fly_boss.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="named_bug_drill.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="shot_bug.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="mon_bug_child_fly.cpp">
-      <Filter>소스 파일\unit\monster</Filter>
-    </ClCompile>
-    <ClCompile Include="named_assasin.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="named_sniper.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="ai_sniper.cpp">
-      <Filter>소스 파일\unit\monster\ai</Filter>
-    </ClCompile>
-    <ClCompile Include="named_virus.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="named_scream.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="named_berserker.cpp">
-      <Filter>소스 파일\unit\monster\named</Filter>
-    </ClCompile>
-    <ClCompile Include="effect_warning_message.cpp">
-      <Filter>소스 파일\shot_class\effect</Filter>
+      <Filter>소스 파일\map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shot_base.h">
+      <Filter>헤더 파일\shot_class</Filter>
+    </ClInclude>
+    <ClInclude Include="shot_base_fire.h">
+      <Filter>헤더 파일\shot_class</Filter>
+    </ClInclude>
+    <ClInclude Include="shot_base_grenade.h">
+      <Filter>헤더 파일\shot_class</Filter>
+    </ClInclude>
+    <ClInclude Include="shot_base_gun.h">
+      <Filter>헤더 파일\shot_class</Filter>
+    </ClInclude>
+    <ClInclude Include="shot_base_melee.h">
+      <Filter>헤더 파일\shot_class</Filter>
+    </ClInclude>
+    <ClInclude Include="shot_base_missile.h">
+      <Filter>헤더 파일\shot_class</Filter>
+    </ClInclude>
+    <ClInclude Include="shot_base_net.h">
       <Filter>헤더 파일\shot_class</Filter>
     </ClInclude>
     <ClInclude Include="effect_message.h">
@@ -775,6 +424,9 @@
     </ClInclude>
     <ClInclude Include="effect_piece.h">
       <Filter>헤더 파일\shot_class\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="ai.h">
+      <Filter>헤더 파일\unit</Filter>
     </ClInclude>
     <ClInclude Include="char_make.h">
       <Filter>헤더 파일\unit</Filter>
@@ -1010,368 +662,5 @@
     <ClInclude Include="window_class.h">
       <Filter>헤더 파일\manager</Filter>
     </ClInclude>
-    <ClInclude Include="mon_zombie_boomer.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_zombie_virus.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_zombie_ghost.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_sf_man.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="smoke_grenade.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_water.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_fire.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_grenade.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_gun.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_melee.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_missile.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_net.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_smoke.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_smoke_bomb.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_virus.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_virus_shot.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="water.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_spy.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_refle_fire.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="fire2.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_bug_fly2.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_bug_ant_lion.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_bug_beetle.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_zombie_small.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_zombie_noise.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="running_shoes.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="barricade.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="obj_barricade.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="shield.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_normal.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="throw_knife.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="named_jack.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="named_looter.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_marathoner.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_berserker.h">
-      <Filter>헤더 파일\ability\use</Filter>
-    </ClInclude>
-    <ClInclude Include="job_berserker.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_vampire.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_antibug.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_bloodreload.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_shadow.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_immortal.h">
-      <Filter>헤더 파일\ability\use</Filter>
-    </ClInclude>
-    <ClInclude Include="networkmanager.h">
-      <Filter>헤더 파일\manager</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_escape_forget.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="no_weapon.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_stalker.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="ai.h">
-      <Filter>헤더 파일\unit\monster\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="ai_stalker.h">
-      <Filter>헤더 파일\unit\monster\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="job_sniper.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_sniper.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_map.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="effect_fog.h">
-      <Filter>헤더 파일\shot_class\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="effect_house.h">
-      <Filter>헤더 파일\shot_class\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="ai_fly_bug.h">
-      <Filter>헤더 파일\unit\monster\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_speedreload.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_bulletup.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_bulletbonus.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_dash.h">
-      <Filter>헤더 파일\ability\use</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_stealth.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_killstamina.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_deathbomb.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_bomb.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_instant_heal.h">
-      <Filter>헤더 파일\ability\instant</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_instant_bullet.h">
-      <Filter>헤더 파일\ability\instant</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_mirror_damage.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="bazooka_ap.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_ap_missle.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="job_politician.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="double_pistol.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="ice.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_ice.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="bow.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="sniper.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="dark_cloak.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="bullet_pack.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_whirlwind.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="named_robot.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="grenade_gun.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="effect_last_message.h">
-      <Filter>헤더 파일\shot_class\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="button.h">
-      <Filter>헤더 파일\item\other</Filter>
-    </ClInclude>
-    <ClInclude Include="burrow2.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_bug_spider.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_critical.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_chaininvi.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="job_archer.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_vaccine.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="debug.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="config.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_hack_slash.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_repress.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_post.h">
-      <Filter>헤더 파일\ability\use</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_cry.h">
-      <Filter>헤더 파일\ability\use</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_antizombie.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_murder.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_big_zombie.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_rock.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="hammer.h">
-      <Filter>헤더 파일\item\melee_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_hammer.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_alert_robot.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_bug_fling.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="fire_cloth.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="adrenalin.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="silencer.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="trap.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_trap.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_sleep.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_poison.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="dart.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="job_teemo.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="job_mercenary.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="named_fly_boss.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="named_bug_drill.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_bug.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_bug_child_fly.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="named_assasin.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="named_sniper.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="ai_sniper.h">
-      <Filter>헤더 파일\unit\monster\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="named_virus.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="named_scream.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="named_berserker.h">
-      <Filter>헤더 파일\unit\monster\named</Filter>
-    </ClInclude>
-    <ClInclude Include="effect_warning_message.h">
-      <Filter>헤더 파일\shot_class\effect</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>
