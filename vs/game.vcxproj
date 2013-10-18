@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{240E9A58-AE1E-4E95-B104-6CC3C8872FF6}</ProjectGuid>
+    <RootNamespace>new_game</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>game</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.60610.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)build-d\</OutDir>
+    <IntDir>$(SolutionDir)temp\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)dep\audiere\include\;$(DXSDK_DIR)Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dep\audiere\lib\;$(DXSDK_DIR)Lib\x86\;$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)-d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)build\</OutDir>
+    <IntDir>$(SolutionDir)temp\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)dep\audiere\include\;$(DXSDK_DIR)Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dep\audiere\lib\;$(DXSDK_DIR)Lib\x86\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\ability.cpp" />
+    <ClCompile Include="..\src\abil_antibug.cpp" />
+    <ClCompile Include="..\src\abil_antiexplosion.cpp" />
+    <ClCompile Include="..\src\abil_antizombie.cpp" />
+    <ClCompile Include="..\src\abil_bare.cpp" />
+    <ClCompile Include="..\src\abil_bazooka.cpp" />
+    <ClCompile Include="..\src\abil_berserker.cpp" />
+    <ClCompile Include="..\src\abil_bloodreload.cpp" />
+    <ClCompile Include="..\src\abil_bullet.cpp" />
+    <ClCompile Include="..\src\abil_bulletbonus.cpp" />
+    <ClCompile Include="..\src\abil_bulletup.cpp" />
+    <ClCompile Include="..\src\abil_chaininvi.cpp" />
+    <ClCompile Include="..\src\abil_critical.cpp" />
+    <ClCompile Include="..\src\abil_cry.cpp" />
+    <ClCompile Include="..\src\abil_dash.cpp" />
+    <ClCompile Include="..\src\abil_deathbomb.cpp" />
+    <ClCompile Include="..\src\abil_dex.cpp" />
+    <ClCompile Include="..\src\abil_escape_forget.cpp" />
+    <ClCompile Include="..\src\abil_fast_portal.cpp" />
+    <ClCompile Include="..\src\abil_fire.cpp" />
+    <ClCompile Include="..\src\abil_flame.cpp" />
+    <ClCompile Include="..\src\abil_hack_slash.cpp" />
+    <ClCompile Include="..\src\abil_health.cpp" />
+    <ClCompile Include="..\src\abil_immortal.cpp" />
+    <ClCompile Include="..\src\abil_instant_bullet.cpp" />
+    <ClCompile Include="..\src\abil_instant_heal.cpp" />
+    <ClCompile Include="..\src\abil_invisible.cpp" />
+    <ClCompile Include="..\src\abil_killstamina.cpp" />
+    <ClCompile Include="..\src\abil_knife.cpp" />
+    <ClCompile Include="..\src\abil_knowledge.cpp" />
+    <ClCompile Include="..\src\abil_live.cpp" />
+    <ClCompile Include="..\src\abil_map.cpp" />
+    <ClCompile Include="..\src\abil_marathoner.cpp" />
+    <ClCompile Include="..\src\abil_mirror_damage.cpp" />
+    <ClCompile Include="..\src\abil_moonwalk.cpp" />
+    <ClCompile Include="..\src\abil_murder.cpp" />
+    <ClCompile Include="..\src\abil_pistol.cpp" />
+    <ClCompile Include="..\src\abil_post.cpp" />
+    <ClCompile Include="..\src\abil_repress.cpp" />
+    <ClCompile Include="..\src\abil_rifle.cpp" />
+    <ClCompile Include="..\src\abil_run.cpp" />
+    <ClCompile Include="..\src\abil_see_sight.cpp" />
+    <ClCompile Include="..\src\abil_shadow.cpp" />
+    <ClCompile Include="..\src\abil_shot_gun.cpp" />
+    <ClCompile Include="..\src\abil_sight.cpp" />
+    <ClCompile Include="..\src\abil_sleep.cpp" />
+    <ClCompile Include="..\src\abil_speedreload.cpp" />
+    <ClCompile Include="..\src\abil_state_view.cpp" />
+    <ClCompile Include="..\src\abil_stealth.cpp" />
+    <ClCompile Include="..\src\abil_tool.cpp" />
+    <ClCompile Include="..\src\abil_vaccine.cpp" />
+    <ClCompile Include="..\src\abil_vampire.cpp" />
+    <ClCompile Include="..\src\abil_whirlwind.cpp" />
+    <ClCompile Include="..\src\adrenalin.cpp" />
+    <ClCompile Include="..\src\ai.cpp" />
+    <ClCompile Include="..\src\ai_fly_bug.cpp" />
+    <ClCompile Include="..\src\ai_sniper.cpp" />
+    <ClCompile Include="..\src\ai_stalker.cpp" />
+    <ClCompile Include="..\src\Astar.cpp" />
+    <ClCompile Include="..\src\barricade.cpp" />
+    <ClCompile Include="..\src\bazooka.cpp" />
+    <ClCompile Include="..\src\bazooka_ap.cpp" />
+    <ClCompile Include="..\src\bitrect.cpp" />
+    <ClCompile Include="..\src\bow.cpp" />
+    <ClCompile Include="..\src\box.cpp" />
+    <ClCompile Include="..\src\bullet_pack.cpp" />
+    <ClCompile Include="..\src\burrow.cpp" />
+    <ClCompile Include="..\src\burrow2.cpp" />
+    <ClCompile Include="..\src\button.cpp" />
+    <ClCompile Include="..\src\char_make.cpp" />
+    <ClCompile Include="..\src\config.cpp" />
+    <ClCompile Include="..\src\coord_def.cpp" />
+    <ClCompile Include="..\src\d3dx_class.cpp" />
+    <ClCompile Include="..\src\dark_cloak.cpp" />
+    <ClCompile Include="..\src\dart.cpp" />
+    <ClCompile Include="..\src\debug.cpp" />
+    <ClCompile Include="..\src\double_pistol.cpp" />
+    <ClCompile Include="..\src\effect_fog.cpp" />
+    <ClCompile Include="..\src\effect_house.cpp" />
+    <ClCompile Include="..\src\effect_last_message.cpp" />
+    <ClCompile Include="..\src\effect_message.cpp" />
+    <ClCompile Include="..\src\effect_piece.cpp" />
+    <ClCompile Include="..\src\effect_warning_message.cpp" />
+    <ClCompile Include="..\src\fire.cpp" />
+    <ClCompile Include="..\src\fire2.cpp" />
+    <ClCompile Include="..\src\fire_cloth.cpp" />
+    <ClCompile Include="..\src\font.cpp" />
+    <ClCompile Include="..\src\FPS.cpp" />
+    <ClCompile Include="..\src\FSM.cpp" />
+    <ClCompile Include="..\src\gamemanager.cpp" />
+    <ClCompile Include="..\src\grenade.cpp" />
+    <ClCompile Include="..\src\grenade_gun.cpp" />
+    <ClCompile Include="..\src\hammer.cpp" />
+    <ClCompile Include="..\src\ice.cpp" />
+    <ClCompile Include="..\src\image.cpp" />
+    <ClCompile Include="..\src\instant_list.cpp" />
+    <ClCompile Include="..\src\item.cpp" />
+    <ClCompile Include="..\src\item_bullet.cpp" />
+    <ClCompile Include="..\src\item_heal.cpp" />
+    <ClCompile Include="..\src\job.cpp" />
+    <ClCompile Include="..\src\job_archer.cpp" />
+    <ClCompile Include="..\src\job_artillery.cpp" />
+    <ClCompile Include="..\src\job_assassin.cpp" />
+    <ClCompile Include="..\src\job_berserker.cpp" />
+    <ClCompile Include="..\src\job_deserter.cpp" />
+    <ClCompile Include="..\src\job_hunter.cpp" />
+    <ClCompile Include="..\src\job_mercenary.cpp" />
+    <ClCompile Include="..\src\job_politician.cpp" />
+    <ClCompile Include="..\src\job_pyro.cpp" />
+    <ClCompile Include="..\src\job_sniper.cpp" />
+    <ClCompile Include="..\src\job_stalker.cpp" />
+    <ClCompile Include="..\src\job_teemo.cpp" />
+    <ClCompile Include="..\src\kevlar.cpp" />
+    <ClCompile Include="..\src\keyinput.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\main_weapon.cpp" />
+    <ClCompile Include="..\src\main_weapon_list.cpp" />
+    <ClCompile Include="..\src\map.cpp" />
+    <ClCompile Include="..\src\map_make.cpp" />
+    <ClCompile Include="..\src\melee_weapon.cpp" />
+    <ClCompile Include="..\src\melee_weapon_list.cpp" />
+    <ClCompile Include="..\src\mini_map.cpp" />
+    <ClCompile Include="..\src\monster.cpp" />
+    <ClCompile Include="..\src\monster_list.cpp" />
+    <ClCompile Include="..\src\mon_alert_robot.cpp" />
+    <ClCompile Include="..\src\mon_big_zombie.cpp" />
+    <ClCompile Include="..\src\mon_bug_ant_lion.cpp" />
+    <ClCompile Include="..\src\mon_bug_beetle.cpp" />
+    <ClCompile Include="..\src\mon_bug_bomb.cpp" />
+    <ClCompile Include="..\src\mon_bug_child_fly.cpp" />
+    <ClCompile Include="..\src\mon_bug_fling.cpp" />
+    <ClCompile Include="..\src\mon_bug_fly.cpp" />
+    <ClCompile Include="..\src\mon_bug_fly2.cpp" />
+    <ClCompile Include="..\src\mon_bug_spider.cpp" />
+    <ClCompile Include="..\src\mon_hunter.cpp" />
+    <ClCompile Include="..\src\mon_sf_man.cpp" />
+    <ClCompile Include="..\src\mon_spy.cpp" />
+    <ClCompile Include="..\src\mon_stalker.cpp" />
+    <ClCompile Include="..\src\mon_zombie_boomer.cpp" />
+    <ClCompile Include="..\src\mon_zombie_ghost.cpp" />
+    <ClCompile Include="..\src\mon_zombie_noise.cpp" />
+    <ClCompile Include="..\src\mon_zombie_small.cpp" />
+    <ClCompile Include="..\src\mon_zombie_virus.cpp" />
+    <ClCompile Include="..\src\named_assasin.cpp" />
+    <ClCompile Include="..\src\named_berserker.cpp" />
+    <ClCompile Include="..\src\named_bug_drill.cpp" />
+    <ClCompile Include="..\src\named_jack.cpp" />
+    <ClCompile Include="..\src\named_list.cpp" />
+    <ClCompile Include="..\src\named_looter.cpp" />
+    <ClCompile Include="..\src\named_robot.cpp" />
+    <ClCompile Include="..\src\named_scream.cpp" />
+    <ClCompile Include="..\src\named_select.cpp" />
+    <ClCompile Include="..\src\named_sniper.cpp" />
+    <ClCompile Include="..\src\named_virus.cpp" />
+    <ClCompile Include="..\src\name_fly_boss.cpp" />
+    <ClCompile Include="..\src\net.cpp" />
+    <ClCompile Include="..\src\networkclient.cpp" />
+    <ClCompile Include="..\src\networkmanager.cpp" />
+    <ClCompile Include="..\src\network_memberkey.cpp" />
+    <ClCompile Include="..\src\no_weapon.cpp" />
+    <ClCompile Include="..\src\obj_barricade.cpp" />
+    <ClCompile Include="..\src\player.cpp" />
+    <ClCompile Include="..\src\portal.cpp" />
+    <ClCompile Include="..\src\profiler.cpp" />
+    <ClCompile Include="..\src\random.cpp" />
+    <ClCompile Include="..\src\rect.cpp" />
+    <ClCompile Include="..\src\rifle.cpp" />
+    <ClCompile Include="..\src\running_shoes.cpp" />
+    <ClCompile Include="..\src\shield.cpp" />
+    <ClCompile Include="..\src\shot_ap_missle.cpp" />
+    <ClCompile Include="..\src\shot_base.cpp" />
+    <ClCompile Include="..\src\shot_bomb.cpp" />
+    <ClCompile Include="..\src\shot_bug.cpp" />
+    <ClCompile Include="..\src\shot_fire.cpp" />
+    <ClCompile Include="..\src\shot_grenade.cpp" />
+    <ClCompile Include="..\src\shot_gun.cpp" />
+    <ClCompile Include="..\src\shot_hammer.cpp" />
+    <ClCompile Include="..\src\shot_ice.cpp" />
+    <ClCompile Include="..\src\shot_melee.cpp" />
+    <ClCompile Include="..\src\shot_missile.cpp" />
+    <ClCompile Include="..\src\shot_net.cpp" />
+    <ClCompile Include="..\src\shot_normal.cpp" />
+    <ClCompile Include="..\src\shot_poison.cpp" />
+    <ClCompile Include="..\src\shot_refle_fire.cpp" />
+    <ClCompile Include="..\src\shot_rock.cpp" />
+    <ClCompile Include="..\src\shot_smoke.cpp" />
+    <ClCompile Include="..\src\shot_smoke_bomb.cpp" />
+    <ClCompile Include="..\src\shot_sniper.cpp" />
+    <ClCompile Include="..\src\shot_trap.cpp" />
+    <ClCompile Include="..\src\shot_virus.cpp" />
+    <ClCompile Include="..\src\shot_virus_shot.cpp" />
+    <ClCompile Include="..\src\shot_water.cpp" />
+    <ClCompile Include="..\src\silencer.cpp" />
+    <ClCompile Include="..\src\smoke_grenade.cpp" />
+    <ClCompile Include="..\src\sniper.cpp" />
+    <ClCompile Include="..\src\sound.cpp" />
+    <ClCompile Include="..\src\stage.cpp" />
+    <ClCompile Include="..\src\sub_weapon.cpp" />
+    <ClCompile Include="..\src\sub_weapon_list.cpp" />
+    <ClCompile Include="..\src\texture_const.cpp" />
+    <ClCompile Include="..\src\throw_knife.cpp" />
+    <ClCompile Include="..\src\trap.cpp" />
+    <ClCompile Include="..\src\unit.cpp" />
+    <ClCompile Include="..\src\water.cpp" />
+    <ClCompile Include="..\src\window_class.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\ability.h" />
+    <ClInclude Include="..\src\abil_antibug.h" />
+    <ClInclude Include="..\src\abil_antiexplosion.h" />
+    <ClInclude Include="..\src\abil_antizombie.h" />
+    <ClInclude Include="..\src\abil_bare.h" />
+    <ClInclude Include="..\src\abil_bazooka.h" />
+    <ClInclude Include="..\src\abil_berserker.h" />
+    <ClInclude Include="..\src\abil_bloodreload.h" />
+    <ClInclude Include="..\src\abil_bullet.h" />
+    <ClInclude Include="..\src\abil_bulletbonus.h" />
+    <ClInclude Include="..\src\abil_bulletup.h" />
+    <ClInclude Include="..\src\abil_chaininvi.h" />
+    <ClInclude Include="..\src\abil_critical.h" />
+    <ClInclude Include="..\src\abil_cry.h" />
+    <ClInclude Include="..\src\abil_dash.h" />
+    <ClInclude Include="..\src\abil_deathbomb.h" />
+    <ClInclude Include="..\src\abil_dex.h" />
+    <ClInclude Include="..\src\abil_escape_forget.h" />
+    <ClInclude Include="..\src\abil_fast_portal.h" />
+    <ClInclude Include="..\src\abil_fire.h" />
+    <ClInclude Include="..\src\abil_flame.h" />
+    <ClInclude Include="..\src\abil_hack_slash.h" />
+    <ClInclude Include="..\src\abil_health.h" />
+    <ClInclude Include="..\src\abil_immortal.h" />
+    <ClInclude Include="..\src\abil_instant_bullet.h" />
+    <ClInclude Include="..\src\abil_instant_heal.h" />
+    <ClInclude Include="..\src\abil_invisible.h" />
+    <ClInclude Include="..\src\abil_killstamina.h" />
+    <ClInclude Include="..\src\abil_knife.h" />
+    <ClInclude Include="..\src\abil_knowledge.h" />
+    <ClInclude Include="..\src\abil_live.h" />
+    <ClInclude Include="..\src\abil_map.h" />
+    <ClInclude Include="..\src\abil_marathoner.h" />
+    <ClInclude Include="..\src\abil_mirror_damage.h" />
+    <ClInclude Include="..\src\abil_moonwalk.h" />
+    <ClInclude Include="..\src\abil_murder.h" />
+    <ClInclude Include="..\src\abil_pistol.h" />
+    <ClInclude Include="..\src\abil_post.h" />
+    <ClInclude Include="..\src\abil_repress.h" />
+    <ClInclude Include="..\src\abil_rifle.h" />
+    <ClInclude Include="..\src\abil_run.h" />
+    <ClInclude Include="..\src\abil_see_sight.h" />
+    <ClInclude Include="..\src\abil_shadow.h" />
+    <ClInclude Include="..\src\abil_shot_gun.h" />
+    <ClInclude Include="..\src\abil_sight.h" />
+    <ClInclude Include="..\src\abil_sleep.h" />
+    <ClInclude Include="..\src\abil_speedreload.h" />
+    <ClInclude Include="..\src\abil_state_view.h" />
+    <ClInclude Include="..\src\abil_stealth.h" />
+    <ClInclude Include="..\src\abil_tool.h" />
+    <ClInclude Include="..\src\abil_vaccine.h" />
+    <ClInclude Include="..\src\abil_vampire.h" />
+    <ClInclude Include="..\src\abil_whirlwind.h" />
+    <ClInclude Include="..\src\adrenalin.h" />
+    <ClInclude Include="..\src\ai.h" />
+    <ClInclude Include="..\src\ai_fly_bug.h" />
+    <ClInclude Include="..\src\ai_sniper.h" />
+    <ClInclude Include="..\src\ai_stalker.h" />
+    <ClInclude Include="..\src\Astar.h" />
+    <ClInclude Include="..\src\barricade.h" />
+    <ClInclude Include="..\src\bazooka.h" />
+    <ClInclude Include="..\src\bazooka_ap.h" />
+    <ClInclude Include="..\src\bitrect.h" />
+    <ClInclude Include="..\src\bow.h" />
+    <ClInclude Include="..\src\box.h" />
+    <ClInclude Include="..\src\bullet_pack.h" />
+    <ClInclude Include="..\src\burrow.h" />
+    <ClInclude Include="..\src\burrow2.h" />
+    <ClInclude Include="..\src\button.h" />
+    <ClInclude Include="..\src\char_make.h" />
+    <ClInclude Include="..\src\config.h" />
+    <ClInclude Include="..\src\coord_def.h" />
+    <ClInclude Include="..\src\d3dx_class.h" />
+    <ClInclude Include="..\src\dark_cloak.h" />
+    <ClInclude Include="..\src\dart.h" />
+    <ClInclude Include="..\src\debug.h" />
+    <ClInclude Include="..\src\double_pistol.h" />
+    <ClInclude Include="..\src\effect_fog.h" />
+    <ClInclude Include="..\src\effect_house.h" />
+    <ClInclude Include="..\src\effect_last_message.h" />
+    <ClInclude Include="..\src\effect_message.h" />
+    <ClInclude Include="..\src\effect_piece.h" />
+    <ClInclude Include="..\src\effect_warning_message.h" />
+    <ClInclude Include="..\src\fire.h" />
+    <ClInclude Include="..\src\fire2.h" />
+    <ClInclude Include="..\src\fire_cloth.h" />
+    <ClInclude Include="..\src\font.h" />
+    <ClInclude Include="..\src\FPS.h" />
+    <ClInclude Include="..\src\FSM.h" />
+    <ClInclude Include="..\src\gamemanager.h" />
+    <ClInclude Include="..\src\grenade.h" />
+    <ClInclude Include="..\src\grenade_gun.h" />
+    <ClInclude Include="..\src\hammer.h" />
+    <ClInclude Include="..\src\ice.h" />
+    <ClInclude Include="..\src\image.h" />
+    <ClInclude Include="..\src\instant_list.h" />
+    <ClInclude Include="..\src\item.h" />
+    <ClInclude Include="..\src\item_bullet.h" />
+    <ClInclude Include="..\src\item_heal.h" />
+    <ClInclude Include="..\src\job.h" />
+    <ClInclude Include="..\src\job_archer.h" />
+    <ClInclude Include="..\src\job_artillery.h" />
+    <ClInclude Include="..\src\job_assassin.h" />
+    <ClInclude Include="..\src\job_berserker.h" />
+    <ClInclude Include="..\src\job_deserter.h" />
+    <ClInclude Include="..\src\job_hunter.h" />
+    <ClInclude Include="..\src\job_mercenary.h" />
+    <ClInclude Include="..\src\job_politician.h" />
+    <ClInclude Include="..\src\job_pyro.h" />
+    <ClInclude Include="..\src\job_sniper.h" />
+    <ClInclude Include="..\src\job_stalker.h" />
+    <ClInclude Include="..\src\job_teemo.h" />
+    <ClInclude Include="..\src\kevlar.h" />
+    <ClInclude Include="..\src\keyinput.h" />
+    <ClInclude Include="..\src\main_weapon.h" />
+    <ClInclude Include="..\src\main_weapon_list.h" />
+    <ClInclude Include="..\src\map.h" />
+    <ClInclude Include="..\src\map_make.h" />
+    <ClInclude Include="..\src\melee_weapon.h" />
+    <ClInclude Include="..\src\melee_weapon_list.h" />
+    <ClInclude Include="..\src\mini_map.h" />
+    <ClInclude Include="..\src\monster.h" />
+    <ClInclude Include="..\src\monster_list.h" />
+    <ClInclude Include="..\src\mon_alert_robot.h" />
+    <ClInclude Include="..\src\mon_big_zombie.h" />
+    <ClInclude Include="..\src\mon_bug_ant_lion.h" />
+    <ClInclude Include="..\src\mon_bug_beetle.h" />
+    <ClInclude Include="..\src\mon_bug_bomb.h" />
+    <ClInclude Include="..\src\mon_bug_child_fly.h" />
+    <ClInclude Include="..\src\mon_bug_fling.h" />
+    <ClInclude Include="..\src\mon_bug_fly.h" />
+    <ClInclude Include="..\src\mon_bug_fly2.h" />
+    <ClInclude Include="..\src\mon_bug_spider.h" />
+    <ClInclude Include="..\src\mon_hunter.h" />
+    <ClInclude Include="..\src\mon_sf_man.h" />
+    <ClInclude Include="..\src\mon_spy.h" />
+    <ClInclude Include="..\src\mon_stalker.h" />
+    <ClInclude Include="..\src\mon_zombie_boomer.h" />
+    <ClInclude Include="..\src\mon_zombie_ghost.h" />
+    <ClInclude Include="..\src\mon_zombie_noise.h" />
+    <ClInclude Include="..\src\mon_zombie_small.h" />
+    <ClInclude Include="..\src\mon_zombie_virus.h" />
+    <ClInclude Include="..\src\named_assasin.h" />
+    <ClInclude Include="..\src\named_berserker.h" />
+    <ClInclude Include="..\src\named_bug_drill.h" />
+    <ClInclude Include="..\src\named_fly_boss.h" />
+    <ClInclude Include="..\src\named_jack.h" />
+    <ClInclude Include="..\src\named_looter.h" />
+    <ClInclude Include="..\src\named_robot.h" />
+    <ClInclude Include="..\src\named_scream.h" />
+    <ClInclude Include="..\src\named_sniper.h" />
+    <ClInclude Include="..\src\named_virus.h" />
+    <ClInclude Include="..\src\net.h" />
+    <ClInclude Include="..\src\networkmanager.h" />
+    <ClInclude Include="..\src\no_weapon.h" />
+    <ClInclude Include="..\src\obj_barricade.h" />
+    <ClInclude Include="..\src\player.h" />
+    <ClInclude Include="..\src\portal.h" />
+    <ClInclude Include="..\src\profiler.h" />
+    <ClInclude Include="..\src\random.h" />
+    <ClInclude Include="..\src\rect.h" />
+    <ClInclude Include="..\src\rifle.h" />
+    <ClInclude Include="..\src\running_shoes.h" />
+    <ClInclude Include="..\src\shield.h" />
+    <ClInclude Include="..\src\shot_ap_missle.h" />
+    <ClInclude Include="..\src\shot_base.h" />
+    <ClInclude Include="..\src\shot_bomb.h" />
+    <ClInclude Include="..\src\shot_bug.h" />
+    <ClInclude Include="..\src\shot_fire.h" />
+    <ClInclude Include="..\src\shot_grenade.h" />
+    <ClInclude Include="..\src\shot_gun.h" />
+    <ClInclude Include="..\src\shot_hammer.h" />
+    <ClInclude Include="..\src\shot_ice.h" />
+    <ClInclude Include="..\src\shot_melee.h" />
+    <ClInclude Include="..\src\shot_missile.h" />
+    <ClInclude Include="..\src\shot_net.h" />
+    <ClInclude Include="..\src\shot_normal.h" />
+    <ClInclude Include="..\src\shot_poison.h" />
+    <ClInclude Include="..\src\shot_refle_fire.h" />
+    <ClInclude Include="..\src\shot_rock.h" />
+    <ClInclude Include="..\src\shot_smoke.h" />
+    <ClInclude Include="..\src\shot_smoke_bomb.h" />
+    <ClInclude Include="..\src\shot_sniper.h" />
+    <ClInclude Include="..\src\shot_trap.h" />
+    <ClInclude Include="..\src\shot_virus.h" />
+    <ClInclude Include="..\src\shot_virus_shot.h" />
+    <ClInclude Include="..\src\shot_water.h" />
+    <ClInclude Include="..\src\silencer.h" />
+    <ClInclude Include="..\src\smoke_grenade.h" />
+    <ClInclude Include="..\src\sniper.h" />
+    <ClInclude Include="..\src\sound.h" />
+    <ClInclude Include="..\src\sub_weapon.h" />
+    <ClInclude Include="..\src\sub_weapon_list.h" />
+    <ClInclude Include="..\src\texture_const.h" />
+    <ClInclude Include="..\src\throw_knife.h" />
+    <ClInclude Include="..\src\trap.h" />
+    <ClInclude Include="..\src\unit.h" />
+    <ClInclude Include="..\src\water.h" />
+    <ClInclude Include="..\src\window_class.h" />
+    <ClInclude Include="shot_base.h" />
+    <ClInclude Include="shot_base_fire.h" />
+    <ClInclude Include="shot_base_grenade.h" />
+    <ClInclude Include="shot_base_gun.h" />
+    <ClInclude Include="shot_base_melee.h" />
+    <ClInclude Include="shot_base_missile.h" />
+    <ClInclude Include="shot_base_net.h" />
+    <ClInclude Include="effect_message.h" />
+    <ClInclude Include="effect_piece.h" />
+    <ClInclude Include="ai.h" />
+    <ClInclude Include="char_make.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="unit.h" />
+    <ClInclude Include="box.h" />
+    <ClInclude Include="burrow.h" />
+    <ClInclude Include="mon_bug_bomb.h" />
+    <ClInclude Include="mon_bug_fly.h" />
+    <ClInclude Include="mon_hunter.h" />
+    <ClInclude Include="monster.h" />
+    <ClInclude Include="monster_list.h" />
+    <ClInclude Include="job.h" />
+    <ClInclude Include="job_artillery.h" />
+    <ClInclude Include="job_assassin.h" />
+    <ClInclude Include="job_deserter.h" />
+    <ClInclude Include="job_hunter.h" />
+    <ClInclude Include="job_pyro.h" />
+    <ClInclude Include="job_stalker.h" />
+    <ClInclude Include="item.h" />
+    <ClInclude Include="bazooka.h" />
+    <ClInclude Include="fire.h" />
+    <ClInclude Include="main_weapon.h" />
+    <ClInclude Include="main_weapon_list.h" />
+    <ClInclude Include="rifle.h" />
+    <ClInclude Include="grenade.h" />
+    <ClInclude Include="kevlar.h" />
+    <ClInclude Include="net.h" />
+    <ClInclude Include="sub_weapon.h" />
+    <ClInclude Include="sub_weapon_list.h" />
+    <ClInclude Include="melee_weapon.h" />
+    <ClInclude Include="melee_weapon_list.h" />
+    <ClInclude Include="instant_list.h" />
+    <ClInclude Include="item_bullet.h" />
+    <ClInclude Include="item_heal.h" />
+    <ClInclude Include="portal.h" />
+    <ClInclude Include="Astar.h" />
+    <ClInclude Include="bitrect.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="map_make.h" />
+    <ClInclude Include="mini_map.h" />
+    <ClInclude Include="rect.h" />
+    <ClInclude Include="image.h" />
+    <ClInclude Include="texture_const.h" />
+    <ClInclude Include="texture_list.h" />
+    <ClInclude Include="profiler.h" />
+    <ClInclude Include="coord_def.h" />
+    <ClInclude Include="damage.h" />
+    <ClInclude Include="font.h" />
+    <ClInclude Include="FPS.h" />
+    <ClInclude Include="FSM.h" />
+    <ClInclude Include="random.h" />
+    <ClInclude Include="sound.h" />
+    <ClInclude Include="ability.h" />
+    <ClInclude Include="abil_antiexplosion.h" />
+    <ClInclude Include="abil_bare.h" />
+    <ClInclude Include="abil_bazooka.h" />
+    <ClInclude Include="abil_bullet.h" />
+    <ClInclude Include="abil_dex.h" />
+    <ClInclude Include="abil_fast_portal.h" />
+    <ClInclude Include="abil_fire.h" />
+    <ClInclude Include="abil_flame.h" />
+    <ClInclude Include="abil_health.h" />
+    <ClInclude Include="abil_knife.h" />
+    <ClInclude Include="abil_knowledge.h" />
+    <ClInclude Include="abil_live.h" />
+    <ClInclude Include="abil_moonwalk.h" />
+    <ClInclude Include="abil_pistol.h" />
+    <ClInclude Include="abil_rifle.h" />
+    <ClInclude Include="abil_see_sight.h" />
+    <ClInclude Include="abil_shot_gun.h" />
+    <ClInclude Include="abil_sight.h" />
+    <ClInclude Include="abil_state_view.h" />
+    <ClInclude Include="abil_tool.h" />
+    <ClInclude Include="abil_invisible.h" />
+    <ClInclude Include="abil_run.h" />
+    <ClInclude Include="d3dx_class.h" />
+    <ClInclude Include="gamemanager.h" />
+    <ClInclude Include="keyinput.h" />
+    <ClInclude Include="window_class.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
