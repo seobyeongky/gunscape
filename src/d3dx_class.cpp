@@ -99,7 +99,8 @@ bool Direct_Manager::init(HWND windowhandle_, int width_, int height_)
 	//device->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
  //   device->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 
-	AddFontResourceEx("font\\nanum-gothic.ttf", FR_PRIVATE, 0);
+	AddFontResourceEx("font\\¾Æ¸®µû-µ¸¿ò(TTF).ttf", FR_PRIVATE, 0);
+//	AddFontResourceEx("font\\nanum-gothic.ttf", FR_PRIVATE, 0);
 
 	D3DXFONT_DESC fontDesc;	
 	ZeroMemory(&fontDesc, sizeof(fontDesc));
@@ -108,7 +109,8 @@ bool Direct_Manager::init(HWND windowhandle_, int width_, int height_)
 	fontDesc.Weight = 400;
 	fontDesc.Italic = false;
 	fontDesc.CharSet = DEFAULT_CHARSET;
-	strcpy_s(fontDesc.FaceName, "³ª´®°íµñ");
+	strcpy_s(fontDesc.FaceName, "¾Æ¸®µû-µ¸¿ò(TTF)-Medium");
+//	strcpy_s(fontDesc.FaceName, "³ª´®°íµñ");
 
 	D3DXCreateFontIndirect(device, &fontDesc, &font);
 
