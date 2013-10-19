@@ -1,8 +1,7 @@
-build/
-build-d/
 temp/
 dep/
 *.suo
+*.pdb
 sound/bgm.wav
 sound/bgm2.wav
 sound/bgm3.wav
