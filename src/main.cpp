@@ -1,17 +1,10 @@
-
-#ifdef _DEBUG
-#define CRTDBG_MAP _ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-#endif
-
-
-
 #include <windows.h>//winapi를 위해
 
 #include <stdio.h>
 #include <d3dx9.h> //다이렉트위해서
 #include <time.h>
+#include <vld.h>
+
 #include "window_class.h"
 #include "d3dx_class.h"
 #include "gamemanager.h"
@@ -31,6 +24,14 @@
 #pragma comment(lib, "user32.lib")
 #pragma comment (lib, "gdi32")
 
+#ifdef _DEBUG
+	#pragma comment(lib, "opznet-client-d.lib")
+	#pragma comment(lib, "opznet-server-d.lib")
+#else
+	#pragma comment(lib, "opznet-client.lib")
+	#pragma comment(lib, "opznet-server.lib")
+#endif
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 void DeviceRelease();
@@ -46,30 +47,27 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, in
 
 	srand((unsigned int)time(NULL));
 
-	Config config_;
-	config_.init();
-	//Window_Manager wnd(hinstance, 600, 400);
-	Window_Manager wnd(hinstance, config_.GetWidth(), config_.GetHeight());
+	config::LoadFromFile();
+
+	Window_Manager wnd(hinstance, config::width, config::height);
+
 	InitSound(wnd.GetHandle());
-	Direct_Manager* drt = Direct_Manager::CreateInstance();
-	drt->init(wnd.GetHandle(),wnd.GetWidth(),wnd.GetHeight());
-	Key_Manager* kym = Key_Manager::CreateInstance(hinstance, wnd.GetHandle(),wnd.GetWidth(),wnd.GetHeight());	
-	Game_Manager* gmm = Game_Manager::CreateInstance();
-
-
-	gmm->SetHandle(wnd.GetHandle());
-
-	gmm->SetKeyClass(kym);
-	gmm->SetDirectClass(drt);
-
-
-	wnd.SetLoop(kym->Loop);
-	wnd.SetLoop(gmm->Loop);
-	wnd.SetLoop(drt->DrawLoop);
 	wnd.SetThreadLoop(UpdateBGM);
 
-	drt->SetLoop(gmm->Draw);
+	Direct_Manager* drt = Direct_Manager::CreateInstance();
+	drt->init(wnd.GetHandle(),wnd.GetWidth(),wnd.GetHeight());
+	wnd.SetLoop(drt->DrawLoop);
 
+	Key_Manager* kym = Key_Manager::CreateInstance(hinstance, wnd.GetHandle(),wnd.GetWidth(),wnd.GetHeight());
+	wnd.SetLoop(kym->Loop);
+
+	Game_Manager* gmm = Game_Manager::CreateInstance();
+	gmm->SetHandle(wnd.GetHandle());
+	gmm->SetKeyClass(kym);
+	gmm->SetDirectClass(drt);
+	wnd.SetLoop(gmm->Loop);
+
+	drt->SetLoop(gmm->Draw);
 
 	wnd.StartLoop();
 
@@ -77,9 +75,9 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, in
 	Game_Manager::DestroyInstance(gmm);
 	Key_Manager::DestroyInstance(kym);
 
-	_CrtDumpMemoryLeaks();
+//	_CrtDumpMemoryLeaks();
 
-	return true;
+	return 0;
 }
 
 

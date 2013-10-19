@@ -25,6 +25,8 @@ Direct_Manager::~Direct_Manager()
 {
 	if(device)
 		device->Release();
+	if (font)
+		RemoveFontResourceEx("font\\nanum-gothic.ttf", FR_PRIVATE, 0);
 }
 
 Direct_Manager* Direct_Manager::CreateInstance()
@@ -97,14 +99,16 @@ bool Direct_Manager::init(HWND windowhandle_, int width_, int height_)
 	//device->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
  //   device->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 
+	AddFontResourceEx("font\\nanum-gothic.ttf", FR_PRIVATE, 0);
+
 	D3DXFONT_DESC fontDesc;	
 	ZeroMemory(&fontDesc, sizeof(fontDesc));
-	fontDesc.Height = 12*width_/600;
+	fontDesc.Height = 18;
+	fontDesc.Width = 8;
 	fontDesc.Weight = 400;
-	fontDesc.Width = 6*height_/400;
 	fontDesc.Italic = false;
 	fontDesc.CharSet = DEFAULT_CHARSET;
-	//strcpy(fontDesc.FaceName, "Times New Roman");
+	strcpy_s(fontDesc.FaceName, "³ª´®°íµñ");
 
 	D3DXCreateFontIndirect(device, &fontDesc, &font);
 

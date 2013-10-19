@@ -424,6 +424,7 @@ SOUNDMANAGER :: ~SOUNDMANAGER()
 	delete bgm_dungeon_0;
 	delete bgm_dungeon_1;
 	delete bgm_dungeon_2;
+	delete bgm_dungeon_3;
 	if(Sound != NULL)
 	{
 		Sound -> Release();

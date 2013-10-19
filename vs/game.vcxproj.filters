@@ -139,6 +139,9 @@
     <Filter Include="소스 파일\ability\instant">
       <UniqueIdentifier>{3b9fffd3-331b-486e-afef-b2cdc9ec8e92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\server">
+      <UniqueIdentifier>{906acce5-ff40-408a-95c7-1c0ed17a394a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\abil_antibug.cpp">
@@ -755,6 +758,9 @@
     </ClCompile>
     <ClCompile Include="..\src\barricade.cpp">
       <Filter>소스 파일\item\sub_weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\server.cpp">
+      <Filter>소스 파일\server</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1618,6 +1624,9 @@
     </ClInclude>
     <ClInclude Include="..\src\barricade.h">
       <Filter>소스 파일\item\sub_weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\server.h">
+      <Filter>소스 파일\server</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -327,6 +327,7 @@ void map_algorithms02(Game_Manager* gm_, Mini_Map& map_)
 				map_.fogUpdate(x_,y_,true);
 	}
 
+	for (it=vec_map.begin(); it!=vec_map.end(); it++) delete *it;
 }
 void map_algorithms03(Game_Manager* gm_, Mini_Map& map_)
 {

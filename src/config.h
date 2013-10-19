@@ -10,17 +10,20 @@
 #ifndef  __CONFIG_H__
 #define  __CONFIG_H__
 
-
-class Config
+enum gameMode_t
 {
-	int width;
-	int height;
-public:
-	Config();
-	void init();
+	SINGLE_GAME,
+	MULTI_GAME
+};
 
-	int GetWidth(){return width;}
-	int GetHeight(){return height;}
+namespace config
+{
+	extern int width;
+	extern int height;
+
+	extern gameMode_t gamemode;
+
+	void LoadFromFile();
 };
 
 #endif // __CONFIG_H__
