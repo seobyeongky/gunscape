@@ -24,7 +24,7 @@ namespace config
 		if(infile.fail())
 		{
 			return;
-		}
+		} 
 		char name[1024];
 		char value[1024];
 		while(1)
