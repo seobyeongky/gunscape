@@ -7,6 +7,7 @@
 
 #include "window_class.h"
 #include "d3dx_class.h"
+#include "chatmsgmanager.h"
 #include "gamemanager.h"
 #include "keyinput.h"
 #include "profiler.h"
@@ -58,22 +59,29 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, in
 	drt->init(wnd.GetHandle(),wnd.GetWidth(),wnd.GetHeight());
 	wnd.SetLoop(drt->DrawLoop);
 
-	Key_Manager* kym = Key_Manager::CreateInstance(hinstance, wnd.GetHandle(),wnd.GetWidth(),wnd.GetHeight());
-	wnd.SetLoop(kym->Loop);
+	{
+		Key_Manager* kym = Key_Manager::CreateInstance(hinstance, wnd.GetHandle(),wnd.GetWidth(),wnd.GetHeight());
+		wnd.SetLoop(kym->Loop);
 
-	Game_Manager* gmm = Game_Manager::CreateInstance();
-	gmm->SetHandle(wnd.GetHandle());
-	gmm->SetKeyClass(kym);
-	gmm->SetDirectClass(drt);
-	wnd.SetLoop(gmm->Loop);
+		ChatMsg_Manager::CreateInstance();
+		wnd.SetThreadLoop(ChatMsg_Manager::UpdateLoop);
+		drt->SetLoop(ChatMsg_Manager::DrawLoop);
+		
+		Game_Manager* gmm = Game_Manager::CreateInstance();
+		gmm->SetHandle(wnd.GetHandle());
+		gmm->SetKeyClass(kym);
+		gmm->SetDirectClass(drt);
+		wnd.SetLoop(gmm->Loop);
+		drt->SetLoop(gmm->Draw);
 
-	drt->SetLoop(gmm->Draw);
+		wnd.StartLoop();
 
-	wnd.StartLoop();
+		Game_Manager::DestroyInstance(gmm);
+		ChatMsg_Manager::DestroyInstance();
+		Key_Manager::DestroyInstance(kym);
+	}
 
 	Direct_Manager::DestroyInstance(drt);
-	Game_Manager::DestroyInstance(gmm);
-	Key_Manager::DestroyInstance(kym);
 
 //	_CrtDumpMemoryLeaks();
 

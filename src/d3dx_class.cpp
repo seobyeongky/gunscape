@@ -42,6 +42,10 @@ void Direct_Manager::DestroyInstance(Direct_Manager* pInstance_)
 		delete pInstance;
 }
 
+Direct_Manager* Direct_Manager::GetInstance()
+{
+	return pInstance;
+}
 
 bool Direct_Manager::init(HWND windowhandle_, int width_, int height_)
 {

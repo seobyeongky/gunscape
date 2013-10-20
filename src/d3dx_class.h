@@ -34,6 +34,7 @@ class Direct_Manager
 public:
 	static Direct_Manager* CreateInstance();
 	static void DestroyInstance(Direct_Manager* pInstance_);
+	static Direct_Manager* GetInstance();
 	
 	int GetWidth(){return width;};
 	int GetHeight(){return height;};

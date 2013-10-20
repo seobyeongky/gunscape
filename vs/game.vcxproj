@@ -163,6 +163,7 @@
     <ClCompile Include="..\src\burrow2.cpp" />
     <ClCompile Include="..\src\button.cpp" />
     <ClCompile Include="..\src\char_make.cpp" />
+    <ClCompile Include="..\src\chatmsgmanager.cpp" />
     <ClCompile Include="..\src\config.cpp" />
     <ClCompile Include="..\src\coord_def.cpp" />
     <ClCompile Include="..\src\d3dx_class.cpp" />
@@ -371,6 +372,7 @@
     <ClInclude Include="..\src\burrow2.h" />
     <ClInclude Include="..\src\button.h" />
     <ClInclude Include="..\src\char_make.h" />
+    <ClInclude Include="..\src\chatmsgmanager.h" />
     <ClInclude Include="..\src\config.h" />
     <ClInclude Include="..\src\coord_def.h" />
     <ClInclude Include="..\src\d3dx_class.h" />

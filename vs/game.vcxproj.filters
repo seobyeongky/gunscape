@@ -762,6 +762,9 @@
     <ClCompile Include="..\src\server.cpp">
       <Filter>소스 파일\server</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\chatmsgmanager.cpp">
+      <Filter>소스 파일\manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shot_base.h">
@@ -1627,6 +1630,9 @@
     </ClInclude>
     <ClInclude Include="..\src\server.h">
       <Filter>소스 파일\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\chatmsgmanager.h">
+      <Filter>소스 파일\manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

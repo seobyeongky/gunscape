@@ -17,6 +17,9 @@ namespace config
 
 	gameMode_t gamemode;
 
+	string username;
+	string host;
+
 	void LoadFromFile()
 	{
 		ifstream infile;
@@ -84,7 +87,8 @@ namespace config
 			{
 				if(value2>0)
 					height = value2;
-			}else if (!strcmp(name, "gamemode"))
+			}
+			else if (!strcmp(name, "gamemode"))
 			{
 				if (!strcmp(value, "multi"))
 				{
@@ -94,6 +98,14 @@ namespace config
 				{
 					gamemode = SINGLE_GAME;
 				}
+			}
+			else if (!strcmp(name, "username"))
+			{
+				username = username;
+			}
+			else if (!strcmp(name, "host"))
+			{
+				host = value;
 			}
 		}
 
