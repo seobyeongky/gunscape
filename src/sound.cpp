@@ -126,7 +126,7 @@ void SOUNDBUFFER :: Load(IDirectSound8* Sound, char* WaveFileName, bool Streamin
 	}
 	infile.close();
 
-	hmmio = mmioOpen(WaveFileName, NULL, MMIO_ALLOCBUF | MMIO_READ);
+	hmmio = mmioOpenA(WaveFileName, NULL, MMIO_ALLOCBUF | MMIO_READ);
 
 	MMCKINFO ckRIFF;
 	ZeroMemory(&ckRIFF, sizeof(MMCKINFO));

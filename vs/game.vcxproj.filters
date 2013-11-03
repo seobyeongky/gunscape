@@ -65,67 +65,6 @@
     <Filter Include="소스 파일\map">
       <UniqueIdentifier>{8bb58968-34b9-472e-ac8f-2431814f46fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일\shot_class">
-      <UniqueIdentifier>{ceafe7f6-612a-4ebc-9ad8-729703be60c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\shot_class\effect">
-      <UniqueIdentifier>{aab2eceb-8f76-4861-90a2-7838e8bdffaa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\unit">
-      <UniqueIdentifier>{4476b32f-fa1f-4945-bde6-e97fb79f0a81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\unit\monster">
-      <UniqueIdentifier>{fbf54cce-5488-4874-b534-04920f76a60f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\unit\job">
-      <UniqueIdentifier>{155ab8d7-93e5-4ef0-b117-c18e69036721}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\item">
-      <UniqueIdentifier>{663c0d1a-dabc-488f-a5a7-373578502fe1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\item\main_weapon">
-      <UniqueIdentifier>{8662cedc-a933-49a8-a3e9-fec85573d760}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\item\sub_weapon">
-      <UniqueIdentifier>{4e3fbb4a-a23a-48f1-981b-82fb94e9c901}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\item\melee_weapon">
-      <UniqueIdentifier>{241f1929-86da-4694-858c-c01980a148f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\item\instant">
-      <UniqueIdentifier>{d0a30239-ccb3-4334-bb1a-88dcbe4bd616}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\item\other">
-      <UniqueIdentifier>{d14f5c22-c9c1-4591-8964-0b1003d9e2b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\map">
-      <UniqueIdentifier>{a393e98d-cf7f-422c-b7bc-065e71d2f888}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\image">
-      <UniqueIdentifier>{27fdb639-f737-4468-9193-7a2613e7839b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\profiler">
-      <UniqueIdentifier>{3821b86f-f855-43a4-804b-4582cfa2896b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\other">
-      <UniqueIdentifier>{9b8ea6df-5e30-4a8f-aa1b-08d8b7a30e57}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\ability">
-      <UniqueIdentifier>{cc4eeba2-a9aa-4a6b-9256-fa3fd257fc0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\ability\passive">
-      <UniqueIdentifier>{cea54805-debe-45c5-9f02-428876270881}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\ability\use">
-      <UniqueIdentifier>{8e90d6b1-b161-4823-9511-7e02db513c3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\manager">
-      <UniqueIdentifier>{665e9cb6-5e6f-47bf-8192-93e1ff3f5447}</UniqueIdentifier>
-    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
@@ -141,6 +80,9 @@
     </Filter>
     <Filter Include="소스 파일\server">
       <UniqueIdentifier>{906acce5-ff40-408a-95c7-1c0ed17a394a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\proto">
+      <UniqueIdentifier>{0fc49b7c-e873-44f3-9343-a0a33376eab7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -765,272 +707,17 @@
     <ClCompile Include="..\src\chatmsgmanager.cpp">
       <Filter>소스 파일\manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\proto\command.pb.cc">
+      <Filter>소스 파일\proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\net_interface.cpp">
+      <Filter>소스 파일\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stringconvert.cpp">
+      <Filter>소스 파일\other</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="shot_base.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_base_fire.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_base_grenade.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_base_gun.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_base_melee.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_base_missile.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="shot_base_net.h">
-      <Filter>헤더 파일\shot_class</Filter>
-    </ClInclude>
-    <ClInclude Include="effect_message.h">
-      <Filter>헤더 파일\shot_class\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="effect_piece.h">
-      <Filter>헤더 파일\shot_class\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="ai.h">
-      <Filter>헤더 파일\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="char_make.h">
-      <Filter>헤더 파일\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>헤더 파일\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="unit.h">
-      <Filter>헤더 파일\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="box.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="burrow.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_bug_bomb.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_bug_fly.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="mon_hunter.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="monster.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="monster_list.h">
-      <Filter>헤더 파일\unit\monster</Filter>
-    </ClInclude>
-    <ClInclude Include="job.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="job_artillery.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="job_assassin.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="job_deserter.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="job_hunter.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="job_pyro.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="job_stalker.h">
-      <Filter>헤더 파일\unit\job</Filter>
-    </ClInclude>
-    <ClInclude Include="item.h">
-      <Filter>헤더 파일\item</Filter>
-    </ClInclude>
-    <ClInclude Include="bazooka.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="fire.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="main_weapon.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="main_weapon_list.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="rifle.h">
-      <Filter>헤더 파일\item\main_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="grenade.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="kevlar.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="net.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="sub_weapon.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="sub_weapon_list.h">
-      <Filter>헤더 파일\item\sub_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="melee_weapon.h">
-      <Filter>헤더 파일\item\melee_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="melee_weapon_list.h">
-      <Filter>헤더 파일\item\melee_weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="instant_list.h">
-      <Filter>헤더 파일\item\instant</Filter>
-    </ClInclude>
-    <ClInclude Include="item_bullet.h">
-      <Filter>헤더 파일\item\instant</Filter>
-    </ClInclude>
-    <ClInclude Include="item_heal.h">
-      <Filter>헤더 파일\item\instant</Filter>
-    </ClInclude>
-    <ClInclude Include="portal.h">
-      <Filter>헤더 파일\item\other</Filter>
-    </ClInclude>
-    <ClInclude Include="Astar.h">
-      <Filter>헤더 파일\map</Filter>
-    </ClInclude>
-    <ClInclude Include="bitrect.h">
-      <Filter>헤더 파일\map</Filter>
-    </ClInclude>
-    <ClInclude Include="map.h">
-      <Filter>헤더 파일\map</Filter>
-    </ClInclude>
-    <ClInclude Include="map_make.h">
-      <Filter>헤더 파일\map</Filter>
-    </ClInclude>
-    <ClInclude Include="mini_map.h">
-      <Filter>헤더 파일\map</Filter>
-    </ClInclude>
-    <ClInclude Include="rect.h">
-      <Filter>헤더 파일\map</Filter>
-    </ClInclude>
-    <ClInclude Include="image.h">
-      <Filter>헤더 파일\image</Filter>
-    </ClInclude>
-    <ClInclude Include="texture_const.h">
-      <Filter>헤더 파일\image</Filter>
-    </ClInclude>
-    <ClInclude Include="texture_list.h">
-      <Filter>헤더 파일\image</Filter>
-    </ClInclude>
-    <ClInclude Include="profiler.h">
-      <Filter>헤더 파일\profiler</Filter>
-    </ClInclude>
-    <ClInclude Include="coord_def.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="damage.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="font.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="FPS.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="FSM.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="random.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="sound.h">
-      <Filter>헤더 파일\other</Filter>
-    </ClInclude>
-    <ClInclude Include="ability.h">
-      <Filter>헤더 파일\ability</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_antiexplosion.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_bare.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_bazooka.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_bullet.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_dex.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_fast_portal.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_fire.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_flame.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_health.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_knife.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_knowledge.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_live.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_moonwalk.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_pistol.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_rifle.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_see_sight.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_shot_gun.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_sight.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_state_view.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_tool.h">
-      <Filter>헤더 파일\ability\passive</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_invisible.h">
-      <Filter>헤더 파일\ability\use</Filter>
-    </ClInclude>
-    <ClInclude Include="abil_run.h">
-      <Filter>헤더 파일\ability\use</Filter>
-    </ClInclude>
-    <ClInclude Include="d3dx_class.h">
-      <Filter>헤더 파일\manager</Filter>
-    </ClInclude>
-    <ClInclude Include="gamemanager.h">
-      <Filter>헤더 파일\manager</Filter>
-    </ClInclude>
-    <ClInclude Include="keyinput.h">
-      <Filter>헤더 파일\manager</Filter>
-    </ClInclude>
-    <ClInclude Include="window_class.h">
-      <Filter>헤더 파일\manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\abil_antibug.h">
       <Filter>소스 파일\ability\passive</Filter>
     </ClInclude>
@@ -1633,6 +1320,30 @@
     </ClInclude>
     <ClInclude Include="..\src\chatmsgmanager.h">
       <Filter>소스 파일\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\proto\command.pb.h">
+      <Filter>소스 파일\proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\smap.h">
+      <Filter>소스 파일\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\protocol.h">
+      <Filter>소스 파일\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\net_interface.h">
+      <Filter>소스 파일\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="stages.h">
+      <Filter>소스 파일\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stages.h">
+      <Filter>소스 파일\manager\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stringconvert.h">
+      <Filter>소스 파일\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\time.h">
+      <Filter>소스 파일\other</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

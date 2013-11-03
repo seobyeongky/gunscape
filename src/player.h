@@ -44,7 +44,6 @@ class Player: public Unit
 	int speed_delay;
 	int remain_ability;
 	int select_ability_num;
-	int ability_select_count;
 	int ability_select_num;
 
 	float bullet;
@@ -76,6 +75,10 @@ class Player: public Unit
 
 
 	list<state_name> state_list;
+
+	float goangle;
+	int walkcount;
+
 public:
 	Main_Weapon* main_weapon;
 	Sub_Weapon* sub_weapon[2];
@@ -114,6 +117,7 @@ public:
 	int GetNeedExp(int level_);
 	float GetExpPercent();
 	int GetSelectAbilityNum(){return select_ability_num;};
+	int GetSelectedAbility(){return ability_select_num; }
 	float GetBullet(){return bullet;};
 	int GetMaxBullet(){return max_bullet;};
 	bool GetAbilitySelect(){return ability_select;};
@@ -190,8 +194,7 @@ public:
 	virtual bool isPlayer(){return true;};
 	
 	virtual bool Action_in(Game_Manager* gm_);
-	void SelectAction(Game_Manager* gm_);
-
+	
 	virtual float GetFocusSum();
 	virtual float GetPlayerSpeed(float angle_);
 
@@ -234,6 +237,9 @@ public:
 	bool Reload();
 
 	bool UseBullet(float bullet_);
+
+	void SetGoAngle(float goangle_);
+	void Walk(Game_Manager * gm_);
 };
 
 #endif // __PLAYER_H__

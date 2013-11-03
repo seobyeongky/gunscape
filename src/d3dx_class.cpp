@@ -26,7 +26,7 @@ Direct_Manager::~Direct_Manager()
 	if(device)
 		device->Release();
 	if (font)
-		RemoveFontResourceEx("font\\nanum-gothic.ttf", FR_PRIVATE, 0);
+		RemoveFontResourceExA("font\\nanum-gothic.ttf", FR_PRIVATE, 0);
 }
 
 Direct_Manager* Direct_Manager::CreateInstance()
@@ -89,7 +89,7 @@ bool Direct_Manager::init(HWND windowhandle_, int width_, int height_)
 		if(FAILED(hr))
 		{
 			d3d9 -> Release();
-			MessageBox(0, "CreateDevice() - FAILED", 0, 0); //전부 실패하면 에러출력
+			MessageBoxA(0, "CreateDevice() - FAILED", 0, 0); //전부 실패하면 에러출력
 			
 			return false;
 		}
@@ -103,10 +103,10 @@ bool Direct_Manager::init(HWND windowhandle_, int width_, int height_)
 	//device->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
  //   device->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 
-	AddFontResourceEx("font\\아리따-돋움(TTF).ttf", FR_PRIVATE, 0);
+	AddFontResourceExA("font\\아리따-돋움(TTF).ttf", FR_PRIVATE, 0);
 //	AddFontResourceEx("font\\nanum-gothic.ttf", FR_PRIVATE, 0);
 
-	D3DXFONT_DESC fontDesc;	
+	D3DXFONT_DESCA fontDesc;	
 	ZeroMemory(&fontDesc, sizeof(fontDesc));
 	fontDesc.Height = 18;
 	fontDesc.Width = 8;
@@ -116,7 +116,7 @@ bool Direct_Manager::init(HWND windowhandle_, int width_, int height_)
 	strcpy_s(fontDesc.FaceName, "아리따-돋움(TTF)-Medium");
 //	strcpy_s(fontDesc.FaceName, "나눔고딕");
 
-	D3DXCreateFontIndirect(device, &fontDesc, &font);
+	D3DXCreateFontIndirectA(device, &fontDesc, &font);
 
 
 	D3DXMATRIX proj;

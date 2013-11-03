@@ -38,11 +38,12 @@ Unit("플레이어",texture_, x_, y_, 1, 100), focus_pos(),
 sub_change(0), current_weapon_num(1), current_weapon(0), main_weapon(0), melee_weapon(0), 
 no_weapon(0),no_sub_weapon(0),pist(0),
 level(1), exp(0),stamina(100.0f), max_stamina(100.0f), stamina_delay(0), speed_delay(0), remain_ability(0), 
-select_ability_num(3), ability_select_count(0), ability_select_num(0),
+select_ability_num(3), ability_select_num(0),
 bullet(4), max_bullet(4), ability_select(false), quick_select(false), quick_menu(1), portal_time(1), state_view(false),
 mon_sight_view(false), berserker(false), blood_reload(0), forget_count(600), 
 warning_time(1000), temp_invisible_turn(0), 
-mirror_damage(0), mirror_knockback(0), sniper(false), map_hack(false/*false*/), critical(0), your_switch(3),silencer(1.0f)
+mirror_damage(0), mirror_knockback(0), sniper(false), map_hack(false/*false*/), critical(0), your_switch(3),silencer(1.0f),
+goangle(0.f), walkcount(0)
 {
 	for(int i =0 ;i<2;i++)
 		sub_weapon[i] = NULL;
@@ -139,11 +140,7 @@ bool Player::StartAbility()
 }
 void Player::SelectAbilityBefore(int i)
 {
-	if(!ability_select_num)
-	{		
-		ability_select_count = 100;
-		ability_select_num = i;
-	}
+	ability_select_num = i;
 }
 bool Player::SelectAbility(Game_Manager* gm_, int i)
 {
@@ -507,19 +504,6 @@ bool Player::Action_in(Game_Manager* gm_)
 	CommonAction(gm_); //유닛 공통의 행동들
 	return false;
 }
-void Player::SelectAction(Game_Manager* gm_)
-{	
-	if(ability_select_count)
-	{
-		ability_select_count--;
-		if(!ability_select_count)
-		{
-			SelectAbility(gm_,ability_select_num);
-			ability_select_num = 0;
-			ability_select_count = 0;
-		}
-	}
-}
 
 float Player::GetFocusSum()
 {
@@ -689,7 +673,7 @@ bool Player::AbilitySelectDraw(Game_Manager* gm_, coord_def offset_)
 		{
 			rc.top += (LONG)(16*gm_->direct->GetHR());
 			D3DCOLOR color_ = (*it)->GetType() == AT_INSTANCE?0xff00ff00:((*it)->GetType() == AT_USE?0xffc000c0:0xff0090ff);
-			if(ability_select_count && ability_select_num == i)
+			if(ability_select_num == i)
 			{
 				color_ =0xffff0000;
 			}
@@ -1026,4 +1010,19 @@ bool Player::UseBullet(float bullet_)
 	else
 		return false;
 
+}
+
+void Player::SetGoAngle(float goangle_)
+{
+	goangle = goangle_;
+	walkcount = 3;
+}
+
+void Player::Walk(Game_Manager * gm_)
+{
+	if (walkcount > 0)
+	{
+		walkcount--;
+		UnitMove(gm_, GetSpeed(goangle), goangle);
+	}
 }

@@ -33,24 +33,56 @@
 #include "char_make.h"
 #include "sound.h"
 #include "debug.h"
+#include "config.h"
+#include "server.h"
+#include "chatmsgmanager.h"
+#include "proto\command.pb.h"
+#include "smap.h"
+#include "net_interface.h"
+#include <opznet\client.h>
+#include <algorithm>
+#include "time.h"
+#include <opznet/client.h>
+#include <iostream>
+#include <fstream>
+#include "stringconvert.h"
 
+struct cl_t
+{
+	string	name;
 
+	cl_t(void) : name() {
+	}
+
+	cl_t(const string & name_) : name(name_) {
+	}
+};
+
+opznet::ID my_id;
+smap<opznet::ID, cl_t> clients;
 
 Game_Manager* Game_Manager::pInstance = NULL;
 HWND Game_Manager::handle = 0;
 
 int death_dump_ = 0;
 
+vector<pair<int, int>> dkey2num;
+
 
 Game_Manager::Game_Manager():
-count(0),level(0), state(0), scale(1.0f), heal_stack(0), sniper_mode(false), focus(0,0), player(NULL), next_portal(NULL), char_maker(NULL), Network_host(NULL), Network_client(NULL), map(NULL), key(NULL), direct(NULL),
-next_floor(false), full_text() 
+level(0), state(0), scale(1.0f), heal_stack(0), sniper_mode(false), focus(0,0), player(NULL), next_portal(NULL), char_maker(NULL), Network_host(NULL), Network_client(NULL), map(NULL), key(NULL), direct(NULL),
+next_floor(false), full_text(), accum(0), command_send_ok(false), state_handle_count(0)
 {
 	for(int i = 0; i<SS_MAX_FLOOR; i++)
 		stage_kind[i] = SS_NORMAL;
 
 	GameMenu();
 
+	int count = 1;
+	for(int dkey = DIK_1; dkey <= DIK_4; ++dkey, ++count)
+	{
+		dkey2num.push_back(pair<int,int>(dkey, count));
+	}
 }
 
 Game_Manager::~Game_Manager()
@@ -82,6 +114,19 @@ Game_Manager::~Game_Manager()
 		delete map;
 	if(char_maker)
 		delete char_maker;
+
+	if (config::gamemode == MULTI_GAME && config::host) Server::End();
+
+//	if (config::gamemode == SINGLE_GAME)
+//	{
+//		LocalGameStart();	
+//	}
+//	
+	if (config::gamemode == MULTI_GAME)
+	{
+		NetInterface::End();
+	}
+
 	if(Network_host)
 		NetworkManager::DestroyInstance(Network_host);
 	if(Network_client)
@@ -344,6 +389,9 @@ void Game_Manager::Loop() //staic함수
 			break;
 		}
 	}
+
+	if (config::gamemode == MULTI_GAME) NetInterface::Update();
+
 	return;
 }
 void Game_Manager::SelectLoop()
@@ -385,20 +433,13 @@ void Game_Manager::SelectLoop()
 	}
 	if(key->GeyKeyState(DIK_RETURN, KEY_DOWN))
 	{
-		player = char_maker->GetPlayer(this);
-		if(player)
+		if (config::gamemode == SINGLE_GAME)
 		{
-			delete char_maker;
-			char_maker = NULL;
-			if(!map)
-				map = new Map(&tex_map);
-
-			unit_list.push_back(player);
-			state = 1;
-
-			InitNamed();
-			StageMake();
-			StageInit(0,MPT_NOMAL,rand_int(1,3),12);
+			LocalGameStart();	
+		}
+		else if (config::gamemode == MULTI_GAME)
+		{
+			MultiGameStart();
 		}
 	}
 	/*if(key->GeyKeyState(DIK_1, KEY_DOWN))
@@ -416,101 +457,166 @@ void Game_Manager::SelectLoop()
 		state = 2;
 	}*/
 }
-void Game_Manager::GameLoop()
+void Game_Manager::LocalGameStart()
 {
-#ifdef __PROFILE__
-	ProfileBegin("Game_Manager::GameLoop()");
-#endif
-	
+	player = char_maker->GetPlayer(this);
+	if(player)
+	{
+		delete char_maker;
+		char_maker = NULL;
+		if(!map)
+			map = new Map(&tex_map);
 
+		unit_list.push_back(player);
+		state = 1;
+
+		InitNamed();
+		MakeStageTypes();
+		MakeStage(0);
+	}
+}
+
+void Game_Manager::MultiGameStart()
+{
+	NetInterface::Begin();
+
+	player = char_maker->GetPlayer(this);
+	if (!player) return;
+	delete char_maker;
+	char_maker = nullptr;
+	map = new Map(&tex_map);
+
+	unit_list.push_back(player);
 	
-	if(player->GetAbilitySelect())
-	{ //능력 셀렉창인경우
-		for(int i = 0; i < player->GetSelectAbilityNum(); i++)
-		{
-			if(key->GeyKeyState(DIK_1+i, KEY_DOWN))
-				player->SelectAbilityBefore(1+i);
-		}
-		player->SelectAction(this);
+	InitNamed();
+	if (config::host)
+	{
+		MakeStageTypes();
+
+		Server::Start(stage_kind, [this](){
+			ConnectToServer();
+		});
 	}
 	else
 	{
-		static int i = 0;
+		ConnectToServer();
+	}
 
-		if(!sniper_mode)
-			focus = player->GetPos();
-		else
+	state = -1;
+}
+
+void Game_Manager::ConnectToServer()
+{		
+	NetInterface::RegisterConnectedCallback([this](const opznet::server_info_t &sv_info, opznet::ID my_id)
+	{
+		ChatMsg_Manager::PushMessage(L"서버에 연결 성공");
+	});
+	NetInterface::RegisterConnectFailedCallback([this]()
+	{
+		ChatMsg_Manager::PushMessage(L"서버에 연결 실패");
+	});
+	NetInterface::RegisterClientIntroCallback([this](const opznet::client_t &cl_info)
+	{
+		string name(cl_info.name.begin(), cl_info.name.end());
+		clients.insert(cl_info.id,  cl_t(name));
+		ChatMsg_Manager::PushMessage(wstring(cl_info.name + L"님 입장").c_str());
+	});
+	NetInterface::RegisterClientGoneCallback([this](const opznet::client_t &cl_info)
+	{
+		ChatMsg_Manager::PushMessage(wstring(cl_info.name + L"님 감").c_str());
+	});
+	NetInterface::RegisterPacketCallback(SV2CL_WELCOME, [this](opznet::Packet &packet)
+	{
+		int nr_stages;
+		packet >> nr_stages;
+		assert(nr_stages == 16);
+		vector<int> stages;
+		stages.resize(nr_stages, 0);
+		for (int i = 0; i < nr_stages; i++)
 		{
-			//coord_def center_((float)direct->GetWidth()/2,(float)direct->GetHeight()/2);
-			POINT new_, old_;
-			GetCursorPos(&new_);
-			RECT rect_;
-			GetWindowRect(handle,&rect_);
-			SetCursorPos(rect_.left+3+ direct->GetWidth()/2,rect_.top+25+direct->GetHeight()/2);
-			GetCursorPos(&old_);
-			coord_def dif_ = coord_def((float)(new_.x-old_.x),(float)(new_.y-old_.y))/scale;
-			focus = focus+dif_;
-			if(player->GetSniperSight()<distan_coord(player->GetPos(), focus)) //저격의 사거리p
-			{
-				float angle_ = GetAngleToTarget(player->GetPos(), focus);
-				focus = coord_def(player->GetPos().x+player->GetSniperSight()*cos(angle_),player->GetPos().y+player->GetSniperSight()*sin(angle_));
-			}
+			int kind;
+			packet >> kind;
+			stages[i] = kind;
 		}
+		SetStageTypesFrom(stages);
+	
+		ChatMsg_Manager::PushMessage(L"server : Welcome!");
+//		ChatMsg_Manager::PushMessage(sv_info.name + L"server : Welcome!");
+//		ChatMsg_Manager::PushMessage(sv_info.address + L"(" + to_wstring(sv_info.num_of_clients) + L"명 접속 중)");
 
-		player->SetAngle(GetAngleToTarget(player->GetPos(), key->GetMousePos()+focus));
-
-		player->SetFocusPos(key->GetMousePos()+focus);
-
-
-		//아이템 처리
-		for(list<Item*>::iterator it = item_list.begin();it != item_list.end(); )
 		{
-			if((*it)->Action(this))
+			opznet::Packet sendpacket;
+			sendpacket << TO_UINT16(CL2SV_REQUEST_LEVEL) << 0;
+			opznet::SafeSend(sendpacket);
+		}
+	});
+	NetInterface::RegisterPacketCallback(SV2CL_CONTEXT, [this](opznet::Packet &packet)
+	{
+		int created;
+		if (packet >> created)
+		{
+			if (created)
 			{
-				delete (*it);
-				list<Item*>::iterator temp = it++;
-				item_list.erase(temp);
+				ChatMsg_Manager::PushMessage(L"스테이지가 이미 만들어져있다.");
 			}
 			else
-				it++;
-		}
-
-		//총알 처리
-		for(list<Shot_base*>::iterator it = shot_list.begin();it != shot_list.end(); )
-		{
-			if((*it)->Action(this))
 			{
-				delete (*it);
-				list<Shot_base*>::iterator temp = it++;
-				shot_list.erase(temp);
+				ChatMsg_Manager::PushMessage(L"스테이지가 만들어져있지 않다. 새로 생성...");
+				MakeStage(level);
+				state = 1;
+				command_send_ok = true;
 			}
-			else
-				it++;
-		} 
-		if(death_dump_)
-		{
-			death_dump_--;
 		}
-		else
+	});
+	NetInterface::RegisterPacketCallback(SV2CL_COMMANDS, [this](opznet::Packet &packet)
+	{
+		size_t nr_commands;
+		packet >> nr_commands;
+		string inbuf;
+		for (size_t i = 0U; i < nr_commands; ++i)
 		{
+			Command c;
+			packet >> inbuf;
+			c.ParseFromString(inbuf);
+			HandleCommand(c);
+			inbuf.clear();
 		}
+		HandleState();
+		state_handle_count = 3;
+		command_send_ok = true;
+	});
+	
+	wstring sv_addr;
+	multi2uni(config::host_addr, &sv_addr);
+	wstring username;
+	multi2uni(config::username, &username);
 
-		//유닛 처리
-		for(list<Unit*>::iterator it = unit_list.begin();it != unit_list.end(); )
+	NetInterface::Connect(sv_addr, username);
+	ChatMsg_Manager::PushMessage(wstring(sv_addr + L" 서버에 연결 시도").c_str());
+}
+
+void Game_Manager::HandleInputs()
+{
+	if(player->GetAbilitySelect())
+	{ //능력 셀렉창인경우
+		for (int i = 0; i <  player->GetSelectAbilityNum(); ++i)
 		{
-			if((*it)->Action(this))
-			{			
-				death_dump_= 3;
-				TargetLost();
-				delete (*it);
-				list<Unit*>::iterator temp = it++;
-				unit_list.erase(temp);
+			if(key->GeyKeyState(DIK_1+i, KEY_DOWN))
+			{
+				player->SelectAbilityBefore(1+i);
+				break;
 			}
-			else
-				it++;
 		}
-		//if(key->GeyKeyState(DIK_Q, KEY_DOWN))
-		//	player->StartAbility();
+		if (key->GeyKeyState(DIK_RETURN, KEY_DOWN))
+		{
+			Command c;
+			c.set_type(COMMAND_SELECT_ABILITY);
+			c.set_selected_num(player->GetSelectedAbility());
+			commands.push_back(c);
+		}
+	}
+	else
+	{
 		if(key->GeyKeyState(DIK_M, KEY_DOWN))
 			map->SwapSize();
 		if(key->GeyKeyState(DIK_F, KEY_DOWN))
@@ -519,8 +625,10 @@ void Game_Manager::GameLoop()
 		if(isPlayerLive())
 		{//플레이어가 살아있을때...
 			float angle_=0;
-			int wh_=11;
-			if(!player->GetSniper()){
+			
+			if(!player->GetSniper())
+			{
+				int wh_=11;
 				if(key->GeyKeyState(DIK_W, KEY_HOLD))
 					wh_--;
 				if(key->GeyKeyState(DIK_S, KEY_HOLD))
@@ -529,11 +637,28 @@ void Game_Manager::GameLoop()
 					wh_-=10;
 				if(key->GeyKeyState(DIK_D, KEY_HOLD))
 					wh_+=10;
+				if (wh_ != 11)
+				{
+					Command c;
+					c.set_type(COMMAND_GO);
+					c.set_wh_(wh_);
+					commands.push_back(c);
+				}
 			}
+			
 			if(key->GeyKeyState(DIK_R, KEY_DOWN))
-				player->Reload();
+			{
+				Command c;
+				c.set_type(COMMAND_RELOAD);
+				commands.push_back(c);
+			}
+
 			if(!player->GetSniper() && key->GeyKeyState(DIK_LSHIFT, KEY_DOWN) || key->GeyKeyState(DIK_RSHIFT, KEY_DOWN))
-				player->PickUp(this);
+			{
+				Command c;
+				c.set_type(COMMAND_PICK_UP);
+				commands.push_back(c);
+			}
 
 			if(player->GetQuickSelect())
 			{
@@ -542,18 +667,25 @@ void Game_Manager::GameLoop()
 				if(key->GeyKeyState(DIK_X, KEY_DOWN))
 					player->SetQuickmenu(6);
 			}
-			else{
+			else
+			{
 				if(key->GeyKeyState(DIK_Z, KEY_DOWN))
-					player->UseAbility(this, 0);
+				{
+					Command c;
+					c.set_type(COMMAND_USE_ABILITY);
+					c.set_selected_num(0);
+					commands.push_back(c);
+				}
 				if(key->GeyKeyState(DIK_X, KEY_DOWN))
-					player->UseAbility(this, 1);
+				{
+					Command c;
+					c.set_type(COMMAND_USE_ABILITY);
+					c.set_selected_num(1);
+					commands.push_back(c);
+				}
 			}
-			/*if(key->GeyKeyState(DIK_M, KEY_DOWN))
-			map->map_hack();*/
-			//if(key->GeyKeyState(DIK_C, KEY_DOWN))
-			//	player->SetHp(100);
 
-
+			
 			if(player->GetQuickSelect())
 			{
 				if(key->GeyKeyState(DIK_1, KEY_DOWN))
@@ -567,65 +699,41 @@ void Game_Manager::GameLoop()
 			}
 			else if(!player->GetSniper())
 			{ //무기교체하기
-
-				if(key->GeyKeyState(DIK_1, KEY_DOWN))
-					player->Swap(1);
-				else if(key->GeyKeyState(DIK_2, KEY_DOWN))
-					player->Swap(2);
-				else if(key->GeyKeyState(DIK_3, KEY_DOWN))
-					player->Swap(3);
-				else if(key->GeyKeyState(DIK_4, KEY_DOWN))
-					player->Swap(4);
-			}
-
-			bool left_click = false;
-			if(player->is_Click_Hold())
-			{
-				if(key->GetMouseState(MOUSE_LEFT_HOLD))
+				for (auto it = dkey2num.begin(); it != dkey2num.end(); ++it)
 				{
-					player->Shot(this, key->GetMousePos()+focus, 0.0f);
-					left_click = true;
+					if (key->GeyKeyState(it->first, KEY_DOWN))
+					{
+						Command c;
+						c.set_type(COMMAND_SWAP);
+						c.set_selected_num(it->second);
+						commands.push_back(c);
+					}
 				}
 			}
-			else
+
+			if( (player->is_Click_Hold() && key->GetMouseState(MOUSE_LEFT_HOLD)) ||
+				(key->GetMouseState(MOUSE_LEFT_DOWN)) )
 			{
-				if(key->GetMouseState(MOUSE_LEFT_DOWN))
-				{
-					player->Shot(this, key->GetMousePos()+focus, 0.0f);
-					left_click = true;
-				}
+				Command c;
+				c.set_type(COMMAND_SHOT);
+				auto to = key->GetMousePos()+focus;
+				Vector2d *f = new Vector2d;
+				f->set_x(to.x);
+				f->set_y(to.y);
+				c.set_allocated_focus(f);
+				commands.push_back(c);
 			}
-			if(!left_click && key->GetMouseState(MOUSE_RIGHT_DOWN))
+			else if(key->GetMouseState(MOUSE_RIGHT_DOWN))
 			{
 				player->Quick(this, key->GetMousePos()+focus, 0.0f);
 			}
 
-#ifdef __PROFILE__
+	#ifdef __PROFILE__
 			if(key->GeyKeyState(DIK_P, KEY_DOWN))
 			{
 				ProfileSaveBuffer();
 			}
-#endif
-
-			if(wh_ != 11 && !player->GetFly())
-			{
-				switch(wh_)
-				{
-				case 21:angle_ =0.0f;break;
-				case 22:angle_ =D3DX_PI/4;break;
-				case 12:angle_ =D3DX_PI/2;break;
-				case 02:angle_ =D3DX_PI*3/4;break;
-				case 01:angle_ =D3DX_PI;break;
-				case 00:angle_ =D3DX_PI*5/4;break;
-				case 10:angle_ =D3DX_PI*3/2;break;
-				case 20:angle_ =D3DX_PI*7/4;break;
-				}
-
-				player->UnitMove(this, player->GetSpeed(angle_), angle_);
-				if(count%10 == 0)
-					map->UpdateSight(player);
-
-			}
+	#endif
 		}
 		else
 		{
@@ -634,16 +742,209 @@ void Game_Manager::GameLoop()
 				GameMenu();			
 			}
 		}
-		if(next_floor && isPlayerLive())
-		{
-			NextStage();
-			next_floor = false;
-		}
-		count++;
-#ifdef __PROFILE__
-		ProfileEnd("Game_Manager::GameLoop()");
-#endif
 	}
+}
+
+void Game_Manager::HandleCommand(Command & c)
+{
+	switch (c.type())
+	{
+	case COMMAND_SELECT_ABILITY:
+		player->SelectAbility(this, c.selected_num());
+		break;
+
+	case COMMAND_GO:
+		if (!player->GetFly())
+		{
+			float angle_;
+			switch(c.wh_())
+			{
+			case 21:angle_ =0.0f;break;
+			case 22:angle_ =D3DX_PI/4;break;
+			case 12:angle_ =D3DX_PI/2;break;
+			case 02:angle_ =D3DX_PI*3/4;break;
+			case 01:angle_ =D3DX_PI;break;
+			case 00:angle_ =D3DX_PI*5/4;break;
+			case 10:angle_ =D3DX_PI*3/2;break;
+			case 20:angle_ =D3DX_PI*7/4;break;
+			}
+
+			player->SetGoAngle(angle_);
+//			player->UnitMove(this, player->GetSpeed(angle_), angle_);
+			map->UpdateSight(player);
+		}
+		break;
+
+	case COMMAND_RELOAD:
+		player->Reload();
+		break;
+
+	case COMMAND_PICK_UP:
+		player->PickUp(this);
+		break;
+
+	case COMMAND_USE_ABILITY:
+		player->UseAbility(this, static_cast<unsigned int>(c.selected_num()));
+		break;
+
+	case COMMAND_SWAP:
+		player->Swap(c.selected_num());
+		break;
+
+	case COMMAND_SHOT:
+		{
+			const Vector2d & f = c.focus();
+			player->Shot(this, coord_def(f.x(), f.y()), 0.0f);			
+		}
+		break;
+	}
+}
+
+void Game_Manager::HandleCommands()
+{
+	for_each(commands.begin(), commands.end(), [this](Command & c)
+	{
+		HandleCommand(c);
+	});
+
+	commands.clear();
+}
+
+void Game_Manager::HandleState()
+{
+	// 능력 셀렉창인 경우 나감.
+	if (player->GetAbilitySelect()) return;
+
+	if (!sniper_mode)
+		player->Walk(this);
+
+	if(!sniper_mode)
+		focus = player->GetPos();
+	else
+	{
+		//coord_def center_((float)direct->GetWidth()/2,(float)direct->GetHeight()/2);
+		POINT new_, old_;
+		GetCursorPos(&new_);
+		RECT rect_;
+		GetWindowRect(handle,&rect_);
+		SetCursorPos(rect_.left+3+ direct->GetWidth()/2,rect_.top+25+direct->GetHeight()/2);
+		GetCursorPos(&old_);
+		coord_def dif_ = coord_def((float)(new_.x-old_.x),(float)(new_.y-old_.y))/scale;
+		focus = focus+dif_;
+		if(player->GetSniperSight()<distan_coord(player->GetPos(), focus)) //저격의 사거리p
+		{
+			float angle_ = GetAngleToTarget(player->GetPos(), focus);
+			focus = coord_def(player->GetPos().x+player->GetSniperSight()*cos(angle_),player->GetPos().y+player->GetSniperSight()*sin(angle_));
+		}
+	}
+
+	player->SetAngle(GetAngleToTarget(player->GetPos(), key->GetMousePos()+focus));
+
+	player->SetFocusPos(key->GetMousePos()+focus);
+
+
+	//아이템 처리
+	for(list<Item*>::iterator it = item_list.begin();it != item_list.end(); )
+	{
+		if((*it)->Action(this))
+		{
+			delete (*it);
+			list<Item*>::iterator temp = it++;
+			item_list.erase(temp);
+		}
+		else
+			it++;
+	}
+
+	//총알 처리
+	for(list<Shot_base*>::iterator it = shot_list.begin();it != shot_list.end(); )
+	{
+		if((*it)->Action(this))
+		{
+			delete (*it);
+			list<Shot_base*>::iterator temp = it++;
+			shot_list.erase(temp);
+		}
+		else
+			it++;
+	} 
+	if(death_dump_)
+	{
+		death_dump_--;
+	}
+	else
+	{
+	}
+
+	//유닛 처리
+	for(list<Unit*>::iterator it = unit_list.begin();it != unit_list.end(); )
+	{
+		if((*it)->Action(this))
+		{			
+			death_dump_= 3;
+			TargetLost();
+			delete (*it);
+			list<Unit*>::iterator temp = it++;
+			unit_list.erase(temp);
+		}
+		else
+			it++;
+	}
+
+	if(next_floor && isPlayerLive())
+	{
+		NextStage();
+		next_floor = false;
+	}
+}
+
+void Game_Manager::GameLoop()
+{
+#ifdef __PROFILE__
+	ProfileBegin("Game_Manager::GameLoop()");
+#endif
+
+	if (config::gamemode == SINGLE_GAME)
+	{
+		HandleInputs();
+
+		HandleCommands();
+
+		HandleState();
+	}
+	else if (config::gamemode == MULTI_GAME)
+	{
+		HandleInputs();
+
+		if (state_handle_count > 0)
+		{
+			state_handle_count--;
+			HandleState();
+		}
+
+		accum += time::delta;
+		if (command_send_ok && state_handle_count == 0)
+		{
+			accum = 0;
+			command_send_ok = false;
+			opznet::Packet sendpacket;
+			sendpacket	<< TO_UINT16(CL2SV_COMMANDS)
+						<< commands.size();
+			string outbuf;
+			for (auto it : commands)
+			{
+				it.AppendToString(&outbuf);
+				sendpacket << outbuf;
+				outbuf.clear();
+			}
+			opznet::SafeSend(sendpacket);
+			commands.clear();
+		}
+	}
+
+	#ifdef __PROFILE__
+		ProfileEnd("Game_Manager::GameLoop()");
+	#endif
 }
 
 void Game_Manager::NetworkLoop()

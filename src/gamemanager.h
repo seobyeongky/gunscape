@@ -12,8 +12,11 @@
 #include "coord_def.h"
 #include "map.h"
 #include "damage.h"
+#include "stages.h"
 #include <list>
+#include <vector>
 #include <windows.h>
+
 
 using namespace std;
 
@@ -30,21 +33,10 @@ class NetworkManager;
 class NetworkClient;
 class Monster;
 
-
-enum SPECIAL_STAGE
-{
-	SS_NORMAL = 0,
-	SS_ZOMBIE = 1,
-	SS_HUMAN = 2,
-	SS_BUG = 3,
-	SS_LAST = 4,
-	SS_MAX_FLOOR = 16
-};
-
+class Command;
 
 class Game_Manager
 {
-	int count;
 	int level;
 	int state;
 	float scale; //시스템을 제외한 이미지 확대크기
@@ -61,6 +53,10 @@ class Game_Manager
 	bool next_floor;
 
 	string full_text;
+	
+	int accum;
+	bool command_send_ok;
+	int	state_handle_count;
 
 	static Game_Manager* pInstance;
 	static HWND handle;
@@ -70,6 +66,10 @@ class Game_Manager
 	~Game_Manager();
 	//void SetSight(coord_def c_, int radius_);
 	//void SetFogTexture();
+	
+	typedef vector<Command> commands_t;
+
+	commands_t commands;
 
 public:
 	Player* player;
@@ -101,8 +101,13 @@ public:
 	bool isPlayerLive();
 
 	void GameMenu();
-	void StageMake();
+
+	void MakeStageTypes();
+	void SetStageTypesFrom(const vector<int> stages);	
+	void MakeStage(int level);
 	void NextStage();
+
+
 	void StageInit(int level_, MAP_TYPE type_, int box_, int monster_);
 	void NamedMake(int level_);
 	void TargetLost(); //유닛이 사라졌을때 ai의 타겟팅 없애야함.
@@ -121,8 +126,18 @@ public:
 
 	static void Loop();
 	void SelectLoop();
+	void LocalGameStart();
+	void MultiGameStart();
+
+	void ConnectToServer();
+	void HandleInputs();
+	void HandleCommand(Command & c);
+	void HandleCommands();
+	void HandleState();
 	void GameLoop();
+
 	void NetworkLoop();
+
 	void TextLoop();
 
 

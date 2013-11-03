@@ -1,0 +1,22 @@
+enum CommandType {
+	COMMAND_GO = 0;
+	COMMAND_SELECT_ABILITY = 1;
+	COMMAND_RELOAD = 2;
+	COMMAND_PICK_UP = 3;
+	COMMAND_USE_ABILITY = 4;
+	COMMAND_SHOT = 5;
+	COMMAND_SWAP = 6;
+}
+
+message Vector2d
+{
+	required float x = 1;
+	required float y = 2;
+}
+
+message Command {
+  required CommandType type = 1;
+  optional int32 wh_ = 2; // for go
+  optional int32 selected_num = 3; // selected number
+  optional Vector2d focus = 4; // for shooting
+}

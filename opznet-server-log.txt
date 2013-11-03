@@ -1,0 +1,9 @@
+=======================================================
+	2,013년 11월 3일	19시 36분 38초의 기록
+=======================================================
+OPZNET server 시작
+OPZNET NetThread 실행
+
+Greeter : TCP listener : 새로운 client 접속 요청
+Greeter : TCP listener : new client accepted
+Greeter : HandleGuest : 새로운 손님()을 client로 승격 허용

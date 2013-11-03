@@ -1,5 +1,7 @@
 temp/
 dep/
+test-d/
+test/
 *.suo
 *.pdb
 sound/bgm.wav

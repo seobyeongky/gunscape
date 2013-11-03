@@ -1,0 +1,1 @@
+protoc command.proto --cpp_out=../src/proto/

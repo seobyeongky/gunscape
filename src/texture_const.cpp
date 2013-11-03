@@ -198,8 +198,8 @@ Image_File::~Image_File()
 void Image_File::loading(IDirect3DDevice9* device_)
 {
 	D3DXIMAGE_INFO ImageInfo;
-	D3DXGetImageInfoFromFile(name.c_str(), &ImageInfo);
-	if(FAILED(D3DXCreateTextureFromFileEx(device_, name.c_str(), ImageInfo.Width, ImageInfo.Height, 1, D3DUSAGE_AUTOGENMIPMAP, ImageInfo.Format, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0, NULL, NULL, &texture)))
+	D3DXGetImageInfoFromFileA(name.c_str(), &ImageInfo);
+	if(FAILED(D3DXCreateTextureFromFileExA(device_, name.c_str(), ImageInfo.Width, ImageInfo.Height, 1, D3DUSAGE_AUTOGENMIPMAP, ImageInfo.Format, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0, NULL, NULL, &texture)))
 	{
 	}
 	width = (float)ImageInfo.Width;

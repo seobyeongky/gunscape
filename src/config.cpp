@@ -18,7 +18,8 @@ namespace config
 	gameMode_t gamemode;
 
 	string username;
-	string host;
+	bool host;
+	string host_addr;
 
 	void LoadFromFile()
 	{
@@ -105,7 +106,18 @@ namespace config
 			}
 			else if (!strcmp(name, "host"))
 			{
-				host = value;
+				if (!strcmp(value, "true"))
+				{
+					host = true;
+				}
+				else
+				{
+					host = false;
+				}
+			}
+			else if (!strcmp(name, "host_addr"))
+			{
+				host_addr = value;
 			}
 		}
 

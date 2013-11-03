@@ -9,6 +9,7 @@
 
 #include "window_class.h"
 #include "profiler.h"
+#include "time.h"
 
 #include <process.h>
 
@@ -17,7 +18,12 @@ int Window_Manager::ThreadCnt = 0;
 bool Window_Manager::window_break = false;
 unsigned int WINAPI ThreadLoop(void *arg);
 
-
+namespace time
+{
+	int present = 0;
+	int last = 0;
+	int delta = 1;
+};
 
 Window_Manager::Window_Manager(HINSTANCE hinstance, int width_, int height_):
 handle(0), width(width_), height(height_)
@@ -42,13 +48,13 @@ bool Window_Manager::init(HINSTANCE hinstance)
 	WndClass.hIcon = LoadIcon(hinstance, IDI_APPLICATION);
 	WndClass.hInstance = hinstance;
 	WndClass.lpfnWndProc = proc;
-	WndClass.lpszClassName = "Gunscape Ver 0.2";
+	WndClass.lpszClassName = L"Gunscape Ver 0.2";
 	WndClass.lpszMenuName = NULL;
 	WndClass.style = CS_HREDRAW | CS_VREDRAW;
 	
 	if( !RegisterClass(&WndClass) )
 	{
-		::MessageBox(0, "RegisterClass() - FAILED", 0, 0);
+		::MessageBox(0, L"RegisterClass() - FAILED", 0, 0);
 		return false;
 	}
 	
@@ -56,7 +62,7 @@ bool Window_Manager::init(HINSTANCE hinstance)
 	
 	if( !handle )
 	{
-		::MessageBox(0, "CreateWindow() - FAILED", 0, 0);
+		::MessageBox(0, L"CreateWindow() - FAILED", 0, 0);
 		return false;
 	}
 	
@@ -78,8 +84,6 @@ void Window_Manager::SetThreadLoop(void (*loop_func_)(void))
 bool Window_Manager::StartLoop()
 {
 	MSG Message;
-	DWORD lastTime = timeGetTime(); 
-	DWORD currTime = lastTime;
 	ZeroMemory(&Message, sizeof(MSG));
 	
 #ifdef __PROFILE__
@@ -98,12 +102,16 @@ bool Window_Manager::StartLoop()
 		}
 	}
 
+	time::last = timeGetTime();
+	time::delta = 16; // 현재 알 수 없기 때문에... 가장 나은 예측값 16을 쓴다
 
 	while(Message.message != WM_QUIT)
 	{
 #ifdef __PROFILE__
 		ProfileBegin("Loop");
 #endif
+		time::present = static_cast<int>(timeGetTime());
+		
 		if(PeekMessage(&Message, 0, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&Message);
@@ -113,7 +121,7 @@ bool Window_Manager::StartLoop()
 #ifdef __PROFILE__
 		ProfileBegin("Window_Manager::StartLoop()");
 #endif
-		if(!window_break)
+//		if(!window_break)
 		{
 			for(vector<void (*)(void)>::iterator it = loop_func.begin(); it != loop_func.end(); it++)
 			{
@@ -125,13 +133,13 @@ bool Window_Manager::StartLoop()
 		ProfileEnd("Window_Manager::StartLoop()");
 #endif
 
-		currTime  = timeGetTime();
-		while(currTime - lastTime < 16)
+		time::last = time::present;
+		int sleeptime = 16 - (timeGetTime() - time::last);
+		if (sleeptime > 0)
 		{
-			currTime = timeGetTime();
-			Sleep(1);
+			Sleep(16 - (timeGetTime() - time::last));
 		}
-		lastTime = currTime;
+		time::delta = 16; // 그냥 쓴다. 타이머 괜히 호출안하고...
 #ifdef __PROFILE__
 		ProfileEnd("Loop");
 #endif
@@ -150,7 +158,7 @@ bool Window_Manager::StartLoop()
 	while(ThreadCnt > 0 && i++ <= 50)
 		Sleep(200);
 	if(i>50)
-		::MessageBox(0, "쓰레드 종료 실패", 0, 0);
+		::MessageBox(0, L"쓰레드 종료 실패", 0, 0);
 
 	return true;
 }

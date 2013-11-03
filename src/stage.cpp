@@ -43,6 +43,9 @@
 
 #include "effect_fog.h"
 
+#include "config.h"
+#include <opznet/client.h>
+#include "protocol.h"
 
 
 
@@ -494,7 +497,7 @@ Monster_Index GetStageMonster(int level, MAP_TYPE type_)
 	return MON_WEAK_ZOMBIE;
 }
 
-void Game_Manager::StageMake()
+void Game_Manager::MakeStageTypes()
 {	
 	for(int i = 0; i<SS_MAX_FLOOR; i++)
 		stage_kind[i] = SS_NORMAL;
@@ -510,17 +513,20 @@ void Game_Manager::StageMake()
 	stage_kind[rand_int(10,12)] = (SPECIAL_STAGE)kind_[2];
 	
 	stage_kind[15] = SS_LAST;
-
-
 }
 
-void Game_Manager::NextStage()
+void Game_Manager::SetStageTypesFrom(const vector<int> stages)
 {
-	level++;
+	for (int i = 0; i < SS_MAX_FLOOR; ++i)
+		stage_kind[i] = static_cast<SPECIAL_STAGE>(stages[i]);
+}
+
+void Game_Manager::MakeStage(int level)
+{
 	switch(stage_kind[level]){
 	case SS_NORMAL:
 	default:
-		StageInit(level,MPT_NOMAL,rand_int(1,3),13);
+		StageInit(level,MPT_NOMAL,rand_int(1,3),12);
 		break;
 	case SS_ZOMBIE:
 		StageInit(level,MPT_ZOMBIE,rand_int(1,3),16);
@@ -534,6 +540,22 @@ void Game_Manager::NextStage()
 	case SS_LAST:
 		StageInit(level,MPT_LAST,rand_int(1,3),60);
 		break;
+	}
+}
+
+void Game_Manager::NextStage()
+{
+	if (config::gamemode == SINGLE_GAME)
+	{
+		MakeStage(++level);
+	}
+	else if (config::gamemode == MULTI_GAME)
+	{
+		++level;
+		opznet::Packet sendpacket;
+		sendpacket << TO_UINT16(CL2SV_REQUEST_LEVEL) << level;
+		SafeSend(sendpacket);
+		state = -1;
 	}
 }
 
@@ -778,4 +800,5 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 	{
 		map->map_hack();
 	}
+	map->map_hack();
 }

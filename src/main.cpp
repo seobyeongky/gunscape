@@ -3,12 +3,18 @@
 #include <stdio.h>
 #include <d3dx9.h> //다이렉트위해서
 #include <time.h>
+#include <locale>
+
+#ifdef _DEBUG
 #include <vld.h>
+#endif
+#include <google\protobuf\stubs\common.h>
 
 #include "window_class.h"
 #include "d3dx_class.h"
 #include "chatmsgmanager.h"
 #include "gamemanager.h"
+#include "server.h"
 #include "keyinput.h"
 #include "profiler.h"
 #include "sound.h"
@@ -28,9 +34,11 @@
 #ifdef _DEBUG
 	#pragma comment(lib, "opznet-client-d.lib")
 	#pragma comment(lib, "opznet-server-d.lib")
+	#pragma comment(lib, "libprotobuf-d.lib")
 #else
 	#pragma comment(lib, "opznet-client.lib")
 	#pragma comment(lib, "opznet-server.lib")
+	#pragma comment(lib, "libprotobuf.lib")
 #endif
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -45,10 +53,11 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, in
 	//_CrtSetBreakAlloc(165);
 	//_CrtSetBreakAlloc(164);
 	//_CrtSetBreakAlloc(158);
-
+	_wsetlocale(LC_ALL, L"korean");
 	srand((unsigned int)time(NULL));
 
 	config::LoadFromFile();
+
 
 	Window_Manager wnd(hinstance, config::width, config::height);
 
@@ -65,14 +74,16 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, in
 
 		ChatMsg_Manager::CreateInstance();
 		wnd.SetThreadLoop(ChatMsg_Manager::UpdateLoop);
-		drt->SetLoop(ChatMsg_Manager::DrawLoop);
+		
 		
 		Game_Manager* gmm = Game_Manager::CreateInstance();
 		gmm->SetHandle(wnd.GetHandle());
 		gmm->SetKeyClass(kym);
 		gmm->SetDirectClass(drt);
 		wnd.SetLoop(gmm->Loop);
+		
 		drt->SetLoop(gmm->Draw);
+		drt->SetLoop(ChatMsg_Manager::DrawLoop);
 
 		wnd.StartLoop();
 
@@ -82,6 +93,9 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, in
 	}
 
 	Direct_Manager::DestroyInstance(drt);
+
+	
+	google::protobuf::ShutdownProtobufLibrary();
 
 //	_CrtDumpMemoryLeaks();
 

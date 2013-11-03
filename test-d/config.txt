@@ -1,0 +1,6 @@
+width = 800
+height = 600
+gamemode = multi
+name = mmo
+host = false
+host_addr = 127.0.0.1
