@@ -17,6 +17,11 @@
 
 #include "effect_piece.h"
 
+#include "smap.h"
+
+#include <opznet/shared_structs.h>
+
+extern smap<opznet::ID, cl_t> clients;
 
 Burrow2::Burrow2(coord_def pos_, int time_, Monster_Index mon_):
 Unit("¼û¾ù¾î¿ä", NULL, pos_.x, pos_.y, -1, 0),
@@ -35,13 +40,17 @@ bool Burrow2::Action_in(Game_Manager* gm_)
 {
 	if(gm_)
 	{
-		if(gm_->player->collution(GetPos(), GetSize()))
+		for (auto & cl : clients)
 		{
-			Unit* temp = New_Monster(mon, GetPos(), -1, 0, 0);
-			gm_->unit_list.push_back(temp);
-			if(sleep)
-				temp->Sleep();
-			return true;
+			Player * p = cl.element().player;
+			if (p->collution(GetPos(), GetSize()))
+			{
+				Unit* temp = New_Monster(mon, GetPos(), -1, 0, 0);
+				gm_->unit_list.push_back(temp);
+				if(sleep)
+					temp->Sleep();
+				return true;
+			}
 		}
 	}
 

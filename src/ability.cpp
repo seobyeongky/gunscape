@@ -177,7 +177,7 @@ bool Ability::GetAbility(Player* player_, int num)
 		}
 		for(int i = 0; i < num ; i++)
 		{
-			int select_ = rand_int(1,sum_percent_);
+			int select_ = my_rand_int(1,sum_percent_);
 
 			for(list<Ability*>::iterator it = temp_list.begin(); it != temp_list.end(); it++)
 			{

@@ -20,7 +20,6 @@ public:
 	virtual ~Effect_fog();
 	virtual bool Action(Game_Manager* gm_);
 	virtual bool Draw(coord_def offset_, float size_);
-
 };
 
 

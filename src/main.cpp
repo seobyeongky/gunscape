@@ -54,7 +54,6 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, in
 	//_CrtSetBreakAlloc(164);
 	//_CrtSetBreakAlloc(158);
 	_wsetlocale(LC_ALL, L"korean");
-	srand((unsigned int)time(NULL));
 
 	config::LoadFromFile();
 

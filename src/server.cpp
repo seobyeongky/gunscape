@@ -24,13 +24,14 @@ namespace Server
 		wstring		name;
 		int			delay;
 		bool		send;
+		bool		req_next_lv;
 	
 		cl_context_t()
-			: name(), delay(0), send(false)
+			: name(), delay(0), send(false), req_next_lv(false)
 		{
 		}
 		cl_context_t(const client_t & _basic_info)
-			: name(_basic_info.name), delay(0), send(false)
+			: name(_basic_info.name), delay(0), send(false), req_next_lv(false)
 		{
 		}
 	};
@@ -43,6 +44,7 @@ namespace Server
 	
 	vector<Command>			commands;
 	int						nr_send = 0;
+	int						nr_voidness = 0;
 
 	vector<list<ID>>		stage_map;
 	int						req_id_count = 0;
@@ -63,61 +65,115 @@ namespace Server
 		}
 	}
 
+	//
+	// 모든 클라이언트가 command들을 보냈다면...
+	//
+	bool IsGotAllCommands()
+	{
+		return nr_send > 0 && static_cast<unsigned int>(nr_send) >= client_map.size();
+	}
+	
+	//
+	// 그걸 합해서 되돌려줍니다.
+	//
+	void DelegateCommands()
+	{		
+		nr_send = 0;
+		for (auto & it : client_map)
+		{
+			it.element().send = false;
+		}
+
+		Packet sendpacket;
+		sendpacket << TO_UINT16(SV2CL_COMMANDS)
+			<< commands.size();
+		string outbuf;
+		for (auto & c : commands)
+		{
+			c.AppendToString(&outbuf);
+			sendpacket << outbuf;
+			outbuf.clear();
+		}
+
+		for (auto & cl : client_map)
+		{
+			SafeSend(cl.key(), sendpacket);
+		}
+
+		commands.clear();
+	}
+
+	//
+	// 확인
+	//
+	bool NextLvOk()
+	{
+		for (auto & cl : client_map)
+		{
+			if (!cl.element().req_next_lv)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	//
+	// hoho
+	//
+	void SendNextLvAllow()
+	{
+		Packet sendpacket;
+		sendpacket << TO_UINT16(SV2CL_NEXT_LEVEL_ALLOW);
+		for (auto & cl : client_map)
+		{
+			SafeSend(cl.key(), sendpacket);
+			cl.element().req_next_lv = false;
+		}
+		nr_voidness = 0;
+	}
+
+
 	void HandleRecvPacket(client_map_t::Iter it, cl2sv_t header, Packet & packet)
 	{
 		ID cl_id = (*it).key();
 		cl_context_t & cl_context = (*it).element();
 		switch (header)
 		{
-		case CL2SV_REQUEST_LEVEL:
+		case CL2SV_MY_CHARACTER:
 			{
-				int lv;
-				packet >> lv;
-				auto & cl_list = stage_map[lv];
-				if (cl_list.empty())
+				int sel;
+				packet >> sel;
+
+				Packet sendpacket;
+				sendpacket << TO_UINT16(SV2CL_INTRODUCE_CHARACTER) << cl_id << sel;
+
+				for (auto & cl : client_map)
 				{
-					Packet sendpacket;
-					sendpacket << TO_UINT16(SV2CL_CONTEXT) << 0;
-					SafeSend(cl_id, sendpacket);
-					for (auto list : stage_map)
-					{
-						list.remove(cl_id);
-					}
-					stage_map[lv].push_back(cl_id);
-				}
-				else
-				{
-					// 이미 가진 클라이언트에게 스테이지 정보 요청
-					ID sender = cl_list.front();
-					ID receiver = cl_id;
-					req_map[req_id_count] = receiver;
-					Packet sendpacket;
-					sendpacket << TO_UINT16(SV2CL_REQUEST_STAGE) << req_id_count;
-					SafeSend(sender, sendpacket);
-					req_id_count++;
+					SafeSend(cl.key(), sendpacket);
 				}
 			}
 			break;
 
-		case CL2SV_STAGE_INFO:
+		case CL2SV_REQUEST_NEXT_LEVEL:
 			{
-				// 전달
-				int req_id;
-				packet >> req_id;
-				ID receiver = req_map[req_id];
-				size_t len = packet.GetByteSize()-sizeof(unsigned short)-sizeof(int);
-				void * buf = new char[len];
-				packet.Extract(buf, len);
-				Packet sendpacket;
-				sendpacket << TO_UINT16(SV2CL_CONTEXT) << 1;
-				sendpacket.Append(buf, len);
-				SafeSend(receiver, sendpacket);
-				delete buf;
+				cl_context.req_next_lv = true;
+
+				bool ok = true;
+				for (auto & cl : client_map)
+				{
+					if (!cl.element().req_next_lv)
+					{
+						ok = false;
+						break;
+					}
+				}
+
+				nr_voidness++;
 			}
 			break;
 
 		case CL2SV_COMMANDS:
-
 			if (cl_context.send)
 			{
 				ChatMsg_Manager::PushMessage(L"클라이언트(" + to_wstring((*it).key()) + L") 중복 전송");
@@ -127,35 +183,7 @@ namespace Server
 			cl_context.send = true;
 
 			PushCommands(packet);
-
-			if (static_cast<unsigned int>(nr_send) >= client_map.size())
-			{
-				// 모든 클라이언트가 command들을 보냈다면...
-				// 그걸 합해서 되돌려줍니다.
-				nr_send = 0;
-				for (auto it : client_map)
-				{
-					it.element().send = false;
-				}
-
-				Packet sendpacket;
-				sendpacket << TO_UINT16(SV2CL_COMMANDS)
-					<< commands.size();
-				string outbuf;
-				for (auto c : commands)
-				{
-					c.AppendToString(&outbuf);
-					sendpacket << outbuf;
-					outbuf.clear();
-				}
-
-				for (auto cl : client_map)
-				{
-					SafeSend(cl.key(), sendpacket);
-				}
-
-				commands.clear();
-			}
+			
 			break;
 		}
 	}
@@ -164,11 +192,12 @@ namespace Server
 	{
 		wstring wusername;
 		multi2uni(config::username, &wusername);
-		BeginServer(wusername + L"님의 관전 서버");
+		BeginServer(wusername + L"님의 서버");
 		ChatMsg_Manager::PushMessage(L"서버 서비스 시작");
 
 		callback();
 
+		unsigned int seed = static_cast<unsigned int>(time(nullptr));
 		server_msg_t msg;
 
 		while(!endflag)
@@ -182,9 +211,10 @@ namespace Server
 						{
 							Packet send_packet;
 							send_packet << TO_UINT16(SV2CL_WELCOME);
-							send_packet << stages.size();
-							for (auto it : stages)
-								send_packet << static_cast<int>(it);
+//							send_packet << stages.size();
+	//						for (auto it : stages)
+		//						send_packet << static_cast<int>(it);
+							send_packet << seed;
 							SafeSend(msg.client_info.id, send_packet);
 						}
 						break;
@@ -197,6 +227,7 @@ namespace Server
 								continue;
 							}
 							if ((*it).element().send) nr_send--;
+							if ((*it).element().req_next_lv) nr_voidness--;
 							client_map.erase(it);
 						}
 						break;
@@ -211,7 +242,7 @@ namespace Server
 								continue;
 							}
 							
-							HandleRecvPacket(it, static_cast<cl2sv_t>(header), msg.packet);
+							HandleRecvPacket(it, static_cast<cl2sv_t>(header), msg.packet);							
 						}
 						break;
 					case SVMSG_CLIENT_DELAY_TIME_UPDATED:
@@ -227,6 +258,8 @@ namespace Server
 						ChatMsg_Manager::PushMessage(L"서버 : 바인드 실패");
 						break;
 				}
+				if (IsGotAllCommands()) DelegateCommands();
+				if (NextLvOk()) SendNextLvAllow();
 			}
 			Sleep(20);
 		}

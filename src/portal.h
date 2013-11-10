@@ -10,10 +10,14 @@
 #define  __PORTAL_H__
 
 #include "item.h"
+#include "smap.h"
+#include <opznet/shared_structs.h>
 
 class Portal: public Item
 {
 	bool last;
+	smap<opznet::ID, int> time_for;
+	bool next_lv;
 public:	
 	Portal(Texture* texture_, coord_def pos_, bool last_);
 

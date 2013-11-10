@@ -155,7 +155,7 @@ Player* Character_Maker::GetPlayer(Game_Manager* gm_)
 		PlaySE(se_pistol_reload);
 		player->SetDelay(0.0f);
 		Player* temp = player;
-		player = NULL;
+		player = new Player(&tex_player, 0, 0);;
 		return temp;
 	}
 	return NULL;

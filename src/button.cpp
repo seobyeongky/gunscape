@@ -36,16 +36,21 @@ bool Button::Action(Game_Manager* gm_)
 {
 	if(!valid)		
 		return true;
-	if(!on && gm_->isPlayerLive())
+	if(!on)
 	{
 		count++;
 		if(count%50==0)
 			Effect_switch(gm_,GetPos(),1.0f);
 
-		coord_def temp = gm_->GetPlayerPos();
-		if(gm_->player->collution(GetPos(), 10) && !gm_->player->GetNet())
+		for (auto & unit : gm_->unit_list)
 		{
-			Effect(gm_, gm_->player);
+			if (unit->isPlayer() && unit->isLive())
+			{
+				if(unit->collution(GetPos(), 10) && !unit->GetNet())
+				{
+					Effect(gm_, reinterpret_cast<Player *>(unit));
+				}				
+			}
 		}
 	}
 	return false;

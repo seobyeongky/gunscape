@@ -79,6 +79,11 @@ class Player: public Unit
 	float goangle;
 	int walkcount;
 
+	//네트웤 레이턴시 때문에 생긴 변수들...
+	coord_def aimed_pos;
+	int triggercount;
+	float destangle;
+
 public:
 	Main_Weapon* main_weapon;
 	Sub_Weapon* sub_weapon[2];
@@ -117,7 +122,7 @@ public:
 	int GetNeedExp(int level_);
 	float GetExpPercent();
 	int GetSelectAbilityNum(){return select_ability_num;};
-	int GetSelectedAbility(){return ability_select_num; }
+	int GetSelectedAbilityId();
 	float GetBullet(){return bullet;};
 	int GetMaxBullet(){return max_bullet;};
 	bool GetAbilitySelect(){return ability_select;};
@@ -240,6 +245,11 @@ public:
 
 	void SetGoAngle(float goangle_);
 	void Walk(Game_Manager * gm_);
+	void SetDestAngle(float destangle_);
+
+	void Trigger(const coord_def & aimed_pos_);
+	void ShotEvent(Game_Manager * gm_);
+	void MoveToDestAngle();
 };
 
 #endif // __PLAYER_H__

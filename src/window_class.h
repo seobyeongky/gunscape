@@ -40,9 +40,10 @@ public:
 	bool StartLoop();
 	
 
+
 	static LRESULT CALLBACK proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-
+	static bool IsFocused() {return !window_break;}
 };
 
 

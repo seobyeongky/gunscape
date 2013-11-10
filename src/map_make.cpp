@@ -365,7 +365,16 @@ void map_algorithms03(Game_Manager* gm_, Mini_Map& map_)
 
 			if(i == 99)
 			{
-				gm_->player->Move((float)(x_)*map_.GetPitchX(),(float)(y_)*map_.GetPitchX());
+				// what is this
+				int count = 0;
+				for (auto & unit : gm_->unit_list)
+				{
+					if (unit->isPlayer() && unit->isLive())
+					{
+						unit->Move((float)((x_)*map_.GetPitchX()+count),(float)(y_)*map_.GetPitchX());
+						count++;
+					}
+				}
 				stack<coord_int> path_stack;
 				if(PathSearch(coord_int((x_),(y_)),coord_int(map_.GetMaxX()/2,map_.GetMaxY()/2),path_stack,map_))//방에 걸린 마스크를 피해서 경로저장
 				{

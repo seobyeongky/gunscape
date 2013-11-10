@@ -42,11 +42,12 @@ enum CommandType {
   COMMAND_PICK_UP = 3,
   COMMAND_USE_ABILITY = 4,
   COMMAND_SHOT = 5,
-  COMMAND_SWAP = 6
+  COMMAND_SWAP = 6,
+  COMMAND_FOCUS = 7
 };
 bool CommandType_IsValid(int value);
 const CommandType CommandType_MIN = COMMAND_GO;
-const CommandType CommandType_MAX = COMMAND_SWAP;
+const CommandType CommandType_MAX = COMMAND_FOCUS;
 const int CommandType_ARRAYSIZE = CommandType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CommandType_descriptor();
@@ -207,31 +208,38 @@ class Command : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .CommandType type = 1;
+  // required uint32 pid = 1;
+  inline bool has_pid() const;
+  inline void clear_pid();
+  static const int kPidFieldNumber = 1;
+  inline ::google::protobuf::uint32 pid() const;
+  inline void set_pid(::google::protobuf::uint32 value);
+
+  // required .CommandType type = 2;
   inline bool has_type() const;
   inline void clear_type();
-  static const int kTypeFieldNumber = 1;
+  static const int kTypeFieldNumber = 2;
   inline ::CommandType type() const;
   inline void set_type(::CommandType value);
 
-  // optional int32 wh_ = 2;
+  // optional int32 wh_ = 3;
   inline bool has_wh_() const;
   inline void clear_wh_();
-  static const int kWhFieldNumber = 2;
+  static const int kWhFieldNumber = 3;
   inline ::google::protobuf::int32 wh_() const;
   inline void set_wh_(::google::protobuf::int32 value);
 
-  // optional int32 selected_num = 3;
+  // optional int32 selected_num = 4;
   inline bool has_selected_num() const;
   inline void clear_selected_num();
-  static const int kSelectedNumFieldNumber = 3;
+  static const int kSelectedNumFieldNumber = 4;
   inline ::google::protobuf::int32 selected_num() const;
   inline void set_selected_num(::google::protobuf::int32 value);
 
-  // optional .Vector2d focus = 4;
+  // optional .Vector2d focus = 5;
   inline bool has_focus() const;
   inline void clear_focus();
-  static const int kFocusFieldNumber = 4;
+  static const int kFocusFieldNumber = 5;
   inline const ::Vector2d& focus() const;
   inline ::Vector2d* mutable_focus();
   inline ::Vector2d* release_focus();
@@ -239,6 +247,8 @@ class Command : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:Command)
  private:
+  inline void set_has_pid();
+  inline void clear_has_pid();
   inline void set_has_type();
   inline void clear_has_type();
   inline void set_has_wh_();
@@ -250,13 +260,14 @@ class Command : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::uint32 pid_;
   int type_;
   ::google::protobuf::int32 wh__;
-  ::Vector2d* focus_;
   ::google::protobuf::int32 selected_num_;
+  ::Vector2d* focus_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_command_2eproto();
   friend void protobuf_AssignDesc_command_2eproto();
@@ -320,15 +331,37 @@ inline void Vector2d::set_y(float value) {
 
 // Command
 
-// required .CommandType type = 1;
-inline bool Command::has_type() const {
+// required uint32 pid = 1;
+inline bool Command::has_pid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Command::set_has_type() {
+inline void Command::set_has_pid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Command::clear_has_type() {
+inline void Command::clear_has_pid() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void Command::clear_pid() {
+  pid_ = 0u;
+  clear_has_pid();
+}
+inline ::google::protobuf::uint32 Command::pid() const {
+  return pid_;
+}
+inline void Command::set_pid(::google::protobuf::uint32 value) {
+  set_has_pid();
+  pid_ = value;
+}
+
+// required .CommandType type = 2;
+inline bool Command::has_type() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Command::set_has_type() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Command::clear_has_type() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void Command::clear_type() {
   type_ = 0;
@@ -343,15 +376,15 @@ inline void Command::set_type(::CommandType value) {
   type_ = value;
 }
 
-// optional int32 wh_ = 2;
+// optional int32 wh_ = 3;
 inline bool Command::has_wh_() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void Command::set_has_wh_() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void Command::clear_has_wh_() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void Command::clear_wh_() {
   wh__ = 0;
@@ -365,15 +398,15 @@ inline void Command::set_wh_(::google::protobuf::int32 value) {
   wh__ = value;
 }
 
-// optional int32 selected_num = 3;
+// optional int32 selected_num = 4;
 inline bool Command::has_selected_num() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void Command::set_has_selected_num() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void Command::clear_has_selected_num() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void Command::clear_selected_num() {
   selected_num_ = 0;
@@ -387,15 +420,15 @@ inline void Command::set_selected_num(::google::protobuf::int32 value) {
   selected_num_ = value;
 }
 
-// optional .Vector2d focus = 4;
+// optional .Vector2d focus = 5;
 inline bool Command::has_focus() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void Command::set_has_focus() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void Command::clear_has_focus() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void Command::clear_focus() {
   if (focus_ != NULL) focus_->::Vector2d::Clear();

@@ -10,6 +10,7 @@
 #define  __Shot_H__
 
 #include "coord_def.h"
+//#include <opznet/shared_structs.h>
 
 class Game_Manager;
 class Texture;
@@ -63,6 +64,8 @@ public:
 	virtual bool Draw(coord_def offset_, float size_) = 0;
 
 	virtual bool isHouse(){return false;};
+
+//	virtual opznet::Packet & operator << (opznet::Packet & packet) = 0;
 
 	Texture* GetTexture(){return texture;};
 	virtual char* GetName(){return "±âº»ÃÑ¾Ë";};

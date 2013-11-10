@@ -43,7 +43,7 @@ bullet(4), max_bullet(4), ability_select(false), quick_select(false), quick_menu
 mon_sight_view(false), berserker(false), blood_reload(0), forget_count(600), 
 warning_time(1000), temp_invisible_turn(0), 
 mirror_damage(0), mirror_knockback(0), sniper(false), map_hack(false/*false*/), critical(0), your_switch(3),silencer(1.0f),
-goangle(0.f), walkcount(0)
+goangle(0.f), walkcount(0), aimed_pos(), triggercount(0)
 {
 	for(int i =0 ;i<2;i++)
 		sub_weapon[i] = NULL;
@@ -117,6 +117,12 @@ Item* Player::GetEmptyWeapon()
 		return no_weapon;
 	}
 };
+
+int Player::GetSelectedAbilityId()
+{
+	return ability_select_num;
+}
+
 float Player::GetExpPercent()
 {
 	if(GetNeedExp(level+1) == -1)
@@ -1015,7 +1021,7 @@ bool Player::UseBullet(float bullet_)
 void Player::SetGoAngle(float goangle_)
 {
 	goangle = goangle_;
-	walkcount = 3;
+	walkcount = 6;
 }
 
 void Player::Walk(Game_Manager * gm_)
@@ -1024,5 +1030,55 @@ void Player::Walk(Game_Manager * gm_)
 	{
 		walkcount--;
 		UnitMove(gm_, GetSpeed(goangle), goangle);
+	}
+}
+
+void Player::SetDestAngle(float destangle_)
+{
+	destangle = destangle_;
+}
+
+void Player::Trigger(const coord_def & aimed_pos_)
+{
+	aimed_pos = aimed_pos_;
+	if (current_weapon == main_weapon)
+		triggercount = 6;
+	else
+		triggercount = 1;
+}
+
+void Player::ShotEvent(Game_Manager * gm_)
+{
+	if (triggercount > 0)
+	{
+		triggercount--;
+		Shot(gm_, aimed_pos, 0.f);
+	}
+}
+
+void Player::MoveToDestAngle()
+{
+	float beginangle = GetAngle();
+	if (beginangle > 0)
+		beginangle = fmodf(beginangle, 2.f*D3DX_PI);
+	else
+		beginangle = fmodf(beginangle, -2.f*D3DX_PI);
+
+	float deltaangle = destangle - beginangle;
+	if (deltaangle > D3DX_PI)
+		deltaangle -= 2.f*D3DX_PI;
+	if (deltaangle < -D3DX_PI)
+		deltaangle += 2.f*D3DX_PI;
+
+	float anglespeed = 0.3f;
+	if (anglespeed > abs(deltaangle))
+	{
+		SetAngle(destangle);
+	}
+	else
+	{
+		float sign = 1.f;
+		if (deltaangle < 0.f) sign = -1.f;
+		SetAngle(sign * anglespeed + GetAngle());
 	}
 }

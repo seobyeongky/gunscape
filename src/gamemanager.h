@@ -13,9 +13,11 @@
 #include "map.h"
 #include "damage.h"
 #include "stages.h"
+#include "smap.h"
 #include <list>
 #include <vector>
 #include <windows.h>
+#include <opznet\shared_structs.h>
 
 
 using namespace std;
@@ -34,6 +36,19 @@ class NetworkClient;
 class Monster;
 
 class Command;
+
+struct cl_t
+{
+	string	name;
+	int		sel;
+	Player * player;
+
+	cl_t(void) : name(), sel(0), player(nullptr) {
+	}
+
+	cl_t(const string & name_) : name(name_), sel(0), player(nullptr) {
+	}
+};
 
 class Game_Manager
 {
@@ -58,6 +73,8 @@ class Game_Manager
 	bool command_send_ok;
 	int	state_handle_count;
 
+	bool wait_scene;
+
 	static Game_Manager* pInstance;
 	static HWND handle;
 
@@ -66,10 +83,23 @@ class Game_Manager
 	~Game_Manager();
 	//void SetSight(coord_def c_, int radius_);
 	//void SetFogTexture();
-	
+
 	typedef vector<Command> commands_t;
 
 	commands_t commands;
+
+	typedef smap<opznet::ID, cl_t>::Iter cl_iter_t;
+	// 다른 사람 카메라로 보고 있는가? 여부
+	bool otherview;
+
+	void HandlePlayer(Player * p);
+	bool CheckCollideWithPlayersView(const coord_def  &c_);
+	bool IsValidPos(int x_, int y_);
+
+	bool	AnyonePlaying();
+	Player * GetFirstPlayingCl();
+	Player * GetNextPlayingCl(Player * cur);
+	Player * GetPrevPlayingCl(Player * cur);
 
 public:
 	Player* player;
@@ -107,7 +137,8 @@ public:
 	void MakeStage(int level);
 	void NextStage();
 
-
+	void MovePlayersToStartPos(MAP_TYPE type_);
+	void EnterPlayers(int level_);
 	void StageInit(int level_, MAP_TYPE type_, int box_, int monster_);
 	void NamedMake(int level_);
 	void TargetLost(); //유닛이 사라졌을때 ai의 타겟팅 없애야함.
@@ -146,7 +177,9 @@ public:
 	bool GameDraw();
 	bool NetworkDraw();
 	bool TextDraw();
+	void WaitDraw();
 
+	void UpdateWaitMessage();
 
 };
 

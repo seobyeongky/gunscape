@@ -1,6 +1,6 @@
 width = 800
 height = 600
 gamemode = multi
-name = sbg
+username = sbg
 host = true
 host_addr = 127.0.0.1

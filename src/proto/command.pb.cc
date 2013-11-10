@@ -52,7 +52,8 @@ void protobuf_AssignDesc_command_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Vector2d));
   Command_descriptor_ = file->message_type(1);
-  static const int Command_offsets_[4] = {
+  static const int Command_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, pid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, wh__),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, selected_num_),
@@ -105,13 +106,14 @@ void protobuf_AddDesc_command_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\rcommand.proto\" \n\010Vector2d\022\t\n\001x\030\001 \002(\002\022\t"
-    "\n\001y\030\002 \002(\002\"b\n\007Command\022\032\n\004type\030\001 \002(\0162\014.Com"
-    "mandType\022\013\n\003wh_\030\002 \001(\005\022\024\n\014selected_num\030\003 "
-    "\001(\005\022\030\n\005focus\030\004 \001(\0132\t.Vector2d*\237\001\n\013Comman"
-    "dType\022\016\n\nCOMMAND_GO\020\000\022\032\n\026COMMAND_SELECT_"
-    "ABILITY\020\001\022\022\n\016COMMAND_RELOAD\020\002\022\023\n\017COMMAND"
-    "_PICK_UP\020\003\022\027\n\023COMMAND_USE_ABILITY\020\004\022\020\n\014C"
-    "OMMAND_SHOT\020\005\022\020\n\014COMMAND_SWAP\020\006", 311);
+    "\n\001y\030\002 \002(\002\"o\n\007Command\022\013\n\003pid\030\001 \002(\r\022\032\n\004typ"
+    "e\030\002 \002(\0162\014.CommandType\022\013\n\003wh_\030\003 \001(\005\022\024\n\014se"
+    "lected_num\030\004 \001(\005\022\030\n\005focus\030\005 \001(\0132\t.Vector"
+    "2d*\262\001\n\013CommandType\022\016\n\nCOMMAND_GO\020\000\022\032\n\026CO"
+    "MMAND_SELECT_ABILITY\020\001\022\022\n\016COMMAND_RELOAD"
+    "\020\002\022\023\n\017COMMAND_PICK_UP\020\003\022\027\n\023COMMAND_USE_A"
+    "BILITY\020\004\022\020\n\014COMMAND_SHOT\020\005\022\020\n\014COMMAND_SW"
+    "AP\020\006\022\021\n\rCOMMAND_FOCUS\020\007", 343);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "command.proto", &protobuf_RegisterTypes);
   Vector2d::default_instance_ = new Vector2d();
@@ -140,6 +142,7 @@ bool CommandType_IsValid(int value) {
     case 4:
     case 5:
     case 6:
+    case 7:
       return true;
     default:
       return false;
@@ -395,6 +398,7 @@ void Vector2d::Swap(Vector2d* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int Command::kPidFieldNumber;
 const int Command::kTypeFieldNumber;
 const int Command::kWhFieldNumber;
 const int Command::kSelectedNumFieldNumber;
@@ -418,6 +422,7 @@ Command::Command(const Command& from)
 
 void Command::SharedCtor() {
   _cached_size_ = 0;
+  pid_ = 0u;
   type_ = 0;
   wh__ = 0;
   selected_num_ = 0;
@@ -458,6 +463,7 @@ Command* Command::New() const {
 
 void Command::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    pid_ = 0u;
     type_ = 0;
     wh__ = 0;
     selected_num_ = 0;
@@ -475,10 +481,26 @@ bool Command::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .CommandType type = 1;
+      // required uint32 pid = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pid_)));
+          set_has_pid();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_type;
+        break;
+      }
+
+      // required .CommandType type = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_type:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -486,17 +508,17 @@ bool Command::MergePartialFromCodedStream(
           if (::CommandType_IsValid(value)) {
             set_type(static_cast< ::CommandType >(value));
           } else {
-            mutable_unknown_fields()->AddVarint(1, value);
+            mutable_unknown_fields()->AddVarint(2, value);
           }
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_wh_;
+        if (input->ExpectTag(24)) goto parse_wh_;
         break;
       }
 
-      // optional int32 wh_ = 2;
-      case 2: {
+      // optional int32 wh_ = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_wh_:
@@ -507,12 +529,12 @@ bool Command::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_selected_num;
+        if (input->ExpectTag(32)) goto parse_selected_num;
         break;
       }
 
-      // optional int32 selected_num = 3;
-      case 3: {
+      // optional int32 selected_num = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_selected_num:
@@ -523,12 +545,12 @@ bool Command::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_focus;
+        if (input->ExpectTag(42)) goto parse_focus;
         break;
       }
 
-      // optional .Vector2d focus = 4;
-      case 4: {
+      // optional .Vector2d focus = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_focus:
@@ -559,26 +581,31 @@ bool Command::MergePartialFromCodedStream(
 
 void Command::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .CommandType type = 1;
+  // required uint32 pid = 1;
+  if (has_pid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->pid(), output);
+  }
+
+  // required .CommandType type = 2;
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
+      2, this->type(), output);
   }
 
-  // optional int32 wh_ = 2;
+  // optional int32 wh_ = 3;
   if (has_wh_()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->wh_(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->wh_(), output);
   }
 
-  // optional int32 selected_num = 3;
+  // optional int32 selected_num = 4;
   if (has_selected_num()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->selected_num(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->selected_num(), output);
   }
 
-  // optional .Vector2d focus = 4;
+  // optional .Vector2d focus = 5;
   if (has_focus()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->focus(), output);
+      5, this->focus(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -589,27 +616,32 @@ void Command::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Command::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .CommandType type = 1;
+  // required uint32 pid = 1;
+  if (has_pid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->pid(), target);
+  }
+
+  // required .CommandType type = 2;
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
+      2, this->type(), target);
   }
 
-  // optional int32 wh_ = 2;
+  // optional int32 wh_ = 3;
   if (has_wh_()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->wh_(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->wh_(), target);
   }
 
-  // optional int32 selected_num = 3;
+  // optional int32 selected_num = 4;
   if (has_selected_num()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->selected_num(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->selected_num(), target);
   }
 
-  // optional .Vector2d focus = 4;
+  // optional .Vector2d focus = 5;
   if (has_focus()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        4, this->focus(), target);
+        5, this->focus(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -623,27 +655,34 @@ int Command::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .CommandType type = 1;
+    // required uint32 pid = 1;
+    if (has_pid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->pid());
+    }
+
+    // required .CommandType type = 2;
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // optional int32 wh_ = 2;
+    // optional int32 wh_ = 3;
     if (has_wh_()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->wh_());
     }
 
-    // optional int32 selected_num = 3;
+    // optional int32 selected_num = 4;
     if (has_selected_num()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->selected_num());
     }
 
-    // optional .Vector2d focus = 4;
+    // optional .Vector2d focus = 5;
     if (has_focus()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -677,6 +716,9 @@ void Command::MergeFrom(const ::google::protobuf::Message& from) {
 void Command::MergeFrom(const Command& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_pid()) {
+      set_pid(from.pid());
+    }
     if (from.has_type()) {
       set_type(from.type());
     }
@@ -706,7 +748,7 @@ void Command::CopyFrom(const Command& from) {
 }
 
 bool Command::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   if (has_focus()) {
     if (!this->focus().IsInitialized()) return false;
@@ -716,6 +758,7 @@ bool Command::IsInitialized() const {
 
 void Command::Swap(Command* other) {
   if (other != this) {
+    std::swap(pid_, other->pid_);
     std::swap(type_, other->type_);
     std::swap(wh__, other->wh__);
     std::swap(selected_num_, other->selected_num_);

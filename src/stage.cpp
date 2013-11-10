@@ -47,7 +47,10 @@
 #include <opznet/client.h>
 #include "protocol.h"
 
+#include "chatmsgmanager.h"
+#include "smap.h"
 
+extern smap<opznet::ID, cl_t> clients;
 
 struct mon_struct
 {
@@ -553,12 +556,69 @@ void Game_Manager::NextStage()
 	{
 		++level;
 		opznet::Packet sendpacket;
-		sendpacket << TO_UINT16(CL2SV_REQUEST_LEVEL) << level;
+		sendpacket << TO_UINT16(CL2SV_REQUEST_NEXT_LEVEL);
 		SafeSend(sendpacket);
-		state = -1;
+		if (AnyonePlaying())
+		{
+			otherview = true;
+			player = GetFirstPlayingCl();
+		}
 	}
 }
 
+void Game_Manager::MovePlayersToStartPos(MAP_TYPE type_)
+{
+	coord_def c_ = GetRandomPos();
+	for(list<Unit*>::iterator it = unit_list.begin(); it != unit_list.end(); it++)
+	{
+		if((*it)->isPlayer())
+		{			
+			while(1)
+			{
+				int dx = rand_int(-20, 20);
+				int dy = rand_int(-20, 20);
+		
+				coord_def c__ = coord_def(c_.x + dx, c_.y + dy);
+
+				if (!IsValidPos(static_cast<int>(c__.x), static_cast<int>(c__.y)))
+					continue;
+
+				if(type_ == MPT_HUMAN)
+				{
+					if(1/*rand_int(0,3)*/)
+					{					
+						list<Shot_base*>::iterator it = shot_list.begin();
+						for(; it != shot_list.end(); it++)
+						{
+							if((*it)->isHouse())
+							{
+								if((*it)->HouseCollution(c__))
+								{
+									break;
+								}
+							}
+						}
+						if(it == shot_list.end())
+							continue;
+					}
+				}
+				(*it)->Move(c__.x,c__.y);
+				break;
+			}
+		}
+	}
+}
+
+void Game_Manager::EnterPlayers(int level_)
+{
+	for(list<Unit*>::iterator it = unit_list.begin(); it != unit_list.end(); it++)
+	{
+		if((*it)->isPlayer())
+		{
+			reinterpret_cast<Player *>((*it))->EnterMap(this, level_);
+		}
+	}
+}
 
 void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 {
@@ -627,13 +687,10 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 			else
 				it++;
 		}
-	}	
+	}
 
 	//player->Heal(player->GetFloorHeal());
 	//player->SuppleBullet(player->GetFloorBullet());
-
-
-
 
 	//종류에 따라
 	map->MapMake(this, level_, type_);
@@ -643,40 +700,12 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 		shot_list.push_back(new Effect_last_message(this));
 	map->MapInit();
 
-	while(type_ != MPT_BUG) //벌레탄에서는 맵제작과 동시에 시작위치가 정해짐
-	{
-		coord_def c_ = GetRandomPos();
-		if(type_ == MPT_HUMAN)
-		{
-			if(1/*rand_int(0,3)*/)
-			{					
-				list<Shot_base*>::iterator it = shot_list.begin();
-				for(; it != shot_list.end(); it++)
-				{
-					if((*it)->isHouse())
-					{
-						if((*it)->HouseCollution(c_))
-						{
-							break;
-						}
-					}
-				}
-				if(it == shot_list.end())
-					continue;
-			}
-		}
-		player->Move(c_.x,c_.y);
-
-
-		
-		//item_list.push_back(New_Main_Weapon(MWK_RIFLE_PISTOL_BIG, c_, -1));
-		break;
-	}
+	MovePlayersToStartPos(type_);
 
 	while(type_ != MPT_BUG && type_ != MPT_LAST) //벌레탄에서는 무조건 포탈은 한 가운데
 	{
 		coord_def c_ = GetRandomPos();
-		if(!player->collution(c_,player->GetView()))
+		if (!CheckCollideWithPlayersView(c_))
 		{			
 			if(type_ == MPT_HUMAN)
 			{
@@ -707,17 +736,25 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 	if(type_ == MPT_LAST)
 	{
 		next_portal = NULL;
-		for(int i = 0; i < player->GetSwitch(); i++)
+		for(int i = 0; i < 3; i++)
 		{
-			while(1) //마지막 층에서 3개의 스위치
+			bool made = false;
+			for(int j = 0; j < 100; j++) //마지막 층에서 3개의 스위치
 			{
 				coord_def c_ = GetRandomPos();
-				if(!player->collution(c_,player->GetView()))
-				{						
+				if (!CheckCollideWithPlayersView(c_))
+				{					
 					Item* button_ = new Button(c_);
 					item_list.push_back(button_);
+					made = true;
 					break;
 				}
+			}
+			if (!made)
+			{
+				coord_def c_ = GetRandomPos();
+				Item* button_ = new Button(c_);
+				item_list.push_back(button_);
 			}
 		}
 	}
@@ -725,7 +762,6 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 		
 	for(int i = 0;i<box_;)
 	{
-
 		coord_def c_ = GetRandomPos();
 		if(type_ == MPT_HUMAN)
 		{
@@ -751,10 +787,10 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 		i++;
 	}
 
-	for(int i = 0;i<monster_;)
+	for(int i = 0;i < monster_ + 5 * (static_cast<int>(clients.size()) - 1);)
 	{
 		coord_def c_ = GetRandomPos();
-		if(!player->collution(c_,player->GetView()*1.5f))
+		if (!CheckCollideWithPlayersView(c_))
 		{
 			if(type_ == MPT_HUMAN)
 			{
@@ -779,9 +815,11 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 			i++;
 		}
 	}
+
 	NamedMake(level);
-	player->EnterMap(this, level_);
-	
+
+	EnterPlayers(level);
+
 	if(level_ == 0)
 		heal_stack=0;
 	else

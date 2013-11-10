@@ -102,7 +102,7 @@ namespace config
 			}
 			else if (!strcmp(name, "username"))
 			{
-				username = username;
+				username = value;
 			}
 			else if (!strcmp(name, "host"))
 			{
