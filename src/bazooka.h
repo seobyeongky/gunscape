@@ -29,6 +29,7 @@ public:
 	
 	virtual const char* GetDamage();
 	virtual const char* GetAtkSpeed();
+	virtual void PlayReloadSE(Game_Manager * gm_);
 };
 
 #endif // __BAZOOKA_H__

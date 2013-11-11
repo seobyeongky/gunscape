@@ -52,12 +52,13 @@ void protobuf_AssignDesc_command_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Vector2d));
   Command_descriptor_ = file->message_type(1);
-  static const int Command_offsets_[5] = {
+  static const int Command_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, pid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, wh__),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, selected_num_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, focus_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, abil_name_),
   };
   Command_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -106,14 +107,15 @@ void protobuf_AddDesc_command_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\rcommand.proto\" \n\010Vector2d\022\t\n\001x\030\001 \002(\002\022\t"
-    "\n\001y\030\002 \002(\002\"o\n\007Command\022\013\n\003pid\030\001 \002(\r\022\032\n\004typ"
-    "e\030\002 \002(\0162\014.CommandType\022\013\n\003wh_\030\003 \001(\005\022\024\n\014se"
-    "lected_num\030\004 \001(\005\022\030\n\005focus\030\005 \001(\0132\t.Vector"
-    "2d*\262\001\n\013CommandType\022\016\n\nCOMMAND_GO\020\000\022\032\n\026CO"
-    "MMAND_SELECT_ABILITY\020\001\022\022\n\016COMMAND_RELOAD"
-    "\020\002\022\023\n\017COMMAND_PICK_UP\020\003\022\027\n\023COMMAND_USE_A"
-    "BILITY\020\004\022\020\n\014COMMAND_SHOT\020\005\022\020\n\014COMMAND_SW"
-    "AP\020\006\022\021\n\rCOMMAND_FOCUS\020\007", 343);
+    "\n\001y\030\002 \002(\002\"\202\001\n\007Command\022\013\n\003pid\030\001 \002(\r\022\032\n\004ty"
+    "pe\030\002 \002(\0162\014.CommandType\022\013\n\003wh_\030\003 \001(\005\022\024\n\014s"
+    "elected_num\030\004 \001(\005\022\030\n\005focus\030\005 \001(\0132\t.Vecto"
+    "r2d\022\021\n\tabil_name\030\006 \001(\t*\305\001\n\013CommandType\022\016"
+    "\n\nCOMMAND_GO\020\000\022\032\n\026COMMAND_SELECT_ABILITY"
+    "\020\001\022\022\n\016COMMAND_RELOAD\020\002\022\023\n\017COMMAND_PICK_U"
+    "P\020\003\022\027\n\023COMMAND_USE_ABILITY\020\004\022\020\n\014COMMAND_"
+    "SHOT\020\005\022\020\n\014COMMAND_SWAP\020\006\022\021\n\rCOMMAND_FOCU"
+    "S\020\007\022\021\n\rCOMMAND_QUICK\020\010", 382);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "command.proto", &protobuf_RegisterTypes);
   Vector2d::default_instance_ = new Vector2d();
@@ -143,6 +145,7 @@ bool CommandType_IsValid(int value) {
     case 5:
     case 6:
     case 7:
+    case 8:
       return true;
     default:
       return false;
@@ -403,6 +406,7 @@ const int Command::kTypeFieldNumber;
 const int Command::kWhFieldNumber;
 const int Command::kSelectedNumFieldNumber;
 const int Command::kFocusFieldNumber;
+const int Command::kAbilNameFieldNumber;
 #endif  // !_MSC_VER
 
 Command::Command()
@@ -427,6 +431,7 @@ void Command::SharedCtor() {
   wh__ = 0;
   selected_num_ = 0;
   focus_ = NULL;
+  abil_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -435,6 +440,9 @@ Command::~Command() {
 }
 
 void Command::SharedDtor() {
+  if (abil_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete abil_name_;
+  }
   if (this != default_instance_) {
     delete focus_;
   }
@@ -469,6 +477,11 @@ void Command::Clear() {
     selected_num_ = 0;
     if (has_focus()) {
       if (focus_ != NULL) focus_->::Vector2d::Clear();
+    }
+    if (has_abil_name()) {
+      if (abil_name_ != &::google::protobuf::internal::kEmptyString) {
+        abil_name_->clear();
+      }
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -559,6 +572,23 @@ bool Command::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(50)) goto parse_abil_name;
+        break;
+      }
+
+      // optional string abil_name = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_abil_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_abil_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->abil_name().data(), this->abil_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -608,6 +638,15 @@ void Command::SerializeWithCachedSizes(
       5, this->focus(), output);
   }
 
+  // optional string abil_name = 6;
+  if (has_abil_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->abil_name().data(), this->abil_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      6, this->abil_name(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -642,6 +681,16 @@ void Command::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         5, this->focus(), target);
+  }
+
+  // optional string abil_name = 6;
+  if (has_abil_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->abil_name().data(), this->abil_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->abil_name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -689,6 +738,13 @@ int Command::ByteSize() const {
           this->focus());
     }
 
+    // optional string abil_name = 6;
+    if (has_abil_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->abil_name());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -731,6 +787,9 @@ void Command::MergeFrom(const Command& from) {
     if (from.has_focus()) {
       mutable_focus()->::Vector2d::MergeFrom(from.focus());
     }
+    if (from.has_abil_name()) {
+      set_abil_name(from.abil_name());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -763,6 +822,7 @@ void Command::Swap(Command* other) {
     std::swap(wh__, other->wh__);
     std::swap(selected_num_, other->selected_num_);
     std::swap(focus_, other->focus_);
+    std::swap(abil_name_, other->abil_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

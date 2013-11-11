@@ -64,9 +64,10 @@ bool Shot_melee::Action(Game_Manager* gm_)
 			}
 		}
 
-		if(gm_ && time == const_time-3 && !ok_backstab)
-			PlaySE(se_knife, false);
-
+//		if(gm_ && time == const_time-3 && !ok_backstab)
+//		{
+//			PlaySE(se_knife, false);
+//		}
 
 		alpha -= (int)(150/const_time);
 		if(alpha<0)
@@ -98,7 +99,10 @@ void Shot_melee::Hit(Game_Manager* gm_, Unit* unit_)
 
 		damage_ *= back_stab;
 		Effect_simple_speak(gm_,"¹é½ºÅÇ!",unit_->GetPos());
-		PlaySE(se_backstab, false);
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			PlaySE(se_backstab, false);
+		}
 		ok_backstab = true;
 		dt_ = DT_BACK_STAB;	
 		power_ *= 3;
@@ -136,4 +140,79 @@ bool Shot_melee::TargetLost_in()
 			it++;
 	}
 	return true;
+}
+
+Shot_knife::Shot_knife(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_)
+	: Shot_melee(texture_, unit_, damage_, power_, max_power_, time_, team_, pos_, angle_, size_, width_, back_stab_)
+{
+}
+
+void Shot_knife::Hit(Game_Manager * gm_, Unit* unit_)
+{
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_knife_hit, false);
+	}
+
+	Shot_melee::Hit(gm_, unit_);
+}
+
+Shot_axe::Shot_axe(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_)
+	: Shot_melee(texture_, unit_, damage_, power_, max_power_, time_, team_, pos_, angle_, size_, width_, back_stab_)
+{
+}
+
+void Shot_axe::Hit(Game_Manager * gm_, Unit* unit_)
+{
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_axe_hit, false);
+	}
+
+	Shot_melee::Hit(gm_, unit_);
+}
+
+Shot_club::Shot_club(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_)
+	: Shot_melee(texture_, unit_, damage_, power_, max_power_, time_, team_, pos_, angle_, size_, width_, back_stab_)
+{
+}
+
+void Shot_club::Hit(Game_Manager * gm_, Unit* unit_)
+{
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_club_hit, false);
+	}
+
+	Shot_melee::Hit(gm_, unit_);
+}
+
+Shot_spear::Shot_spear(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_)
+	: Shot_melee(texture_, unit_, damage_, power_, max_power_, time_, team_, pos_, angle_, size_, width_, back_stab_)
+{
+}
+
+void Shot_spear::Hit(Game_Manager * gm_, Unit* unit_)
+{
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_knife_hit, false);
+	}
+
+	Shot_melee::Hit(gm_, unit_);
+}
+
+Shot_assasinknife::Shot_assasinknife(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_)
+	: Shot_melee(texture_, unit_, damage_, power_, max_power_, time_, team_, pos_, angle_, size_, width_, back_stab_)
+{
+}
+
+void Shot_assasinknife::Hit(Game_Manager * gm_, Unit* unit_)
+{
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_assknife_hit, false);
+	}
+
+	Shot_melee::Hit(gm_, unit_);
 }

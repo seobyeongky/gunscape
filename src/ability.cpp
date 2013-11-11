@@ -161,6 +161,19 @@ bool Ability::AddAbility(Ability* ability_)
 	else
 		return false;
 }
+void Ability::GetAbilityByName(Player * player_, const char * abil_name, Ability ** ptr)
+{
+	auto it = ability_list.find(abil_name);
+	if (it == ability_list.end())
+	{
+		*ptr = nullptr;
+		return;
+	}
+
+	auto abil = it->second;
+	int abil_lv = abil->Possible(player_);
+	*ptr = abil->Clone(abil_lv);	
+}
 bool Ability::GetAbility(Player* player_, int num)
 {//staticÇÔ¼ö
 	if(player_->select_abil_list.empty())

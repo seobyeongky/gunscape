@@ -33,6 +33,7 @@ public:
 
 
 	virtual bool isThrowable(){return false;};
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_ZOMBIE_BOOMER_H__

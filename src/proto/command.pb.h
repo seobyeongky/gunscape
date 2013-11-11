@@ -43,11 +43,12 @@ enum CommandType {
   COMMAND_USE_ABILITY = 4,
   COMMAND_SHOT = 5,
   COMMAND_SWAP = 6,
-  COMMAND_FOCUS = 7
+  COMMAND_FOCUS = 7,
+  COMMAND_QUICK = 8
 };
 bool CommandType_IsValid(int value);
 const CommandType CommandType_MIN = COMMAND_GO;
-const CommandType CommandType_MAX = COMMAND_FOCUS;
+const CommandType CommandType_MAX = COMMAND_QUICK;
 const int CommandType_ARRAYSIZE = CommandType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CommandType_descriptor();
@@ -245,6 +246,18 @@ class Command : public ::google::protobuf::Message {
   inline ::Vector2d* release_focus();
   inline void set_allocated_focus(::Vector2d* focus);
 
+  // optional string abil_name = 6;
+  inline bool has_abil_name() const;
+  inline void clear_abil_name();
+  static const int kAbilNameFieldNumber = 6;
+  inline const ::std::string& abil_name() const;
+  inline void set_abil_name(const ::std::string& value);
+  inline void set_abil_name(const char* value);
+  inline void set_abil_name(const char* value, size_t size);
+  inline ::std::string* mutable_abil_name();
+  inline ::std::string* release_abil_name();
+  inline void set_allocated_abil_name(::std::string* abil_name);
+
   // @@protoc_insertion_point(class_scope:Command)
  private:
   inline void set_has_pid();
@@ -257,6 +270,8 @@ class Command : public ::google::protobuf::Message {
   inline void clear_has_selected_num();
   inline void set_has_focus();
   inline void clear_has_focus();
+  inline void set_has_abil_name();
+  inline void clear_has_abil_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -265,9 +280,10 @@ class Command : public ::google::protobuf::Message {
   ::google::protobuf::int32 wh__;
   ::google::protobuf::int32 selected_num_;
   ::Vector2d* focus_;
+  ::std::string* abil_name_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_command_2eproto();
   friend void protobuf_AssignDesc_command_2eproto();
@@ -455,6 +471,76 @@ inline void Command::set_allocated_focus(::Vector2d* focus) {
     set_has_focus();
   } else {
     clear_has_focus();
+  }
+}
+
+// optional string abil_name = 6;
+inline bool Command::has_abil_name() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void Command::set_has_abil_name() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void Command::clear_has_abil_name() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void Command::clear_abil_name() {
+  if (abil_name_ != &::google::protobuf::internal::kEmptyString) {
+    abil_name_->clear();
+  }
+  clear_has_abil_name();
+}
+inline const ::std::string& Command::abil_name() const {
+  return *abil_name_;
+}
+inline void Command::set_abil_name(const ::std::string& value) {
+  set_has_abil_name();
+  if (abil_name_ == &::google::protobuf::internal::kEmptyString) {
+    abil_name_ = new ::std::string;
+  }
+  abil_name_->assign(value);
+}
+inline void Command::set_abil_name(const char* value) {
+  set_has_abil_name();
+  if (abil_name_ == &::google::protobuf::internal::kEmptyString) {
+    abil_name_ = new ::std::string;
+  }
+  abil_name_->assign(value);
+}
+inline void Command::set_abil_name(const char* value, size_t size) {
+  set_has_abil_name();
+  if (abil_name_ == &::google::protobuf::internal::kEmptyString) {
+    abil_name_ = new ::std::string;
+  }
+  abil_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Command::mutable_abil_name() {
+  set_has_abil_name();
+  if (abil_name_ == &::google::protobuf::internal::kEmptyString) {
+    abil_name_ = new ::std::string;
+  }
+  return abil_name_;
+}
+inline ::std::string* Command::release_abil_name() {
+  clear_has_abil_name();
+  if (abil_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = abil_name_;
+    abil_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Command::set_allocated_abil_name(::std::string* abil_name) {
+  if (abil_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete abil_name_;
+  }
+  if (abil_name) {
+    set_has_abil_name();
+    abil_name_ = abil_name;
+  } else {
+    clear_has_abil_name();
+    abil_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

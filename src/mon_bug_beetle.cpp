@@ -14,6 +14,7 @@
 #include "effect_piece.h"
 #include "image.h"
 #include "map.h"
+#include "sound.h"
 
 Mon_bug_beetle::Mon_bug_beetle(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -175,4 +176,8 @@ bool Mon_bug_beetle::Special_Action(Game_Manager* gm_)
 		rush_delay--;
 	}
 	return true;
+}
+void Mon_bug_beetle::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
 }

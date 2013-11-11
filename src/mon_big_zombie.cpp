@@ -14,6 +14,7 @@
 #include "shot_rock.h"
 #include "random.h"
 #include "image.h"
+#include "sound.h"
 
 Mon_big_zombie::Mon_big_zombie(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -157,4 +158,8 @@ void Mon_big_zombie::Approach(Game_Manager* gm_, coord_def c, Unit* target_)
 			throw_count = 10;
 		}
 	}
+}
+void Mon_big_zombie::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_zombie_dead2);
 }

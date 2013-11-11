@@ -25,9 +25,9 @@ namespace config
 
 	extern gameMode_t gamemode;
 
-	extern std::string username;
+	extern std::wstring username;
 	extern bool host;
-	extern std::string host_addr;
+	extern std::wstring host_addr;
 
 	void LoadFromFile();
 };

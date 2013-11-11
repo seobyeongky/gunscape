@@ -9,6 +9,7 @@
 #include "mon_zombie_small.h"
 
 #include "gamemanager.h"
+#include "sound.h"
 
 Mon_zombie_small::Mon_zombie_small(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_)
@@ -26,4 +27,7 @@ void Mon_zombie_small::MeleeDamage(Game_Manager* gm_, Unit* target_)
 	target_->SetBlind(100);
 	target_->StateApply("시야방해",100);
 	target_->SetSlow(100);
+}
+void Mon_zombie_small::Death(Game_Manager* gm_)
+{
 }

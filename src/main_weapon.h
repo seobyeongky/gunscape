@@ -214,7 +214,7 @@ public:
 			bullet = (int)max_bullet;
 		return reload_speed;
 	}; //
-	virtual void PlayReloadSE();
+	virtual void PlayReloadSE(Game_Manager * gm_);
 	
 	virtual bool is_Click_Hold(){return true;};
 	virtual char* is_Special(){return NULL;};

@@ -19,6 +19,7 @@
 #include "profiler.h"
 #include "sound.h"
 #include "config.h"
+#include "stringconvert.h"
 
 
 //필요한 라이브러리
@@ -45,6 +46,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 void DeviceRelease();
 void LoadTexture(char* TextureFileName, IDirect3DTexture9** texture_);
+
+void ShowHello()
+{
+	ChatMsg_Manager::PushMessage(config::username + L"님 반갑습니다.");
+}
 
 int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, int showCmd)
 {
@@ -83,6 +89,8 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, in
 		
 		drt->SetLoop(gmm->Draw);
 		drt->SetLoop(ChatMsg_Manager::DrawLoop);
+
+		ShowHello();
 
 		wnd.StartLoop();
 

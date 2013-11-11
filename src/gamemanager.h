@@ -129,6 +129,7 @@ public:
 	void SetState(int state_){state = state_;};
 
 	bool isPlayerLive();
+	bool isPlayerCanHear(const coord_def & pos_);
 
 	void GameMenu();
 

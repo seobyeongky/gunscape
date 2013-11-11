@@ -11,7 +11,8 @@
 #include "effect_piece.h"
 #include "gamemanager.h"
 #include "map.h"
-
+#include "sound.h"
+#include "sound.h"
 
 Mon_bug_bomb::Mon_bug_bomb(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_)
@@ -46,6 +47,7 @@ bool Mon_bug_bomb::Melee(Game_Manager* gm_)
 
 void Mon_bug_bomb::Death(Game_Manager* gm_)
 {
+	PlaySE(se_grenade_hit);
 	Bomb(gm_);
 }
 void Mon_bug_bomb::Bomb(Game_Manager* gm_)

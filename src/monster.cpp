@@ -19,6 +19,7 @@
 #include "image.h"
 #include "effect_message.h"
 #include "debug.h"
+#include "sound.h"
 
 
 Monster::Monster(monster_infor& infor_, float x_, float y_, int team_, int time_):
@@ -305,5 +306,19 @@ void Monster::MeleeDamage(Game_Manager* gm_, Unit* target_)
 	if(target_->GetMirrorKnockback())
 	{
 		SetKnockback(target_->GetMirrorKnockback(), target_->GetMirrorKnockback()*2, GetAngleToTarget(target_->GetPos(),GetPos()));
+	}
+}
+void Monster::Death(Game_Manager * gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		if (my_rand_int(0, 100) < 50)
+		{
+			PlaySE(se_zombie_dead1, false);
+		}
+		else
+		{
+			PlaySE(se_zombie_dead2, false);
+		}
 	}
 }

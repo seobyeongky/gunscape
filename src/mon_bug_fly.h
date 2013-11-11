@@ -23,6 +23,8 @@ public:
 	virtual bool Special_Action(Game_Manager* gm_);
 
 	virtual void Approach(Game_Manager* gm_, coord_def c, Unit* target_);
+
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_BUG_FLY_H__

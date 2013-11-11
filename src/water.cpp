@@ -44,7 +44,7 @@ float Water::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& st
 	return -1;
 }
 
-void Water::PlayReloadSE()
+void Water::PlayReloadSE(Game_Manager * gm_)
 {
 }
 const char* Water::GetDamage()

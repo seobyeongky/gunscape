@@ -11,6 +11,7 @@
 #include "gamemanager.h"
 #include "player.h"
 #include "shot_hammer.h"
+#include "sound.h"
 
 Melee_Hammer::Melee_Hammer(const melee_weapon_infor& infor_, coord_def pos_, int time_):
 Melee_Weapon(infor_, pos_, time_)
@@ -26,5 +27,9 @@ float Melee_Hammer::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_
 	float angle_ = GetAngleToTarget(start_, pos_);
 	float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 	gm_->shot_list.push_back(new Shot_hammer(width<3.0f?effect_texture:&tex_melee2, User_, damage_, GetPower(), GetMaxPower(), burst_speed, team_, start_, angle_, GetDistance(), width, back_stab));
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_hammer);
+	}
 	return burst_speed*(1.0f/(GetBurstSpeedApply()*(User_?User_->GetAtkSpdApply():1.0f)));
 }

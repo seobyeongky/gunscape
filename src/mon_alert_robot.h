@@ -29,7 +29,8 @@ public:
 
 	virtual float GetSearchRate(){return 3.0f;};
 
-	virtual bool CanSpeeing(){return false;};	
+	virtual bool CanSpeeing(){return false;};
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_ALERT_ROBOT_H__

@@ -37,6 +37,7 @@
 #include "double_pistol.h"
 #include "bazooka.h"
 #include "random.h"
+#include "sound.h"
 
 
 monster_infor monster__weak_zombie = 
@@ -716,7 +717,7 @@ Unit* New_Monster(Monster_Index kind_, coord_def pos_, int team_, int flag_, int
 		case MON_PISTOL_REDNECK:
 			p_monster = &monster__pistol_redneck;
 			temp = new Monster(*p_monster, pos_.x, pos_.y, team_, time_);
-			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
+			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_monpistol, se_pistol_reload));
 			break;
 		case MON_BIG_ZOMBIE:
 			p_monster = &monster__big_zombie;
@@ -748,7 +749,7 @@ Unit* New_Monster(Monster_Index kind_, coord_def pos_, int team_, int flag_, int
 		case MON_HUNTER:
 			p_monster = &monster__hunter;
 			temp = new Mon_hunter(*p_monster, pos_.x, pos_.y, team_, time_);
-			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
+			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_shotgun, se_shotgun_reload));
 			break;
 		case MON_BUG_BOMB:
 			p_monster = &monster__bug_bomb;
@@ -772,7 +773,7 @@ Unit* New_Monster(Monster_Index kind_, coord_def pos_, int team_, int flag_, int
 		case MON_BLUE_MAN:
 			p_monster = &monster__blue_man;
 			temp = new Monster(*p_monster, pos_.x, pos_.y, team_, time_);
-			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
+			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_monrifle, se_rifle_reload));
 			break;
 		case MON_ZOMBIE_BOOMER:
 			p_monster = &monster__zombie_boomer;
@@ -789,7 +790,7 @@ Unit* New_Monster(Monster_Index kind_, coord_def pos_, int team_, int flag_, int
 		case MON_SF_MAN:
 			p_monster = &monster__sf_man;
 			temp = new Mon_sf_man(*p_monster, pos_.x, pos_.y, team_, time_);
-			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
+			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_monrifle, se_rifle_reload));
 			temp->SeFogResist(true);
 			break;
 		case MON_WATER_MAN:
@@ -800,7 +801,7 @@ Unit* New_Monster(Monster_Index kind_, coord_def pos_, int team_, int flag_, int
 		case MON_SPY:
 			p_monster = &monster__spy;
 			temp = new Mon_spy(*p_monster, pos_.x, pos_.y, team_, time_);
-			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
+			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_monasspistol, se_pistol_reload));
 			break;
 		case MON_PYRO2:
 			p_monster = &monster__pyro2;
@@ -810,7 +811,7 @@ Unit* New_Monster(Monster_Index kind_, coord_def pos_, int team_, int flag_, int
 		case MON_ALERT_ROBOT:
 			p_monster = &monster__alert_robot;
 			temp = new Mon_alert_robot(*p_monster, pos_.x, pos_.y, team_, time_);
-			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
+			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_minigun, se_reload));
 			temp->SetDefResist(DT_VIRUS, true);
 			temp->ApplyDefense(DT_POISON,0.5f);
 			break;
@@ -841,7 +842,7 @@ Unit* New_Monster(Monster_Index kind_, coord_def pos_, int team_, int flag_, int
 		case MON_STALKER:
 			p_monster = &monster__stalker;
 			temp = new Mon_stalker(*p_monster, pos_.x, pos_.y, team_, time_);
-			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
+			temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_monpistol, se_pistol_reload));
 			break;
 		case MON_SPIDER:
 			p_monster = &monster__bug_spider;

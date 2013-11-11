@@ -122,7 +122,7 @@ public:
 	int GetNeedExp(int level_);
 	float GetExpPercent();
 	int GetSelectAbilityNum(){return select_ability_num;};
-	int GetSelectedAbilityId();
+	const char * GetSelectedAbilityName();
 	float GetBullet(){return bullet;};
 	int GetMaxBullet(){return max_bullet;};
 	bool GetAbilitySelect(){return ability_select;};
@@ -146,7 +146,8 @@ public:
 	
 	bool StartAbility();
 	void SelectAbilityBefore(int i);
-	bool SelectAbility(Game_Manager* gm_, int i);
+	void AddAbility(Game_Manager * gm_, const char * abil_name);
+//	bool SelectAbility(Game_Manager* gm_, int i);
 	bool StartQuickStart();
 	bool SetQuickmenu(int i);
 	bool GetAbility(Game_Manager* gm_, Ability* abil_);
@@ -239,7 +240,7 @@ public:
 	virtual bool Special(Game_Manager* gm_, coord_def c, float focus_);
 	virtual bool Quick(Game_Manager* gm_, coord_def c, float focus_);
 	
-	bool Reload();
+	bool Reload(Game_Manager * gm_);
 
 	bool UseBullet(float bullet_);
 

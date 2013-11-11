@@ -30,6 +30,8 @@ public:
 	virtual bool Shot(Game_Manager* gm_, coord_def c, float focus_, int item_num = 0){return false;};
 
 	virtual bool DropItem(Game_Manager* gm_);
+
+	virtual void Death(Game_Manager* gm_); 
 };
 
 

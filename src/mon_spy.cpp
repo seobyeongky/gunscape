@@ -11,6 +11,7 @@
 #include "texture_list.h"
 #include "gamemanager.h"
 #include "random.h"
+#include "sound.h"
 
 Mon_spy::Mon_spy(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -42,4 +43,8 @@ bool Mon_spy::Special_Action(Game_Manager* gm_)
 	if(count>0)
 		count-=5;
 	return true;
+}
+void Mon_spy::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_human_dead);
 }

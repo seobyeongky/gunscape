@@ -32,6 +32,7 @@ public:
 
 	virtual bool TargetLost();
 
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_BUG_CHILD_FLY_H__

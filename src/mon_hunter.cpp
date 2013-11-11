@@ -11,6 +11,7 @@
 #include "texture_list.h"
 #include "gamemanager.h"
 #include "shot_net.h"
+#include "sound.h"
 
 Mon_hunter::Mon_hunter(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -45,4 +46,8 @@ bool Mon_hunter::Shot(Game_Manager* gm_, coord_def c, float focus_, int item_num
 		return true;
 	}
 	return false;
+}
+void Mon_hunter::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_human_dead);
 }

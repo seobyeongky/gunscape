@@ -15,6 +15,7 @@
 #include "random.h"
 #include "gamemanager.h"
 #include "map.h"
+#include "sound.h"
 
 
 Mon_bug_child_fly::Mon_bug_child_fly(monster_infor& infor_, Unit* head_, Unit* target_, float x_, float y_, int team_, int return_time_, int time_):
@@ -101,4 +102,8 @@ bool Mon_bug_child_fly::TargetLost()
 		target = NULL;
 	}
 	return false;
+}
+void Mon_bug_child_fly::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
 }

@@ -13,6 +13,7 @@
 #include "shot_virus_shot.h"
 #include "image.h"
 #include "map.h"
+#include "sound.h"
 
 Mon_bug_ant_lion::Mon_bug_ant_lion(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -150,4 +151,8 @@ bool Mon_bug_ant_lion::Special_Action(Game_Manager* gm_)
 		tongue_delay--;
 	}
 	return true;
+}
+void Mon_bug_ant_lion::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
 }

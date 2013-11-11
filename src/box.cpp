@@ -14,7 +14,7 @@
 #include "sub_weapon_list.h"
 #include "instant_list.h"
 #include "gamemanager.h"
-
+#include "sound.h"
 
 Box::Box(Texture* texture_, coord_def pos_, int level_):
 Unit("»óÀÚ",texture_, pos_.x, pos_.y, -1, 20),
@@ -78,4 +78,10 @@ bool Box::DropItem(Game_Manager* gm_)
 	else
 		return false;
 
+}
+
+
+
+void Box::Death(Game_Manager* gm_)
+{
 }

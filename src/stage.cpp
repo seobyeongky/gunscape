@@ -829,14 +829,20 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 	//item_list.push_back(new Fire(rifle__flame_thrower, coord_def(180,200), -1));
 	//item_list.push_back(new Sub_Kevlar(NULL, coord_def(120,350),-1));
 	//item_list.push_back(new Melee_Weapon(melee__club, coord_def(120,400),-1));
-	if(player->GetSniper()){
-		player->Special(this, key->GetMousePos()+focus, 0.0f);
+	
+	for (auto & cl : clients)
+	{
+		Player * p =cl.element().player;
+		if (p->isLive() && p->GetSniper())
+		{
+			p->Special(this, key->GetMousePos()+focus, 0.0f);		
+		}		
 	}
+
 	SetSniperMode(false,coord_def(),1.0f,false);
 
 	if(player->GetMapHack())
 	{
 		map->map_hack();
 	}
-	map->map_hack();
 }

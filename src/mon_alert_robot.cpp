@@ -13,6 +13,7 @@
 #include "image.h"
 #include "random.h"
 #include "effect_piece.h"
+#include "sound.h"
 
 Mon_alert_robot::Mon_alert_robot(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -65,4 +66,8 @@ bool Mon_alert_robot::Special_Action(Game_Manager* gm_)
 	}
 	search_angle+=0.05f;
 	return true;
+}
+void Mon_alert_robot::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_grenade_hit);
 }

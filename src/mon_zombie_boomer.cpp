@@ -11,6 +11,7 @@
 #include "texture_list.h"
 #include "gamemanager.h"
 #include "shot_virus_shot.h"
+#include "sound.h"
 
 Mon_zombie_boomer::Mon_zombie_boomer(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -50,4 +51,8 @@ bool Mon_zombie_boomer::Shot(Game_Manager* gm_, coord_def c, float focus_, int i
 		return true;
 	}
 	return false;
+}
+void Mon_zombie_boomer::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_zombie_dead1);
 }

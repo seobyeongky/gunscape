@@ -26,6 +26,7 @@ public:
 	virtual void SetAi(monster_state state_, Unit* head_ = NULL, int level_ = 0);
 	virtual bool Shot(Game_Manager* gm_, coord_def c, float focus_, int item_num = 0);
 	virtual bool Special_Action(Game_Manager* gm_);
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_STALKER_H__

@@ -132,6 +132,7 @@ public:
 
 	virtual bool Melee(Game_Manager* gm_);
 	virtual void MeleeDamage(Game_Manager* gm_, Unit* target_);
+	virtual void Death(Game_Manager* gm_); //데미지로 죽을 경우.
 
 };
 

@@ -28,6 +28,15 @@
 #include "main_weapon_list.h"
 #include "rifle.h"
 
+#include "smap.h"
+
+#include <cassert>
+
+#include <opznet\shared_structs.h>
+
+extern smap<opznet::ID, cl_t> clients;
+extern opznet::ID my_id;
+
 //Player::Player():
 //Unit()
 //{
@@ -118,9 +127,21 @@ Item* Player::GetEmptyWeapon()
 	}
 };
 
-int Player::GetSelectedAbilityId()
+const char * Player::GetSelectedAbilityName()
 {
-	return ability_select_num;
+	// fix me
+	int i = 1;
+	for(auto & abil : select_abil_list)
+	{
+		if (ability_select_num == i)
+		{
+			return abil->GetName();
+		}
+
+		i++;
+	}
+	assert("망");
+	return 0;
 }
 
 float Player::GetExpPercent()
@@ -148,6 +169,28 @@ void Player::SelectAbilityBefore(int i)
 {
 	ability_select_num = i;
 }
+
+void Player::AddAbility(Game_Manager * gm_, const char * abil_name)
+{
+	Ability * abil = nullptr;
+	Ability::GetAbilityByName(this, abil_name, &abil);
+	assert(abil != nullptr);
+
+	GetAbility(gm_, abil);
+
+	for(auto it = select_abil_list.begin();it!=select_abil_list.end();it++)
+		delete (*it);
+	select_abil_list.clear();
+
+	ability_select = false;
+
+	remain_ability--;
+	if(remain_ability)
+		Ability::GetAbility(this, select_ability_num);
+
+}
+
+/*
 bool Player::SelectAbility(Game_Manager* gm_, int i)
 {
 
@@ -172,6 +215,7 @@ bool Player::SelectAbility(Game_Manager* gm_, int i)
 	}
 	return false;
 }	
+*/
 bool Player::StartQuickStart()
 {
 	if(!ability_select)
@@ -508,7 +552,7 @@ bool Player::Action_in(Game_Manager* gm_)
 	}
 
 	CommonAction(gm_); //유닛 공통의 행동들
-	return false;
+	return !isLive();
 }
 
 float Player::GetFocusSum()
@@ -675,17 +719,22 @@ bool Player::AbilitySelectDraw(Game_Manager* gm_, coord_def offset_)
 		char temp[256];
 		RECT rc={(LONG)(offset_.x+gm_->direct->GetWidth()/2.0f), (LONG)(offset_.y+gm_->direct->GetHeight()/2.0f), 1000, 1000};
 		gm_->direct->GetFont()->DrawTextA(NULL, "레벨업했습니다! 배우고 싶은 능력의 숫자키를 선택해주세요.", -1, &rc, DT_LEFT | DT_NOCLIP, 0xff0090ff);
-		for(vector<Ability*>::iterator it = select_abil_list.begin(); it != select_abil_list.end(); it++)
+		
+		Player * my_player = clients[my_id].player;
+		if (this == my_player)
 		{
-			rc.top += (LONG)(16*gm_->direct->GetHR());
-			D3DCOLOR color_ = (*it)->GetType() == AT_INSTANCE?0xff00ff00:((*it)->GetType() == AT_USE?0xffc000c0:0xff0090ff);
-			if(ability_select_num == i)
+			for(vector<Ability*>::iterator it = select_abil_list.begin(); it != select_abil_list.end(); it++)
 			{
-				color_ =0xffff0000;
-			}
-			sprintf_s(temp,256,"%d.%s(%d레벨)-%s",i++,(*it)->GetName(),(*it)->GetLevel(),(*it)->GetInfor());
+				rc.top += (LONG)(16*gm_->direct->GetHR());
+				D3DCOLOR color_ = (*it)->GetType() == AT_INSTANCE?0xff00ff00:((*it)->GetType() == AT_USE?0xffc000c0:0xff0090ff);
+				if(ability_select_num == i)
+				{
+					color_ =0xffff0000;
+				}
+				sprintf_s(temp,256,"%d.%s(%d레벨)-%s",i++,(*it)->GetName(),(*it)->GetLevel(),(*it)->GetInfor());
 
-			gm_->direct->GetFont()->DrawTextA(NULL, temp, -1, &rc, DT_LEFT | DT_NOCLIP, color_);
+				gm_->direct->GetFont()->DrawTextA(NULL, temp, -1, &rc, DT_LEFT | DT_NOCLIP, color_);
+			}
 		}
 	}
 	return true;
@@ -916,7 +965,7 @@ bool Player::Shot(Game_Manager* gm_, coord_def c, float focus_, int item_num)
 			SetDelay(0);
 			if(item_ == main_weapon)
 			{
-				Reload();
+				Reload(gm_);
 			}
 			return false;
 		}
@@ -985,21 +1034,21 @@ bool Player::Quick(Game_Manager* gm_, coord_def c, float focus_)
 	}
 	return true;
 }
-bool Player::Reload()
+bool Player::Reload(Game_Manager * gm_)
 {//나중에 bullet의 갯수에 의해서 리로딩하게 하자
 	if(current_weapon && current_weapon == main_weapon)
 	{
 		float need_bullet = 1.0f-((float)main_weapon->GetBullet()/(int)main_weapon->GetMaxBullet());
 		if(need_bullet && bullet > 0.0f)
 		{
-			main_weapon->PlayReloadSE();
+			main_weapon->PlayReloadSE(gm_);
 			need_bullet = min(need_bullet,bullet);
 			bullet -= need_bullet;
 			SetDelay(main_weapon->Reload(need_bullet));
 		}
 		else if(blood_reload && GetHp()>blood_reload)
 		{
-			main_weapon->PlayReloadSE();
+			main_weapon->PlayReloadSE(gm_);
 			UpDownHp(-(int)(blood_reload*need_bullet+0.99f));
 			SetDelay(main_weapon->Reload(need_bullet));
 		}

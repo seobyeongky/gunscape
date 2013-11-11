@@ -9,8 +9,8 @@
 #include "item_heal.h"
 #include "player.h"
 #include "texture_list.h"
-
-
+#include "gamemanager.h"
+#include "sound.h"
 
 Item_heal::Item_heal(coord_def pos_, int time_):
 Item(&tex_item_heal, "회복키트", "피 30회복", pos_, time_)
@@ -24,6 +24,10 @@ bool Item_heal::Effect(Game_Manager* gm_, Player* unit_)
 {
 	if(unit_ && unit_->isLive() && unit_->GetHp() != (int)unit_->GetMaxHp())
 	{
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			PlaySE(se_healthkit, false);
+		}
 		int heal_ = 30;
 		unit_->Heal(heal_);
 		Erase();

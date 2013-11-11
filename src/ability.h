@@ -69,6 +69,7 @@ public:
 	static void InitAbility(Game_Manager* gm_);
 	static void ReleaseAbility();
 	static bool AddAbility(Ability* ability_);
+	static void GetAbilityByName(Player * player_, const char * abil_name, Ability ** ptr);
 	static bool GetAbility(Player* player_, int num); //만약 플레이어의 어빌리티가 이미 차있으면 무시.
 
 	bool Learn(Game_Manager* gm_, Player* player_); //처음 능력을 얻었을때

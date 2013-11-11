@@ -51,7 +51,7 @@ public:
 	virtual float GetSniper(){return sniper;};
 	virtual void ApplySniper(float ratio_){sniper*=ratio_;};
 	
-	virtual void PlayReloadSE();
+	virtual void PlayReloadSE(Game_Manager * gm_);
 
 
 	virtual const char* GetDamage();

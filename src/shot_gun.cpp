@@ -12,6 +12,7 @@
 #include "unit.h"
 #include "image.h"
 #include "debug.h"
+#include "sound.h"
 
 Shot_gun::Shot_gun(Texture* texture_, Unit* unit_, float damage_, float sniper_, float power_, float max_power_, int team_, coord_def pos_, float angle_, float speed_, float distance_, int slow_turn_, float slow_ratio_, int delay_):
 Shot_base(texture_, unit_, team_, pos_, coord_def(cos(angle_)*speed_, sin(angle_)*speed_)), 
@@ -37,6 +38,11 @@ bool Shot_gun::Action(Game_Manager* gm_)
 				{
 					if(unit_collution((*it)->GetPos(), (*it)->GetSize()+((*it)->isPlayer()?0.0f:3.0f) ))
 					{
+						if (gm_->isPlayerCanHear(GetPos()))
+						{
+							PlaySE(se_bullet_flesh);
+						}
+						
 						(*it)->SetKnockback(power, max_power, angle);
 						if(slow_turn)
 							(*it)->SlowApply(slow_ratio,slow_turn, SK_GUN);

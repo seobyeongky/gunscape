@@ -21,6 +21,8 @@ public:
 	virtual ~Mon_bug_filng();
 	
 	virtual void MeleeDamage(Game_Manager* gm_, Unit* target_);
+
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_BUG_FLING_H__

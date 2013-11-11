@@ -168,6 +168,13 @@ bool Game_Manager::isPlayerLive()
 {
 	return player && player->isLive();
 };
+bool Game_Manager::isPlayerCanHear(const coord_def & pos_)
+{
+	if (player == nullptr) return false;
+	return true;
+	float dist = distan_coord(player->GetPos(), pos_);
+	return dist < 30.f;
+}
 void Game_Manager::SetDirectClass(Direct_Manager* direct_)
 {
 	direct = direct_;	
@@ -447,7 +454,7 @@ void Game_Manager::SelectLoop()
 			soundmanager.SetSeOnOff();
 		}
 	}
-	if(key->GeyKeyState(DIK_RETURN, KEY_DOWN))
+	if(key->GeyKeyState(DIK_RETURN, KEY_DOWN) && myselection != -1)
 	{
 		if (config::gamemode == SINGLE_GAME)
 		{
@@ -527,7 +534,7 @@ void Game_Manager::ConnectToServer()
 	{
 		my_id = my_id_;
 		auto &me = clients[my_id];
-		me.name = config::username;
+		uni2multi(config::username, &me.name);
 		ChatMsg_Manager::PushMessage(L"서버에 연결 성공");
 		sv_info = sv_info_;
 		wait_scene = true;
@@ -547,6 +554,20 @@ void Game_Manager::ConnectToServer()
 	});
 	NetInterface::RegisterClientGoneCallback([this](const opznet::client_t &cl_info)
 	{
+		smap<opznet::ID, cl_t>::Iter it;
+		if (clients.find(cl_info.id, &it))
+		{
+			Player * p = (*it).element().player;
+			if (p->isLive())
+			{
+				unit_list.remove(reinterpret_cast<Unit *>(p));
+				delete p;
+				TargetLost();
+			}
+			clients.erase(it);
+		}
+		clients.erase(cl_info.id);
+
 		ChatMsg_Manager::PushMessage(wstring(cl_info.name + L"님 감").c_str());
 		UpdateWaitMessage();
 	});
@@ -567,6 +588,37 @@ void Game_Manager::ConnectToServer()
 	});
 	NetInterface::RegisterPacketCallback(SV2CL_NEXT_LEVEL_ALLOW, [this](opznet::Packet &packet)
 	{
+		bool alive_one_exists = false;
+		for (auto & cl : clients)
+		{
+			Player * p = cl.element().player;
+			if (p != nullptr && p->isLive())
+			{
+				alive_one_exists = true;
+				break;
+			}
+		}
+
+		if (! alive_one_exists)
+		{
+			bool all_null = true;
+			for (auto & cl : clients)
+			{
+				Player * p = cl.element().player;
+				if (p != nullptr)
+				{
+					all_null = false;
+					break;
+				}
+			}
+
+			// 모두 끝난 것...
+			if (! all_null)
+			{
+				return;
+			}
+		}
+
 		if (level == 0)
 		{
 			for (auto & cl : clients)
@@ -575,6 +627,10 @@ void Game_Manager::ConnectToServer()
 				Player * p = char_maker->GetPlayer(this);
 				if (cl.key() == my_id) player = p;
 				cl.element().player = p;
+				auto lickname = new string(p->GetName());
+				*lickname += ' ';
+				*lickname += cl.element().name;
+				p->SetName(lickname->c_str());
 
 				ChatMsg_Manager::PushMessage(to_wstring(cl.key()) + L"플레이어 진입");
 			}
@@ -624,13 +680,8 @@ void Game_Manager::ConnectToServer()
 		command_send_ok = true;
 	});
 	
-	wstring sv_addr;
-	multi2uni(config::host_addr, &sv_addr);
-	wstring username;
-	multi2uni(config::username, &username);
-
-	NetInterface::Connect(sv_addr, username);
-	ChatMsg_Manager::PushMessage(wstring(sv_addr + L" 서버에 연결 시도").c_str());
+	NetInterface::Connect(config::host_addr, config::username);
+	ChatMsg_Manager::PushMessage(config::host_addr + L" 서버에 연결 시도");
 }
 
 void Game_Manager::HandleInputs()
@@ -651,7 +702,7 @@ void Game_Manager::HandleInputs()
 			Command c;
 			c.set_pid(my_id);
 			c.set_type(COMMAND_SELECT_ABILITY);
-			c.set_selected_num(player->GetSelectedAbilityId());
+			c.set_abil_name(player->GetSelectedAbilityName());
 			commands.push_back(c);
 		}
 	}
@@ -766,6 +817,7 @@ void Game_Manager::HandleInputs()
 				}
 			}
 
+			// 발사!
 			if( (player->is_Click_Hold() && key->GetMouseState(MOUSE_LEFT_HOLD)) ||
 				(key->GetMouseState(MOUSE_LEFT_DOWN)) )
 			{
@@ -781,7 +833,15 @@ void Game_Manager::HandleInputs()
 			}
 			else if(key->GetMouseState(MOUSE_RIGHT_DOWN))
 			{
-				player->Quick(this, key->GetMousePos()+focus, 0.0f);
+				Command c;
+				c.set_pid(my_id);
+				c.set_type(COMMAND_QUICK);
+				auto to = key->GetMousePos()+focus;
+				Vector2d *f = new Vector2d;
+				f->set_x(to.x);
+				f->set_y(to.y);
+				c.set_allocated_focus(f);
+				commands.push_back(c);
 			}
 
 	#ifdef __PROFILE__
@@ -813,7 +873,7 @@ void Game_Manager::HandleCommand(Command & c)
 	switch (c.type())
 	{
 	case COMMAND_SELECT_ABILITY:
-		p->SelectAbility(this, c.selected_num());
+		p->AddAbility(this, c.abil_name().c_str());
 		break;
 
 	case COMMAND_GO:
@@ -840,7 +900,7 @@ void Game_Manager::HandleCommand(Command & c)
 		break;
 
 	case COMMAND_RELOAD:
-		p->Reload();
+		p->Reload(this);
 		break;
 
 	case COMMAND_PICK_UP:
@@ -871,6 +931,14 @@ void Game_Manager::HandleCommand(Command & c)
 			p->SetFocusPos(to);
 		}
 		break;
+
+	case COMMAND_QUICK:
+		{
+			const Vector2d & f = c.focus();
+			auto to = coord_def(f.x(), f.y());
+			p->Quick(this, to, 0.0f);
+		}
+		break;
 	}
 }
 
@@ -886,11 +954,14 @@ void Game_Manager::HandleCommands()
 
 void Game_Manager::HandlePlayer(Player * p)
 {
-	if (!sniper_mode && p->isLive())
+	if (p->isLive())
 	{
-		p->Walk(this);
-		p->ShotEvent(this);
 		p->MoveToDestAngle();
+		p->ShotEvent(this);
+		if (!p->GetSniper())
+		{
+			p->Walk(this);
+		}
 	}
 }
 
@@ -949,23 +1020,36 @@ void Game_Manager::HandleState()
 	//유닛 처리
 	for(list<Unit*>::iterator it = unit_list.begin();it != unit_list.end(); )
 	{
-		if((*it)->Action(this))
-		{			
+		Unit * unit = (*it);
+		if(unit->Action(this))
+		{
 			death_dump_= 3;
+			it = unit_list.erase(it);
+			if (unit->isPlayer())
+			{
+				if (reinterpret_cast<Player *>(unit) == clients[my_id].player)
+				{
+					level++;
+					opznet::Packet sendpacket;
+					sendpacket << TO_UINT16(CL2SV_REQUEST_NEXT_LEVEL);
+					opznet::SafeSend(sendpacket);
+				}
+			}
 			TargetLost();
-			delete (*it);
-			list<Unit*>::iterator temp = it++;
-			unit_list.erase(temp);
+			if (!unit->isPlayer())
+				delete unit;
 		}
 		else
 			it++;
 	}
 
-	Player * my_player = clients[my_id].player;
-	if (!otherview && !my_player->isLive() && AnyonePlaying())
 	{
-		otherview = true;
-		player = GetFirstPlayingCl();
+		Player * my_player = clients[my_id].player;
+		if (!otherview && !my_player->isLive() && AnyonePlaying())
+		{
+			otherview = true;
+			player = GetFirstPlayingCl();
+		}
 	}
 
 	if(next_floor)
@@ -1020,11 +1104,10 @@ void Game_Manager::GameLoop()
 		{
 			if (key->GetMouseState(MOUSE_LEFT_DOWN))
 			{
-				player = GetNextPlayingCl(player);
-			}
-			if (key->GetMouseState(MOUSE_RIGHT_DOWN))
-			{
-				player = GetPrevPlayingCl(player);
+				if (AnyonePlaying())
+				{
+					player = GetNextPlayingCl(player);
+				}				
 			}
 		}
 
@@ -1309,7 +1392,7 @@ void Game_Manager::WaitDraw()
 
 void Game_Manager::UpdateWaitMessage()
 {
-	wait_message = L"준비했으면 엔터를 치세요.\n" + sv_info.name + L'\n';
+	wait_message = L"준비했으면 엔터를 치세요.\n[" + sv_info.name + L"]\n";
 	for (auto cl : clients)
 	{
 		wstring wname;

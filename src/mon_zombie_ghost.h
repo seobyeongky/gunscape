@@ -22,6 +22,7 @@ public:
 	virtual ~Mon_zombie_ghost();
 
 	virtual bool Special_Action(Game_Manager* gm_);
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_ZOMBIE_GHOST_H__

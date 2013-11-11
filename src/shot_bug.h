@@ -57,6 +57,7 @@ public:
 	virtual int SetDamage(Game_Manager* gm_, coord_def c, Damage_Type type_, float damage_, int team_, float sniper_ = 1.0f, int critical_ = 0);
 	virtual void SetPoison(float damage_, int turn_, Unit* unit_);
 	//virtual void Damage(Game_Manager* gm_, Unit* unit_);
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __SHOT_BUG_H__

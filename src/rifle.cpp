@@ -16,14 +16,15 @@
 #include "unit.h"
 
 
-Rifle::Rifle(const main_weapon_infor& infor_, coord_def pos_, int time_):
+Rifle::Rifle(const main_weapon_infor& infor_, coord_def pos_, int time_, SOUNDBUFFER * shot_sound_, SOUNDBUFFER * reload_sound_):
 Main_Weapon(infor_, pos_, time_), 
 start_speed(infor_.burst_speed_init), speed_up((int)infor_.size_var), burst_speed(infor_.burst_speed), current_speed(infor_.burst_speed_init),
 delay(0), shot_speed(infor_.shot_speed), damage(infor_.damage), sniper(infor_.bonus_damage?infor_.bonus_damage:1.0f), sniper_static(infor_.bonus_damage?infor_.bonus_damage:1.0f),
-bunch(infor_.bunch), slow_ratio(infor_.size_var?infor_.size_var:1.0f), slow_turn(infor_.bonus_int)
+bunch(infor_.bunch), slow_ratio(infor_.size_var?infor_.size_var:1.0f), slow_turn(infor_.bonus_int),
+shot_sound(shot_sound_), reload_sound(reload_sound_)
 {
-
 }
+
 Rifle::~Rifle()
 {
 }
@@ -39,10 +40,13 @@ float Rifle::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& st
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_gun(&tex_gun, User_, damage_, sniper, GetPower(), GetMaxPower(), team_, start_, angle_+focus2_, speed2_, GetDistance(),slow_turn,slow_ratio,2));
 		}
-		if(GetType() == WT_SILENCE || User_->GetSilencer() != 1.0f)
-			PlaySE(se_silencer);
-		else
-			PlaySE(se_pistol);
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			if(GetType() == WT_SILENCE || User_->GetSilencer() != 1.0f)
+				PlaySE(se_silencer);
+			else
+				PlaySE(shot_sound);
+		}
 		gm_->Noise(team_,start_,GetNoise() * User_->GetSilencer());
 		delay = start_speed*2;
 		if(current_speed>burst_speed)
@@ -52,17 +56,6 @@ float Rifle::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& st
 		return current_speed*(1.0f/(GetBurstSpeedApply()*(User_?User_->GetAtkSpdApply():1.0f)));
 	}
 	return -1;
-}
-
-
-void Rifle::PlayReloadSE()
-{
-	if(bunch>1)
-	{
-		PlaySE(se_shotgun_reload);
-	}
-	else
-		PlaySE(se_pistol_reload);
 }
 
 void Rifle::Passive(Game_Manager* gm_, Player* unit_, bool current_)
@@ -84,6 +77,12 @@ int Rifle::GetBackStabDamage(Unit* User_)
 {
 	float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f)*sniper;
 	return (int)damage_;
+}
+
+
+void Rifle::PlayReloadSE(Game_Manager * gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(reload_sound);
 }
 
 

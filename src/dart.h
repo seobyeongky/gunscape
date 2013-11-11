@@ -20,7 +20,7 @@ public:
 	
 	virtual float Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& start_, const coord_def& pos_, float focus_);
 	
-	virtual void PlayReloadSE(){};
+	virtual void PlayReloadSE(Game_Manager * gm_){};
 };
 
 #endif // __DART_H__

@@ -13,6 +13,7 @@
 #include "image.h"
 #include "gamemanager.h"
 #include "map.h"
+#include "sound.h"
 
 
 Mon_bug_fly::Mon_bug_fly(monster_infor& infor_, float x_, float y_, int team_, int time_):
@@ -51,4 +52,8 @@ void Mon_bug_fly::Approach(Game_Manager* gm_, coord_def c, Unit* target_)
 		SetAngle(angle_);
 	}
 	return;
+}
+void Mon_bug_fly::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
 }

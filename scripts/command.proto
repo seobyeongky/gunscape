@@ -7,6 +7,7 @@ enum CommandType {
 	COMMAND_SHOT = 5;
 	COMMAND_SWAP = 6;
 	COMMAND_FOCUS = 7;
+	COMMAND_QUICK = 8;
 }
 
 message Vector2d
@@ -21,4 +22,5 @@ message Command {
   optional int32 wh_ = 3; // for go
   optional int32 selected_num = 4; // selected number
   optional Vector2d focus = 5; // for shooting
+  optional string abil_name = 6;
 }

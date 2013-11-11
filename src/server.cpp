@@ -190,9 +190,7 @@ namespace Server
 
 	void Loop(function<void()> callback)
 	{
-		wstring wusername;
-		multi2uni(config::username, &wusername);
-		BeginServer(wusername + L"님의 서버");
+		BeginServer(config::username + L"님의 서버");
 		ChatMsg_Manager::PushMessage(L"서버 서비스 시작");
 
 		callback();
@@ -221,7 +219,7 @@ namespace Server
 					case SVMSG_CLIENT_GONE:
 						{
 							client_map_t::Iter it;
-							if (client_map.find(msg.client_info.id, &it))
+							if (!client_map.find(msg.client_info.id, &it))
 							{
 								ChatMsg_Manager::PushMessage(L"서버 : 알 수 없는 클라이언트 : " + to_wstring(msg.client_info.id));
 								continue;

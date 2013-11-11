@@ -34,7 +34,10 @@ float Sub_Throw_knife::Shot(Game_Manager* gm_, Unit* User_, int team_, const coo
 		target_ = temp_ + start_;
 	}
 	float angle_ = GetAngleToTarget(start_, pos_);
-	PlaySE(se_knife, false);
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_knife, false);
+	}
 	gm_->shot_list.push_back(new Shot_normal(&tex_throw_knife, User_, 10, 0.5f, 4.0f, team_, start_, angle_, 5.0f, 100));
 	if(!UpDownNum(-1))
 	{

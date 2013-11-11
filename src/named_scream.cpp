@@ -11,6 +11,7 @@
 #include "texture_list.h"
 #include "gamemanager.h"
 #include "effect_piece.h"
+#include "sound.h"
 
 Named_Scream::Named_Scream(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -24,6 +25,7 @@ Named_Scream::~Named_Scream()
 
 void Named_Scream::Death(Game_Manager* gm_)
 {
+	PlaySE(se_shout4, false);
 	Effect_noise(gm_, GetPos(), 1.0f);
 	gm_->Noise(GetTeam(),GetPos(),200.0f);
 }

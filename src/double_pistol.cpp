@@ -42,10 +42,13 @@ float Double_pistol::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_gun(&tex_gun, User_, damage_, sniper, GetPower(), GetMaxPower(), team_, start_pos_, angle2_+focus2_, speed2_, GetDistance(),0,0.0f, 2));
 		}
-		if(GetType() == WT_SILENCE || User_->GetSilencer() != 1.0f)
-			PlaySE(se_silencer);
-		else
-			PlaySE(se_pistol);
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			if(GetType() == WT_SILENCE || User_->GetSilencer() != 1.0f)
+				PlaySE(se_silencer, false);
+			else
+				PlaySE(se_doublepistol, false);
+		}
 		gm_->Noise(team_,start_,GetNoise() * User_->GetSilencer());
 		delay = start_speed*2;
 		if(current_speed>burst_speed)

@@ -12,6 +12,7 @@
 #include "gamemanager.h"
 #include "random.h"
 #include "shot_virus.h"
+#include "sound.h"
 
 Mon_zombie_virus::Mon_zombie_virus(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -36,5 +37,6 @@ bool Mon_zombie_virus::Special_Action(Game_Manager* gm_)
 
 void Mon_zombie_virus::Death(Game_Manager* gm_)
 {
+	
 	gm_->shot_list.push_back(new Shot_virus(&tex_virus, NULL, 2, 1, 15, GetTeam(), GetPos(), 250));
 }

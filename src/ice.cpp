@@ -37,17 +37,19 @@ float Ice::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& star
 		float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.8f, 1.2f);
 		float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 		gm_->shot_list.push_back(new Shot_ice(&tex_gun, User_, damage_, fire_damage, (int)GetDistance(), team_, start_, angle_+focus2_, speed2_, slow_turn, slow_ratio, size_inc));
-		PlaySE(se_flame_thrower, false);
+//		if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_icegun, false);
 		gm_->Noise(team_,start_,GetNoise() * User_->GetSilencer());
 		return burst_speed*(1.0f/(GetBurstSpeedApply()*(User_?User_->GetAtkSpdApply():1.0f)));
 	}
 	return -1;
 }
 
-void Ice::PlayReloadSE()
+void Ice::PlayReloadSE(Game_Manager * gm_)
 {
-	PlaySE(se_flame_reload);
-
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_icegun_reload, false);
+	}
 }
 const char* Ice::GetDamage()
 {

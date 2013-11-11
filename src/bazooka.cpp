@@ -13,6 +13,7 @@
 #include "texture_list.h"
 #include "shot_missile.h"
 #include "unit.h"
+#include "sound.h"
 
 Bazooka::Bazooka(const main_weapon_infor& infor_, coord_def pos_, int time_):
 Main_Weapon(infor_, pos_, time_), 
@@ -38,6 +39,10 @@ float Bazooka::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& 
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_missile(&tex_missile, User_, damage_, GetPower(), GetMaxPower(), range, team_, start_, angle_+focus2_, speed2_, guided_range, guided_power, GetDistance()));
 		}
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			PlaySE(se_rocket, false);
+		}
 		gm_->Noise(team_,start_,GetNoise() * User_->GetSilencer());
 		return burst_speed*(1.0f/(GetBurstSpeedApply()*(User_?User_->GetAtkSpdApply():1.0f)));
 	}
@@ -52,4 +57,12 @@ const char* Bazooka::GetAtkSpeed()
 {
 	sprintf_s(temp_str,32,"%.2g",60.0f/burst_speed);
 	return temp_str;
+}
+
+void Bazooka::PlayReloadSE(Game_Manager * gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_rocket_reload, false);
+	}
 }

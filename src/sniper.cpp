@@ -15,6 +15,10 @@
 #include "sound.h"
 #include "unit.h"
 
+#include <opznet/shared_structs.h>
+
+extern smap<opznet::ID, cl_t> clients;
+extern opznet::ID my_id;
 
 Sniper::Sniper(const main_weapon_infor& infor_, coord_def pos_, int time_):
 Main_Weapon(infor_, pos_, time_), 
@@ -41,10 +45,13 @@ float Sniper::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& s
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_sniper(&tex_gun, User_, damage_, sniper, GetPower(), GetMaxPower(), team_, start_, angle_+focus2_, GetDistance(), 50));
 		}
-		if(GetType() == WT_SILENCE || User_->GetSilencer() != 1.0f)
-			PlaySE(se_pistol);
-		else
-			PlaySE(se_sniper);
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			if(GetType() == WT_SILENCE || User_->GetSilencer() != 1.0f)
+				PlaySE(se_silencesnipergun);
+			else
+				PlaySE(se_snipergun);
+		}
 		gm_->Noise(team_,start_,GetNoise() * User_->GetSilencer());
 		return burst_speed*(1.0f/(GetBurstSpeedApply()*(User_?User_->GetAtkSpdApply():1.0f)));
 	}
@@ -52,17 +59,29 @@ float Sniper::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& s
 }
 float Sniper::special(Game_Manager* gm_, Unit* User_, int team_, const coord_def& start_, const coord_def& pos_, float focus_)
 {
+	Player * my_player = clients[my_id].player;
+
 	if(User_->GetSniper())
 	{
 		User_->SetSniper(false);
-		gm_->SetSniperMode(false, pos_, 1.0f);
+		if (reinterpret_cast<Player *>(User_ ) == my_player)
+		{
+			gm_->SetSniperMode(false, pos_, 1.0f);
+		}
 		ApplyDamegeApply(0.5f);
 	}
 	else
 	{
 		User_->SetSniper(true);
-		gm_->SetSniperMode(true, pos_, 2.0f);
+		if (reinterpret_cast<Player *>(User_ ) == my_player)
+		{
+			gm_->SetSniperMode(true, pos_, 2.0f);
+		}
 		ApplyDamegeApply(2.0f);
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			PlaySE(se_snipermode, false);
+		}
 	}
 	return 40;
 
@@ -74,6 +93,11 @@ int Sniper::GetBackStabDamage(Unit* User_)
 	float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f)*sniper;
 	return (int)damage_;
 }
+void Sniper::PlayReloadSE(Game_Manager * gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_snipergun_reload);
+}
+
 const char* Sniper::GetDamage()
 {
 	sprintf_s(temp_str,32,"%d",(int)damage);

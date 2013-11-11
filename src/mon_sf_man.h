@@ -21,6 +21,8 @@ public:
 	virtual ~Mon_sf_man();
 
 	virtual bool Shot(Game_Manager* gm_, coord_def c, float focus_, int item_num = 0);
+
+	virtual void Death(Game_Manager* gm_);
 };
 
 #endif // __MON_SF_MAN_H__

@@ -20,6 +20,8 @@ public:
 	virtual ~Mon_zombie_small();
 	
 	virtual void MeleeDamage(Game_Manager* gm_, Unit* target_);
+
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_ZOMBIE_SMALL_H__

@@ -71,7 +71,10 @@ void Named_Assasin::MeleeDamage(Game_Manager* gm_, Unit* target_)
 		damage__*=8;
 		Effect_simple_speak(gm_,"¹é½ºÅÇ!",target_->GetPos());
 		dt_ = DT_BACK_STAB;
-		PlaySE(se_backstab, false);
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			PlaySE(se_backstab, false);
+		}
 	}
 
 

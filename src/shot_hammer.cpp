@@ -43,7 +43,8 @@ void Shot_hammer::Hit(Game_Manager* gm_, Unit* unit_)
 
 		damage_ *= back_stab;
 		Effect_simple_speak(gm_,"¹é½ºÅÇ!",unit_->GetPos());
-		PlaySE(se_backstab, false);
+		if (gm_->isPlayerCanHear(GetPos()))
+			PlaySE(se_backstab, false);
 		ok_backstab = true;
 		dt_ = DT_BACK_STAB;	
 		power_ *= 3;
@@ -54,6 +55,10 @@ void Shot_hammer::Hit(Game_Manager* gm_, Unit* unit_)
 	{
 		unit->GiveDamage(gm_, unit_, dt_, final_damge_);
 		{
+			if (gm_->isPlayerCanHear(GetPos()))
+			{
+				PlaySE(se_hammer_hit, false);
+			}
 			float angle_ = GetAngleToTarget(GetPos(), unit_->GetPos());
 			float knockback_ = power_*5.0f+unit_->GetSize();
 			coord_def knock_pos = unit_->GetPos()+coord_def(cos(angle_)*knockback_,sin(angle_)*knockback_);

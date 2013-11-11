@@ -39,6 +39,8 @@ public:
 	virtual bool isItemOk(){return false;}; 
 
 	virtual bool CanSpeeing(){return false;};	
+
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_BUG_FLY2_H__

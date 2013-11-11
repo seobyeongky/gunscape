@@ -45,10 +45,12 @@ float Fire::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& sta
 	return -1;
 }
 
-void Fire::PlayReloadSE()
+void Fire::PlayReloadSE(Game_Manager * gm_)
 {
-	PlaySE(se_flame_reload);
-
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_flame_reload, false);
+	}
 }
 const char* Fire::GetDamage()
 {

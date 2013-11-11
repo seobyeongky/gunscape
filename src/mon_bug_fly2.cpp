@@ -15,6 +15,7 @@
 #include "random.h"
 #include "gamemanager.h"
 #include "map.h"
+#include "sound.h"
 
 
 Mon_bug_fly2::Mon_bug_fly2(monster_infor& infor_, float x_, float y_, int team_, int time_):
@@ -111,3 +112,8 @@ bool Mon_bug_fly2::isCollution()
 	return false;
 }
 
+
+void Mon_bug_fly2::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
+}

@@ -151,8 +151,7 @@ Player* Character_Maker::GetPlayer(Game_Manager* gm_)
 	{
 		job_list[num]->SetPlayer(gm_, player);
 		player->Heal(player->GetMaxHp());
-		player->Reload();
-		PlaySE(se_pistol_reload);
+		player->Reload(gm_);
 		player->SetDelay(0.0f);
 		Player* temp = player;
 		player = new Player(&tex_player, 0, 0);;

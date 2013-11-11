@@ -11,15 +11,34 @@
 #include <stdlib.h>
 #include <time.h>
 
-int state = (int)time(NULL);
+unsigned int m_w = static_cast<unsigned int>(time(nullptr));
+unsigned int m_z = static_cast<unsigned int>(time(nullptr));
+
+unsigned int GetUint()
+{
+	m_z = 36969 * (m_z & 65535) + (m_z >> 16);
+    m_w = 18000 * (m_w & 65535) + (m_w >> 16);
+    return (m_z << 16) + m_w;
+}
+
+float GetUniform()
+{
+	unsigned int u = GetUint();
+	return (u + 1.0f) * 2.328306435454494e-10f;
+}
 
 int my_rand_int(int min, int max)
 {
 	if(min == max)
 		return min;
 
-	state = state * 1664525 + 1013904223;
-	return (int)(state >> 24) % (max - min+1) + min;
+	unsigned int n = GetUint();
+	return n % (max - min+1) + min;
+}
+
+float my_rand_float(float min, float max)
+{
+	return GetUniform() * (max - min) + min;
 }
 
 float rand_float(float min, float max)

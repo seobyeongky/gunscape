@@ -14,6 +14,7 @@
 #include "image.h"
 #include "effect_piece.h"
 #include "Map.h"
+#include "sound.h"
 
 
 Shot_bug::Shot_bug(Texture* texture_, Unit* unit_, float damage_, coord_def start_, coord_def goal_, int time_, int team_, int delay_):
@@ -154,3 +155,7 @@ void Shot_bug::SetPoison(float damage_, int turn_, Unit* unit_)
 		head->SetPoison(damage_, turn_, unit_);
 	}
 };
+void Shot_bug::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
+}

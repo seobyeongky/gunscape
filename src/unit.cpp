@@ -150,7 +150,7 @@ bool Unit::Draw(Game_Manager* gm_, coord_def offset, float size_)
 }
 bool Unit::NameDraw(Game_Manager* gm_, coord_def offset, float size_)
 {
-	if( isNamed() && !isNonLife() && isViewName())
+	if( isNamed() && !isNonLife() && isViewName() || isPlayer())
 	{
 		float w_ = gm_->direct->GetWR();
 		float h_ = gm_->direct->GetHR();

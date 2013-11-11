@@ -22,6 +22,7 @@ public:
 	virtual ~Mon_zombie_boomer();
 
 	virtual bool Shot(Game_Manager* gm_, coord_def c, float focus_, int item_num = 0);
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_ZOMBIE_BOOMER_H__

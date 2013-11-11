@@ -18,14 +18,20 @@ namespace NetInterface
 
 	void Begin()
 	{
-		BeginClient();
-		began = true;
+		if (!began)
+		{
+			BeginClient();
+			began = true;
+		}
 	}
 
 	void End()
 	{
-		began = false;
-		EndClient();
+		if (began)
+		{
+			began = false;
+			EndClient();
+		}
 	}
 
 	bool Connect(const wstring & addr, const wstring & user_name)

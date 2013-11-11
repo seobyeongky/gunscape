@@ -11,6 +11,8 @@
 
 #include "main_weapon.h"
 
+class SOUNDBUFFER;
+
 class Rifle: public Main_Weapon
 {
 protected:
@@ -26,9 +28,11 @@ protected:
 	float slow_ratio;
 	int slow_turn;
 	int bunch;
+	SOUNDBUFFER * shot_sound;
+	SOUNDBUFFER * reload_sound;
 
 public:
-	Rifle(const main_weapon_infor& infor_, coord_def pos_, int time_);
+	Rifle(const main_weapon_infor& infor_, coord_def pos_, int time_, SOUNDBUFFER * shot_sound_, SOUNDBUFFER * reload_sound_);
 	virtual ~Rifle();
 	
 
@@ -40,7 +44,7 @@ public:
 
 
 	
-	virtual void PlayReloadSE();
+	virtual void PlayReloadSE(Game_Manager * gm_);
 	
 	virtual int GetBackStabDamage(Unit* User_);
 	virtual float GetSniper(){return sniper;};

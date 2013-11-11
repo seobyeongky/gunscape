@@ -9,6 +9,7 @@
 #include <math.h>
 #include "mon_bug_fling.h"
 #include "gamemanager.h"
+#include "sound.h"
 
 Mon_bug_filng::Mon_bug_filng(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -41,4 +42,8 @@ void Mon_bug_filng::MeleeDamage(Game_Manager* gm_, Unit* target_)
 		SetStop(20);
 		fling = false;
 	}
+}
+void Mon_bug_filng::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
 }

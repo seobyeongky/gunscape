@@ -47,6 +47,43 @@ public:
 };
 
 
+class Shot_knife: public Shot_melee
+{
+public:
+	Shot_knife(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_);
+	virtual void Hit(Game_Manager* gm_, Unit* unit_);
+};
+
+
+class Shot_axe: public Shot_melee
+{
+public:
+	Shot_axe(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_);
+	virtual void Hit(Game_Manager* gm_, Unit* unit_);
+};
+
+
+class Shot_club: public Shot_melee
+{
+public:
+	Shot_club(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_);
+	virtual void Hit(Game_Manager* gm_, Unit* unit_);
+};
+
+
+class Shot_spear: public Shot_melee
+{
+public:
+	Shot_spear(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_);
+	virtual void Hit(Game_Manager* gm_, Unit* unit_);
+};
+
+class Shot_assasinknife: public Shot_melee
+{
+public:
+	Shot_assasinknife(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, int time_, int team_, coord_def pos_, float angle_, float size_, float width_, float back_stab_);
+	virtual void Hit(Game_Manager* gm_, Unit* unit_);
+};
 
 
 #endif // __SHOT_MELEE_H__

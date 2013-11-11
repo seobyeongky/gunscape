@@ -145,7 +145,7 @@ bool Main_Weapon::Effect(Game_Manager* gm_, Player* unit_)
 }
 
 
-void Main_Weapon::PlayReloadSE()
+void Main_Weapon::PlayReloadSE(Game_Manager * gm_)
 {
-	PlaySE(se_pistol_reload);
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_reload);
 }

@@ -11,6 +11,7 @@
 #include "texture_list.h"
 #include "gamemanager.h"
 #include "shot_smoke_bomb.h"
+#include "sound.h"
 
 Mon_sf_man::Mon_sf_man(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -44,4 +45,8 @@ bool Mon_sf_man::Shot(Game_Manager* gm_, coord_def c, float focus_, int item_num
 		return true;
 	}
 	return false;
+}
+void Mon_sf_man::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_human_dead);
 }

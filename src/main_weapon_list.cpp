@@ -20,6 +20,7 @@
 #include "dart.h"
 #include "grenade_gun.h"
 #include "texture_list.h"
+#include "sound.h"
 
 
 main_weapon_infor rifle__no_weapon = 
@@ -1107,31 +1108,31 @@ Main_Weapon* New_Main_Weapon(Main_Weapon_Kind kind_, coord_def pos_, int time_, 
 	case MWK_NONE:
 	case MWK_ASSAUL_RIFLE:
 	default:
-		temp = new Rifle(rifle__assault_rifle, pos_, time_);
+		temp = new Rifle(rifle__assault_rifle, pos_, time_, se_rifle, se_rifle_reload);
 	break;
 	case MWK_HEAVY:
-		temp = new Rifle(rifle__heavy, pos_, time_);
+		temp = new Rifle(rifle__heavy, pos_, time_, se_minigun, se_flame_reload);
 	break;
 	case MWK_RIFLE_PISTOL:
-		temp = new Rifle(rifle__pistol, pos_, time_);
+		temp = new Rifle(rifle__pistol, pos_, time_, se_pistol, se_pistol_reload);
 	break;
 	case MWK_RIFLE_PISTOL_BIG:
-		temp = new Rifle(rifle__pistol_big, pos_, time_);
+		temp = new Rifle(rifle__pistol_big, pos_, time_, se_deagle, se_deagle_reload);
 	break;
 	case MWK_RIFLE_ASSASSIN_PISTOL:
-		temp = new Rifle(rifle__assassin_pistol, pos_, time_);
+		temp = new Rifle(rifle__assassin_pistol, pos_, time_, se_asspistol, se_asspistol_reload);
 	break;
 	case MWK_RIFLE_DOUBLE_PISTOL:
 		temp = new Double_pistol(rifle__double_pistol, pos_, time_);
 	break;
 	case MWK_SHOT_GUN:
-		temp = new Rifle(rifle__shot_gun, pos_, time_);
+		temp = new Rifle(rifle__shot_gun, pos_, time_, se_shotgun, se_shotgun_reload);
 	break;
 	case MWK_SHOT_GUN_SHORT:
-		temp = new Rifle(rifle__shot_gun_short, pos_, time_);
+		temp = new Rifle(rifle__shot_gun_short, pos_, time_, se_shortshotgun, se_shotgun_reload);
 	break;
 	case MWK_SHOT_GUN_KNOCKBACK:
-		temp = new Rifle(rifle__shot_gun_knockback, pos_, time_);
+		temp = new Rifle(rifle__shot_gun_knockback, pos_, time_, se_shotgun, se_shotgun_reload);
 	break;	
 	case MWK_FLAME_THROWER:
 		temp = new Fire(rifle__flame_thrower, pos_, time_);
@@ -1161,7 +1162,7 @@ Main_Weapon* New_Main_Weapon(Main_Weapon_Kind kind_, coord_def pos_, int time_, 
 		temp = new Bow(rifle__bow, pos_, time_);
 	break;
 	case MWK_CROSS_BOW:
-		temp = new Rifle(rifle__cross_bow, pos_, time_);
+		temp = new Rifle(rifle__cross_bow, pos_, time_, se_bow2, se_ammo_pick);
 	break;
 	case MWK_DART:	
 		temp = new Dart(rifle__dart, pos_, time_);
@@ -1170,13 +1171,13 @@ Main_Weapon* New_Main_Weapon(Main_Weapon_Kind kind_, coord_def pos_, int time_, 
 		temp = new Bazooka(rifle__mon_bazooka, pos_, time_);
 	break;
 	case MWK_MON_ASSAUL_RIFLE:
-		temp = new Rifle(rifle__mon_assault_rifle, pos_, time_);
+		temp = new Rifle(rifle__mon_assault_rifle, pos_, time_, se_monrifle, se_reload);
 	break;
 	case MWK_MON_PISTOL:
-		temp = new Rifle(rifle__mon_pistol_big, pos_, time_);
+		temp = new Rifle(rifle__mon_pistol_big, pos_, time_, se_monpistol, se_reload);
 	break;	
 	case MWK_MON_SILENCE_GUN:
-		temp = new Rifle(rifle__mon_silence_gun, pos_, time_);
+		temp = new Rifle(rifle__mon_silence_gun, pos_, time_, se_monasspistol, se_reload);
 	break;	
 	case MWK_MON_WATER_GUN:
 		temp = new Water(rifle__mon_water_gun, pos_, time_);
@@ -1191,7 +1192,7 @@ Main_Weapon* New_Main_Weapon(Main_Weapon_Kind kind_, coord_def pos_, int time_, 
 		temp = new Double_pistol(rifle__mon_robot_minigun, pos_, time_);
 	break;
 	case MWK_MON_ROBOT_BAZOOKA:
-		temp = new Rifle(rifle__mon_robot_bazooka, pos_, time_);
+		temp = new Rifle(rifle__mon_robot_bazooka, pos_, time_, se_rocket, se_reload);
 	break;
 	case MWK_MON_ROBOT_GRENADE:
 		temp = new Grenade_gun(rifle__mon_robot_grenade, pos_, time_);

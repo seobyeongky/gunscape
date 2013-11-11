@@ -9,6 +9,8 @@
 #ifndef  __SOUND_H__
 #define  __SOUND_H__
 
+#include "coord_def.h"
+
 #include <dsound.h>
 #include <math.h>
 #pragma comment (lib, "dsound")
@@ -90,8 +92,61 @@ extern SOUNDBUFFER* se_bow;
 extern SOUNDBUFFER* se_flame_reload;
 extern SOUNDBUFFER* se_backstab;
 extern SOUNDBUFFER* se_knife;
-extern SOUNDBUFFER* se_sniper;
 extern SOUNDBUFFER* se_silencer;
+extern SOUNDBUFFER* se_ammo_pick;
+extern SOUNDBUFFER* se_assknife;
+extern SOUNDBUFFER* se_assknife_hit;
+extern SOUNDBUFFER* se_asspistol;
+extern SOUNDBUFFER* se_asspistol_reload;
+extern SOUNDBUFFER* se_axe;
+extern SOUNDBUFFER* se_axe_hit;
+extern SOUNDBUFFER* se_bow2;
+extern SOUNDBUFFER* se_bug_dead;
+extern SOUNDBUFFER* se_bullet_flesh;
+extern SOUNDBUFFER* se_club_hit;
+extern SOUNDBUFFER* se_deagle_reload;
+extern SOUNDBUFFER* se_doublepistol;
+extern SOUNDBUFFER* se_fireball;
+extern SOUNDBUFFER* se_gamestart;
+extern SOUNDBUFFER* se_giant_dead;
+extern SOUNDBUFFER* se_grenade_hit;
+extern SOUNDBUFFER* se_grenadegun;
+extern SOUNDBUFFER* se_hammer;
+extern SOUNDBUFFER* se_hammer_hit;
+extern SOUNDBUFFER* se_healthkit;
+extern SOUNDBUFFER* se_human_dead;
+extern SOUNDBUFFER* se_icegun_reload;
+extern SOUNDBUFFER* se_knife_hit;
+extern SOUNDBUFFER* se_monasspistol;
+extern SOUNDBUFFER* se_monrifle;
+extern SOUNDBUFFER* se_monsnipergun;
+extern SOUNDBUFFER* se_portal;
+extern SOUNDBUFFER* se_reload;
+extern SOUNDBUFFER* se_rifle;
+extern SOUNDBUFFER* se_rifle_reload;
+extern SOUNDBUFFER* se_robot;
+extern SOUNDBUFFER* se_rocket;
+extern SOUNDBUFFER* se_rocket_reload;
+extern SOUNDBUFFER* se_shout1;
+extern SOUNDBUFFER* se_shout2;
+extern SOUNDBUFFER* se_shout3;
+extern SOUNDBUFFER* se_shout4;
+extern SOUNDBUFFER* se_silencesnipergun;
+extern SOUNDBUFFER* se_smoke;
+extern SOUNDBUFFER* se_snipergun;
+extern SOUNDBUFFER* se_snipergun_reload;
+extern SOUNDBUFFER* se_snipermode;
+extern SOUNDBUFFER* se_spear_hit;
+extern SOUNDBUFFER* se_switch;
+extern SOUNDBUFFER* se_zombie_dead1;
+extern SOUNDBUFFER* se_zombie_dead2;
+extern SOUNDBUFFER* se_minigun;
+extern SOUNDBUFFER* se_monpistol;
+extern SOUNDBUFFER* se_deagle;
+extern SOUNDBUFFER* se_shotgun;
+extern SOUNDBUFFER* se_shortshotgun;
+
+
 extern SOUNDBUFFER* bgm_dungeon_0;
 extern SOUNDBUFFER* bgm_dungeon_1;
 extern SOUNDBUFFER* bgm_dungeon_2;

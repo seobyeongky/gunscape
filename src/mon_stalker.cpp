@@ -13,6 +13,7 @@
 #include "shot_net.h"
 #include "mon_stalker.h"
 #include "effect_piece.h"
+#include "sound.h"
 
 Mon_stalker::Mon_stalker(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -74,4 +75,8 @@ bool Mon_stalker::Special_Action(Game_Manager* gm_)
 	}
 	return true;
 
+}
+void Mon_stalker::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_human_dead);
 }

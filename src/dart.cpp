@@ -18,7 +18,7 @@
 
 
 Dart::Dart(const main_weapon_infor& infor_, coord_def pos_, int time_):
-Rifle(infor_, pos_, time_)
+	Rifle(infor_, pos_, time_, se_bow, se_ammo_pick)
 {
 }
 
@@ -34,7 +34,7 @@ float Dart::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& sta
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_poison(&tex_gun, User_, damage_, sniper, GetPower(), GetMaxPower(), team_, start_, angle_+focus2_, speed2_, GetDistance(),slow_turn,slow_ratio,2));
 		}
-		PlaySE(se_bow);
+		if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bow, false);
 		gm_->Noise(team_,start_,GetNoise() * User_->GetSilencer());
 		delay = start_speed*2;
 		if(current_speed>burst_speed)

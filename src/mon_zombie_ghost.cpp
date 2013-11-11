@@ -11,6 +11,7 @@
 #include "texture_list.h"
 #include "gamemanager.h"
 #include "random.h"
+#include "sound.h"
 
 Mon_zombie_ghost::Mon_zombie_ghost(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
@@ -40,4 +41,9 @@ bool Mon_zombie_ghost::Special_Action(Game_Manager* gm_)
 	}
 
 	return true;
+}
+
+void Mon_zombie_ghost::Death(Game_Manager* gm_)
+{
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_zombie_dead2);
 }

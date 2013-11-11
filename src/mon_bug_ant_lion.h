@@ -39,6 +39,7 @@ public:
 	virtual bool TargetLost();
 
 	virtual bool Special_Action(Game_Manager* gm_);
+	virtual void Death(Game_Manager* gm_); 
 };
 
 #endif // __MON_BUG_ANT_LION_H__

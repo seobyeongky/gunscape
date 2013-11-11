@@ -71,7 +71,7 @@ void Bow::Passive(Game_Manager* gm_, Player* unit_, bool current_)
 			float damage_ =  damage*GetDamegeApply()*(bow_state.User?bow_state.User->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_gun(&tex_gun, bow_state.User, damage_, sniper, GetPower(), GetMaxPower(), bow_state.team, bow_state.start, angle_+focus2_, speed2_, GetDistance(),slow_turn,slow_ratio,5));
 		}
-		PlaySE(se_bow);
+		if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bow, false);
 		gm_->Noise(bow_state.team,bow_state.start,GetNoise() * unit_->GetSilencer());
 		bow_state.User->SetDelay(burst_speed*(1.0f/(GetBurstSpeedApply()*(bow_state.User?bow_state.User->GetAtkSpdApply():1.0f))));
 		count = 1;
@@ -80,7 +80,7 @@ void Bow::Passive(Game_Manager* gm_, Player* unit_, bool current_)
 	pre_click = cur_click;
 	cur_click = false;
 }
-void Bow::PlayReloadSE()
+void Bow::PlayReloadSE(Game_Manager * gm_)
 {
 
 }

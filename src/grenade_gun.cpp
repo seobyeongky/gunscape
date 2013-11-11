@@ -14,6 +14,7 @@
 #include "texture_list.h"
 #include "shot_missile.h"
 #include "unit.h"
+#include "sound.h"
 
 Grenade_gun::Grenade_gun(const main_weapon_infor& infor_, coord_def pos_, int time_):
 Main_Weapon(infor_, pos_, time_), 
@@ -56,10 +57,17 @@ float Grenade_gun::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_d
 			gm_->shot_list.push_back(new Shot_grenade(&tex_grenade, User_, shot_time, damage_, GetPower(), GetMaxPower(), range, pentan, team_, start_, target_));
 
 		}
+		if (gm_->isPlayerCanHear(GetPos()))
+		{
+			PlaySE(se_grenadegun, false);
+		}
 		gm_->Noise(team_,start_,GetNoise() * User_->GetSilencer());
 		return burst_speed*(1.0f/(GetBurstSpeedApply()*(User_?User_->GetAtkSpdApply():1.0f)));
 	}
 	return -1;
+}
+void Grenade_gun::PlayReloadSE(Game_Manager * gm_)
+{
 }
 const char* Grenade_gun::GetDamage()
 {

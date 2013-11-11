@@ -23,6 +23,7 @@
 #include "double_pistol.h"
 #include "bazooka.h"
 #include "grenade_gun.h"
+#include "sound.h"
 
 
 monster_infor named__jack = 
@@ -248,8 +249,8 @@ Unit* New_Named(Monster_Index kind_, coord_def pos_, int team_, int flag_, int t
 	default:
 		p_monster = &named__jack;
 		temp = new Named_jack(*p_monster, pos_.x, pos_.y, team_, time_);
-		temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
-	break;
+		temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_pistol, se_pistol_reload));
+		break;
 	case NAMED_LOOTER:
 		p_monster = &named__looter;
 		temp = new Named_jack(*p_monster, pos_.x, pos_.y, team_, time_);
@@ -276,7 +277,7 @@ Unit* New_Named(Monster_Index kind_, coord_def pos_, int team_, int flag_, int t
 	case NAMED_ASSASIN:
 		p_monster = &named__assasin;
 		temp = new Named_Assasin(*p_monster, pos_.x, pos_.y, team_, time_);
-		temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1));
+		temp->SetWeapon(new Rifle((*p_monster->weapon), coord_def(), -1, se_monasspistol, se_pistol_reload));
 	break;
 	case NAMED_SNIPER:
 		p_monster = &named__sniper;
