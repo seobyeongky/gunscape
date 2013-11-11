@@ -157,5 +157,5 @@ void Shot_bug::SetPoison(float damage_, int turn_, Unit* unit_)
 };
 void Shot_bug::Death(Game_Manager* gm_)
 {
-	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_slashed3);
 }

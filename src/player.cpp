@@ -140,7 +140,7 @@ const char * Player::GetSelectedAbilityName()
 
 		i++;
 	}
-	assert("¸Á");
+	assert(!"¸Á");
 	return 0;
 }
 

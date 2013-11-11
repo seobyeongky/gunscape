@@ -8,7 +8,10 @@
 
 #include "sound.h"
 #include <fstream>
+#include <audiere.h>
 using namespace std;
+
+using namespace audiere;
 
 SOUNDMANAGER soundmanager;
 
@@ -73,56 +76,36 @@ SOUNDBUFFER* se_monpistol=0;
 SOUNDBUFFER* se_deagle=0;
 SOUNDBUFFER* se_shotgun=0;
 SOUNDBUFFER* se_shortshotgun=0;
+SOUNDBUFFER* se_slashed1;
+SOUNDBUFFER* se_slashed2;
+SOUNDBUFFER* se_slashed3;
+SOUNDBUFFER* se_slashed4;
+SOUNDBUFFER* se_slashed5;
+SOUNDBUFFER* se_slashed6;
+SOUNDBUFFER* se_hello1;
+SOUNDBUFFER* se_hello2;
+SOUNDBUFFER* se_hello3;
+SOUNDBUFFER* se_hello4;
+SOUNDBUFFER* se_hello5;
+SOUNDBUFFER* se_hello6;
+SOUNDBUFFER* se_hello7;
+SOUNDBUFFER* se_hello8;
+SOUNDBUFFER* se_hello9;
+SOUNDBUFFER* se_hello10;
+SOUNDBUFFER* se_hello11;
+SOUNDBUFFER* se_item1;
+SOUNDBUFFER* se_item2;
+SOUNDBUFFER* se_item3;
+SOUNDBUFFER* se_pickup;
 
-SOUNDBUFFER* bgm_dungeon_0=0;
-SOUNDBUFFER* bgm_dungeon_1=0;
-SOUNDBUFFER* bgm_dungeon_2=0;
-SOUNDBUFFER* bgm_dungeon_3=0;
 
-//AudioDevicePtr DevicePtr = NULL;
-//OutputStreamPtr se_pistol = NULL;
-//OutputStreamPtr se_flame_thrower = NULL;
-//OutputStreamPtr se_pistol_reload = NULL;
-//OutputStreamPtr se_flame_reload = NULL;
-//OutputStreamPtr bgm_dungeon_0 = NULL;
-//
-//void InitSound()
-//{
-//	DevicePtr = OpenDevice();
-//	if ( !DevicePtr )
-//		return;
-//	se_pistol = OpenSound(DevicePtr, "sound\\ÃÑ¼Ò¸®2.wav", false);
-//	se_flame_thrower = OpenSound(DevicePtr, "sound\\fire.wav", false);
-//	se_pistol_reload = OpenSound(DevicePtr, "sound\\ÃÑÀåÀü.wav", false);
-//	se_flame_reload = OpenSound(DevicePtr, "sound\\fire_reload.wav", false);
-//	bgm_dungeon_0 = OpenSound(DevicePtr, "sound\\bgm.mp3", true);
-//	bgm_dungeon_0->setRepeat(true);
-//}
-//
-//void PlaySE(OutputStreamPtr& sound_, bool init_)
-//{
-//	if(sound_)
-//	{
-//		if(init_)
-//			sound_->setPosition(0);
-//		sound_->play();
-//	}
-//}
-//
-//void PlayBGM(OutputStreamPtr& sound_)
-//{
-//	if(sound_)
-//	{
-//		sound_->play();
-//	}
-//}
-//void StopBGM(OutputStreamPtr& sound_)
-//{
-//	if(sound_)
-//	{
-//		sound_->stop();
-//	}
-//}
+struct bgm_context_t
+{
+	AudioDevicePtr DevicePtr;
+	OutputStreamPtr bgms[NR_BGM];
+};
+
+bgm_context_t * bc = nullptr;
 
 
 SOUNDBUFFER :: SOUNDBUFFER()
@@ -501,12 +484,28 @@ SOUNDMANAGER :: SOUNDMANAGER()
 	se_deagle=new SOUNDBUFFER();
 	se_shotgun=new SOUNDBUFFER();
 	se_shortshotgun=new SOUNDBUFFER();
+	se_slashed1=new SOUNDBUFFER();
+	se_slashed2=new SOUNDBUFFER();
+	se_slashed3=new SOUNDBUFFER();
+	se_slashed4=new SOUNDBUFFER();
+	se_slashed5=new SOUNDBUFFER();
+	se_slashed6=new SOUNDBUFFER();
+	se_hello1=new SOUNDBUFFER();
+	se_hello2=new SOUNDBUFFER();
+	se_hello3=new SOUNDBUFFER();
+	se_hello4=new SOUNDBUFFER();
+	se_hello5=new SOUNDBUFFER();
+	se_hello6=new SOUNDBUFFER();
+	se_hello7=new SOUNDBUFFER();
+	se_hello8=new SOUNDBUFFER();
+	se_hello9=new SOUNDBUFFER();
+	se_hello10=new SOUNDBUFFER();
+	se_hello11=new SOUNDBUFFER();
+	se_item1=new SOUNDBUFFER();
+	se_item2=new SOUNDBUFFER();
+	se_item3=new SOUNDBUFFER();
+	se_pickup=new SOUNDBUFFER();
 
-	bgm_dungeon_0 = new SOUNDBUFFER();
-	bgm_dungeon_1 = new SOUNDBUFFER();
-	bgm_dungeon_2 = new SOUNDBUFFER();
-	bgm_dungeon_3 = new SOUNDBUFFER();
-	bgm_on = true;
 	se_on = true;
 	BackgroundVolume = 0.0f;
 	VoiceVolume = 0.0f;
@@ -576,11 +575,28 @@ SOUNDMANAGER :: ~SOUNDMANAGER()
 	delete se_deagle;
 	delete se_shotgun;
 	delete se_shortshotgun;
+	delete se_slashed1;
+	delete se_slashed2;
+	delete se_slashed3;
+	delete se_slashed4;
+	delete se_slashed5;
+	delete se_slashed6;
+	delete se_hello1;
+	delete se_hello2;
+	delete se_hello3;
+	delete se_hello4;
+	delete se_hello5;
+	delete se_hello6;
+	delete se_hello7;
+	delete se_hello8;
+	delete se_hello9;
+	delete se_hello10;
+	delete se_hello11;
+	delete se_item1;
+	delete se_item2;
+	delete se_item3;
+	delete se_pickup;
 
-	delete bgm_dungeon_0;
-	delete bgm_dungeon_1;
-	delete bgm_dungeon_2;
-	delete bgm_dungeon_3;
 	if(Sound != NULL)
 	{
 		Sound -> Release();
@@ -655,23 +671,32 @@ void SOUNDMANAGER :: Initialize(HWND WindowHandle)
 	se_deagle -> Load(Sound, "sound\\se_deagle.wav", false, false, true);
 	se_shotgun -> Load(Sound, "sound\\se_shotgun.wav", false, false, true);
 	se_shortshotgun -> Load(Sound, "sound\\se_shortshotgun.wav", false, false, true);
-
-	bgm_dungeon_0 -> Load(Sound, "sound\\bgm.wav", true, true, false);
-	bgm_dungeon_1 -> Load(Sound, "sound\\bgm2.wav", true, true, false);
-	bgm_dungeon_2 -> Load(Sound, "sound\\bgm3.wav", true, true, false);
-	bgm_dungeon_3 -> Load(Sound, "sound\\bgm4.wav", true, true, false);
-
+	se_slashed1 -> Load(Sound, "sound\\se_slashed1.wav", false, false, true);
+	se_slashed2 -> Load(Sound, "sound\\se_slashed2.wav", false, false, true);
+	se_slashed3 -> Load(Sound, "sound\\se_slashed3.wav", false, false, true);
+	se_slashed4 -> Load(Sound, "sound\\se_slashed4.wav", false, false, true);
+	se_slashed5 -> Load(Sound, "sound\\se_slashed5.wav", false, false, true);
+	se_slashed6 -> Load(Sound, "sound\\se_slashed6.wav", false, false, true);
+	se_hello1 -> Load(Sound, "sound\\se_hello1.wav", false, false, true);
+	se_hello2 -> Load(Sound, "sound\\se_hello2.wav", false, false, true);
+	se_hello3 -> Load(Sound, "sound\\se_hello3.wav", false, false, true);
+	se_hello4 -> Load(Sound, "sound\\se_hello4.wav", false, false, true);
+	se_hello5 -> Load(Sound, "sound\\se_hello5.wav", false, false, true);
+	se_hello6 -> Load(Sound, "sound\\se_hello6.wav", false, false, true);
+	se_hello7 -> Load(Sound, "sound\\se_hello7.wav", false, false, true);
+	se_hello8 -> Load(Sound, "sound\\se_hello8.wav", false, false, true);
+	se_hello9 -> Load(Sound, "sound\\se_hello9.wav", false, false, true);
+	se_hello10 -> Load(Sound, "sound\\se_hello10.wav", false, false, true);
+	se_hello11 -> Load(Sound, "sound\\se_hello11.wav", false, false, true);
+	se_item1 -> Load(Sound, "sound\\item1.wav", false, false, true);
+	se_item2 -> Load(Sound, "sound\\item2.wav", false, false, true);
+	se_item3 -> Load(Sound, "sound\\item3.wav", false, false, true);
+	se_pickup -> Load(Sound, "sound\\pickup.wav", false, false, true);
 }
 
 void SOUNDMANAGER :: Update()
 {
 	se_flame_thrower -> BufferUpdate();
-
-
-	bgm_dungeon_0 -> BufferUpdate();
-	bgm_dungeon_1 -> BufferUpdate();
-	bgm_dungeon_2 -> BufferUpdate();
-	bgm_dungeon_3 -> BufferUpdate();
 }
 
 
@@ -681,6 +706,28 @@ void SOUNDMANAGER :: Update()
 void InitSound(HWND windowhandle_)
 {
 	soundmanager.Initialize(windowhandle_);
+
+	// ¸Þ¸ð¸® ¼À ±×·¡µµ ±¦ªS...?
+	bc = new bgm_context_t();
+
+	bc->DevicePtr = OpenDevice();
+
+	auto addbgm = [](bgm_t key, const string & filename){
+		bc->bgms[key] = OpenSound(bc->DevicePtr, string("sound\\" + filename).c_str(), true);
+	};
+	
+	addbgm(BGM_MAIN, "bgm.ogg");
+	addbgm(BGM_ZOMBIE, "bgm2.ogg");
+	addbgm(BGM_3, "bgm3.ogg");
+	addbgm(BGM_4, "bgm4.mp3");
+
+	for (auto stream : bc->bgms)
+	{
+		if (stream)
+		{
+			stream->setRepeat(true);
+		}
+	}
 }
 
 void PlaySE(SOUNDBUFFER* sound_, bool init_)
@@ -694,19 +741,44 @@ void PlaySE(SOUNDBUFFER* sound_, bool init_)
 	}
 }
 
-void PlayBGM(SOUNDBUFFER* sound_)
+#include "random.h"
+
+void PlaySE2(SOUNDBUFFER* sound_1, SOUNDBUFFER* sound_2)
 {
-	if(sound_ && sound_->SoundBuffer && soundmanager.bgm_on)
+	int r = my_rand_int(0, 100);
+	if (r < 50)
+		PlaySE(sound_1, false);
+	else
+		PlaySE(sound_2, false);
+}
+
+void PlaySE3(SOUNDBUFFER* sound_1, SOUNDBUFFER* sound_2, SOUNDBUFFER* sound_3)
+{
+	int r = my_rand_int(0, 100);
+	if (r < 33)
+		PlaySE(sound_1, false);
+	else if (r < 67)
+		PlaySE(sound_2, false);
+	else
+		PlaySE(sound_3, false);
+}
+
+void PlayBGM(bgm_t bgm_)
+{
+	auto stream = bc->bgms[bgm_];
+	if (stream)
 	{
-		sound_->PlaySound();
-		sound_->play_time = 0;
+		stream->play();
 	}
 }
-void StopBGM(SOUNDBUFFER* sound_)
+void StopBGM()
 {
-	if(sound_ && sound_->SoundBuffer && soundmanager.bgm_on)
+	for (auto stream : bc->bgms)
 	{
-		sound_->StopSound();
+		if (stream)
+		{
+			stream->stop();
+		}
 	}
 }
 

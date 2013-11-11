@@ -13,6 +13,7 @@
 #include "image.h"
 #include "effect_piece.h"
 #include "Map.h"
+#include "sound.h"
 
 Shot_missile::Shot_missile(Texture* texture_, Unit* unit_, float damage_, float power_, float max_power_, float range_, int team_, coord_def pos_, float angle_, float speed_, int guided_range_, float guided_power_, float distance_):
 Shot_base(texture_, unit_, team_, pos_, coord_def(cos(angle_)*speed_, sin(angle_)*speed_)), 
@@ -38,7 +39,10 @@ bool Shot_missile::Action(Game_Manager* gm_)
 					if((*it)->collution(GetPos(), 5.0f))
 					{
 						if(valid)
+						{
+							if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_grenade_hit, false);
 							Bomb(gm_, power, max_power, damage, range);
+						}
 						valid = false;
 					}
 				}
@@ -98,7 +102,10 @@ bool Shot_missile::Action(Game_Manager* gm_)
 		if(collution(3))
 		{
 			if(valid)
+			{
+				if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_grenade_hit, false);
 				Bomb(gm_, power, max_power, damage, range);
+			}
 			valid = false;
 		}
 		else

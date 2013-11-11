@@ -33,6 +33,7 @@ int my_rand_int(int min, int max)
 		return min;
 
 	unsigned int n = GetUint();
+	if (max - min+1 == 0) return 0; 
 	return n % (max - min+1) + min;
 }
 

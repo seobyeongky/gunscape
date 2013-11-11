@@ -27,7 +27,7 @@ Mon_bug_spider::~Mon_bug_spider()
 
 void Mon_bug_spider::Death(Game_Manager* gm_)
 {
-	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE2(se_slashed1, se_slashed4);
 	gm_->unit_list.push_back(New_Monster(MON_SPIDER_BABY, GetPos(), -1, 0, 30));
 	gm_->unit_list.push_back(New_Monster(MON_SPIDER_BABY, GetPos(), -1, 0, 30));
 }

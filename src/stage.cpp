@@ -625,38 +625,16 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 	if(!player)
 		return;
 	
+	StopBGM();
+	bgm_t nextbgm;
 	switch(type_){
-	case MPT_NOMAL:
-		StopBGM(bgm_dungeon_1);
-		StopBGM(bgm_dungeon_2);
-		StopBGM(bgm_dungeon_3);
-		PlayBGM(bgm_dungeon_0);
-		break;
-	case MPT_ZOMBIE:
-		StopBGM(bgm_dungeon_0);
-		StopBGM(bgm_dungeon_2);
-		StopBGM(bgm_dungeon_3);
-		PlayBGM(bgm_dungeon_1);
-		break;
-	case MPT_HUMAN:
-		StopBGM(bgm_dungeon_0);
-		StopBGM(bgm_dungeon_1);
-		StopBGM(bgm_dungeon_3);
-		PlayBGM(bgm_dungeon_2);
-		break;
-	case MPT_BUG:
-		StopBGM(bgm_dungeon_0);
-		StopBGM(bgm_dungeon_1);
-		StopBGM(bgm_dungeon_2);
-		PlayBGM(bgm_dungeon_3);
-		break;
-	default:
-		StopBGM(bgm_dungeon_1);
-		StopBGM(bgm_dungeon_2);
-		StopBGM(bgm_dungeon_3);
-		PlayBGM(bgm_dungeon_0);
-		break;
+	case MPT_NOMAL: nextbgm = BGM_MAIN; break;
+	case MPT_ZOMBIE: nextbgm = BGM_ZOMBIE; break;
+	case MPT_HUMAN: nextbgm = BGM_4; break;
+	case MPT_BUG: nextbgm = BGM_3; break;
+	default: nextbgm = BGM_MAIN; break;
 	}
+	PlayBGM(nextbgm);
 
 	if(!item_list.empty())
 	{

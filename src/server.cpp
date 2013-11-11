@@ -25,13 +25,14 @@ namespace Server
 		int			delay;
 		bool		send;
 		bool		req_next_lv;
+		bool		dead;
 	
 		cl_context_t()
-			: name(), delay(0), send(false), req_next_lv(false)
+			: name(), delay(0), send(false), req_next_lv(false), dead(false)
 		{
 		}
 		cl_context_t(const client_t & _basic_info)
-			: name(_basic_info.name), delay(0), send(false), req_next_lv(false)
+			: name(_basic_info.name), delay(0), send(false), req_next_lv(false), dead(false)
 		{
 		}
 	};
@@ -103,14 +104,31 @@ namespace Server
 		commands.clear();
 	}
 
+	bool AllDead()
+	{
+		for (auto & cl : client_map)
+		{
+			if (!cl.element().dead)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
 	//
 	// »Æ¿Œ
 	//
 	bool NextLvOk()
 	{
+		if (AllDead())
+		{
+			return false;
+		}
+
 		for (auto & cl : client_map)
 		{
-			if (!cl.element().req_next_lv)
+			if (!cl.element().req_next_lv && !cl.element().dead)
 			{
 				return false;
 			}
@@ -159,17 +177,13 @@ namespace Server
 			{
 				cl_context.req_next_lv = true;
 
-				bool ok = true;
-				for (auto & cl : client_map)
-				{
-					if (!cl.element().req_next_lv)
-					{
-						ok = false;
-						break;
-					}
-				}
-
 				nr_voidness++;
+			}
+			break;
+
+		case CL2SV_I_DEAD:
+			{
+				cl_context.dead = true;
 			}
 			break;
 

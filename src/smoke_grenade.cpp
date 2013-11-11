@@ -12,6 +12,7 @@
 #include "gamemanager.h"
 #include "shot_smoke_bomb.h"
 
+
 Sub_Smoke_Grenade::Sub_Smoke_Grenade(Player* user_, coord_def pos_, int time_):
 Sub_Weapon(&tex_item_unknown, "연막탄", "연막을 만드는 수류탄\n이동속도와 시야를 줄임", pos_, time_, user_, &tex_inter_bomb, 4, 5.0f)
 {

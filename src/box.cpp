@@ -84,4 +84,8 @@ bool Box::DropItem(Game_Manager* gm_)
 
 void Box::Death(Game_Manager* gm_)
 {
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE3(se_item1, se_item2, se_item3);
+	}
 }

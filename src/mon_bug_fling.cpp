@@ -45,5 +45,5 @@ void Mon_bug_filng::MeleeDamage(Game_Manager* gm_, Unit* target_)
 }
 void Mon_bug_filng::Death(Game_Manager* gm_)
 {
-	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE2(se_slashed1, se_slashed4);
 }

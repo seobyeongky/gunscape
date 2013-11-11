@@ -312,13 +312,22 @@ void Monster::Death(Game_Manager * gm_)
 {
 	if (gm_->isPlayerCanHear(GetPos()))
 	{
-		if (my_rand_int(0, 100) < 50)
+		if (CheckFlag(MF_HUMAN))
 		{
-			PlaySE(se_zombie_dead1, false);
+			PlaySE(se_human_dead, false);
+		}
+		else if (CheckFlag(MF_ZOMBIE))
+		{
+			PlaySE2(se_zombie_dead1, se_zombie_dead2);
+		}
+		
+		if (!CheckFlag(MF_ROBOT))
+		{
+			PlaySE3(se_slashed3, se_slashed4, se_slashed5);
 		}
 		else
 		{
-			PlaySE(se_zombie_dead2, false);
+			PlaySE(se_grenade_hit);
 		}
 	}
 }

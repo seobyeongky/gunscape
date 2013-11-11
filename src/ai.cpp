@@ -18,6 +18,7 @@
 #include "Astar.h"
 #include "effect_piece.h"
 #include <math.h>
+#include "sound.h"
 
 Game_Manager* Ai_Manager::gm = NULL;
 Map* Ai_Manager::map = NULL;
@@ -367,6 +368,10 @@ bool Ai_Manager::SearchTarget()
 					target = (*it);
 					if(state.GetState() != MS_ATTACK)
 						unit->SetDelay(20.0f);
+					if (state.GetState() != MS_ATTACK)
+					{
+						PlayFoundSound();
+					}
 					StateChange(MSI_FOUND);
 				}
 			}
@@ -428,6 +433,61 @@ void Ai_Manager::StateChange(monster_state_input input_)
 		next_state.StateTransition(input_);
 		delay = 5;
 	}
+}
 
+void Ai_Manager::PlayFoundSound()
+{
+	if (gm->isPlayerCanHear(unit->GetPos()))
+	{
+		bool handled = false;
+		if (unit->CheckFlag(MF_SHOUT))
+		{
+			PlaySE3(se_shout1, se_shout2, se_shout3);
+			handled = true;
+		}
+		else if (unit->CheckFlag(MF_SCREEM))
+		{
+			PlaySE(se_hello10, false);
+			handled = true;
+		}
+		else if (unit->CheckFlag(MF_GROWL))
+		{
+			PlaySE(se_hello11, false);
+			handled = true;
+		}
 
+		if (handled)
+		{
+			return;
+		}
+
+		if (unit->CheckFlag(MF_ROBOT))
+		{
+			PlaySE(se_robot, false);
+		}
+		else if (unit->CheckFlag(MF_HUMAN))
+		{
+			int r = my_rand_int(0, 100);
+			if (r < 30)
+			{
+				PlaySE2(se_hello1, se_hello2);
+			}
+		}
+		else if (unit->CheckFlag(MF_ZOMBIE))
+		{
+			int r = my_rand_int(0, 100);
+			if (r < 30)
+			{
+				PlaySE2(se_hello3, se_hello4);
+			}
+		}
+		else
+		{
+			int r = my_rand_int(0, 100);
+			if (r < 30)
+			{
+				PlaySE2(se_hello8, false);
+			}
+		}
+	}
 }

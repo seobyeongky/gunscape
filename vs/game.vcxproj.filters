@@ -716,6 +716,9 @@
     <ClCompile Include="..\src\stringconvert.cpp">
       <Filter>소스 파일\other</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\mini_dump.cpp">
+      <Filter>소스 파일\other</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\abil_antibug.h">
@@ -1343,6 +1346,9 @@
       <Filter>소스 파일\other</Filter>
     </ClInclude>
     <ClInclude Include="..\src\time.h">
+      <Filter>소스 파일\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mini_dump.h">
       <Filter>소스 파일\other</Filter>
     </ClInclude>
   </ItemGroup>

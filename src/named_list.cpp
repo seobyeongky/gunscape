@@ -38,14 +38,14 @@ monster_infor named__jack =
 	1.0f,						/*패널티 배율*/
 	0.0f,							/*근접공격*/
 
-	50,							/*체력*/
+	80,							/*체력*/
 	3.0f,						/*사이즈*/
 	1.0f,						/*속도*/
 	100.0f,						/*시야*/
 	30,							/*경험치*/
 	3,							/*인공지능*/
 
-	MF_DROP_BULLET | MF_HUMAN,				/*플래그*/
+	MF_DROP_BULLET | MF_HUMAN | MF_SHOUT,				/*플래그*/
 };
 
 monster_infor named__looter = 
@@ -60,14 +60,14 @@ monster_infor named__looter =
 	3.0f,						/*패널티 배율*/
 	15.0f,							/*근접공격*/
 
-	60,							/*체력*/
+	90,							/*체력*/
 	3.0f,						/*사이즈*/
 	1.1f,						/*속도*/
 	180.0f,						/*시야*/
 	25,							/*경험치*/
 	0,							/*인공지능*/
 
-	MF_ZOMBIE,							/*플래그*/
+	MF_ZOMBIE | MF_SHOUT,							/*플래그*/
 };
 monster_infor named__robot = 
 {
@@ -81,14 +81,14 @@ monster_infor named__robot =
 	1.0f,						/*패널티 배율*/
 	0.0f,							/*근접공격*/
 
-	150/*200*/,							/*체력*/
+	220/*200*/,							/*체력*/
 	5.0f,						/*사이즈*/
 	0.7f,						/*속도*/
 	150.0f,						/*시야*/
 	200,							/*경험치*/
 	3,							/*인공지능*/
 
-	MF_DROP_BULLET,				/*플래그*/
+	MF_ROBOT | MF_DROP_BULLET,				/*플래그*/
 };
 monster_infor named__bug_drill = 
 {
@@ -102,14 +102,14 @@ monster_infor named__bug_drill =
 	3.0f,						/*패널티 배율*/
 	15.0f,							/*근접공격*/
 
-	100,							/*체력*/
+	130,							/*체력*/
 	8.0f,						/*사이즈*/
 	1.0f,						/*속도*/
 	100.0f,						/*시야*/
 	70,							/*경험치*/
 	2,							/*인공지능*/
 
-	MF_TRUE_SIGHT | MF_BUG,							/*플래그*/
+	MF_TRUE_SIGHT | MF_BUG | MF_GROWL,							/*플래그*/
 };
 monster_infor named__bug_fly_boss = 
 {
@@ -123,14 +123,14 @@ monster_infor named__bug_fly_boss =
 	3.0f,						/*패널티 배율*/
 	0.0f,							/*근접공격*/
 
-	120,							/*체력*/
+	150,							/*체력*/
 	8.0f,						/*사이즈*/
 	0.5f,						/*속도*/
 	150.0f,						/*시야*/
 	80,							/*경험치*/
 	2,							/*인공지능*/
 
-	MF_TRUE_SIGHT | MF_BUG,							/*플래그*/
+	MF_TRUE_SIGHT | MF_BUG | MF_GROWL,							/*플래그*/
 };
 monster_infor named__assasin = 
 {
@@ -144,14 +144,14 @@ monster_infor named__assasin =
 	1.5f,						/*패널티 배율*/
 	5.0f,							/*근접공격*/
 
-	40,							/*체력*/
+	80,							/*체력*/
 	3.0f,						/*사이즈*/
 	1.0f,						/*속도*/
 	150.0f,						/*시야*/
 	50,							/*경험치*/
 	2,							/*인공지능*/
 
-	MF_DROP_BULLET | MF_HUMAN,				/*플래그*/
+	MF_DROP_BULLET | MF_HUMAN | MF_SHOUT,				/*플래그*/
 };
 monster_infor named__sniper = 
 {
@@ -165,14 +165,14 @@ monster_infor named__sniper =
 	1.5f,						/*패널티 배율*/
 	0.0f,							/*근접공격*/
 
-	30,							/*체력*/
+	50,							/*체력*/
 	3.0f,						/*사이즈*/
 	1.0f,						/*속도*/
 	150.0f,						/*시야*/
 	60,							/*경험치*/
 	5,							/*인공지능*/
 
-	MF_TRUE_SIGHT | MF_DROP_BULLET | MF_HUMAN,				/*플래그*/
+	MF_TRUE_SIGHT | MF_DROP_BULLET | MF_HUMAN | MF_GROWL,				/*플래그*/
 };
 
 monster_infor named__zombie_virus = 
@@ -187,14 +187,14 @@ monster_infor named__zombie_virus =
 	3.0f,						/*패널티 배율*/
 	20.0f,							/*근접공격*/
 
-	120,							/*체력*/
+	150,							/*체력*/
 	6.0f,						/*사이즈*/
 	0.9f,						/*속도*/
 	120.0f,						/*시야*/
 	45,							/*경험치*/
 	2,							/*인공지능*/
 
-	MF_ZOMBIE,							/*플래그*/
+	MF_ZOMBIE | MF_GROWL,							/*플래그*/
 };
 monster_infor named__berserker = 
 {
@@ -208,14 +208,14 @@ monster_infor named__berserker =
 	1.0f,						/*패널티 배율*/
 	12.0f,							/*근접공격*/
 
-	45,							/*체력*/
+	85,							/*체력*/
 	4.0f,						/*사이즈*/
 	1.0f,						/*속도*/
 	100.0f,						/*시야*/
 	40,							/*경험치*/
 	2,							/*인공지능*/
 
-	MF_DROP_BULLET | MF_HUMAN,				/*플래그*/
+	MF_DROP_BULLET | MF_HUMAN | MF_SHOUT,				/*플래그*/
 };
 monster_infor named__scream = 
 {
@@ -229,14 +229,14 @@ monster_infor named__scream =
 	3.0f,						/*패널티 배율*/
 	15.0f,							/*근접공격*/
 
-	70,							/*체력*/
+	80,							/*체력*/
 	4.0f,						/*사이즈*/
 	0.8f,						/*속도*/
 	120.0f,						/*시야*/
 	30,							/*경험치*/
 	2,							/*인공지능*/
 
-	MF_ZOMBIE,							/*플래그*/
+	MF_ZOMBIE | MF_SCREEM,							/*플래그*/
 };
 
 Unit* New_Named(Monster_Index kind_, coord_def pos_, int team_, int flag_, int time_)

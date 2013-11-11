@@ -69,5 +69,8 @@ bool Mon_alert_robot::Special_Action(Game_Manager* gm_)
 }
 void Mon_alert_robot::Death(Game_Manager* gm_)
 {
-	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_grenade_hit);
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_grenade_hit);
+	}
 }

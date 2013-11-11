@@ -215,6 +215,7 @@
     <ClCompile Include="..\src\map_make.cpp" />
     <ClCompile Include="..\src\melee_weapon.cpp" />
     <ClCompile Include="..\src\melee_weapon_list.cpp" />
+    <ClCompile Include="..\src\mini_dump.cpp" />
     <ClCompile Include="..\src\mini_map.cpp" />
     <ClCompile Include="..\src\monster.cpp" />
     <ClCompile Include="..\src\monster_list.cpp" />
@@ -426,6 +427,7 @@
     <ClInclude Include="..\src\map_make.h" />
     <ClInclude Include="..\src\melee_weapon.h" />
     <ClInclude Include="..\src\melee_weapon_list.h" />
+    <ClInclude Include="..\src\mini_dump.h" />
     <ClInclude Include="..\src\mini_map.h" />
     <ClInclude Include="..\src\monster.h" />
     <ClInclude Include="..\src\monster_list.h" />

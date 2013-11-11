@@ -161,5 +161,9 @@ void Mon_big_zombie::Approach(Game_Manager* gm_, coord_def c, Unit* target_)
 }
 void Mon_big_zombie::Death(Game_Manager* gm_)
 {
-	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_zombie_dead2);
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE(se_zombie_dead2);
+		PlaySE(se_giant_dead);
+	}
 }

@@ -60,7 +60,6 @@ class SOUNDMANAGER
 public:
 	IDirectSound8* Sound;
 
-	bool bgm_on;
 	bool se_on;
 
 
@@ -75,8 +74,6 @@ public:
 	void Duplicate(SOUNDBUFFER **buffer_);
 	void Update();
 
-	void SetBgmOn(bool on_){bgm_on = on_;};
-	void SetBgmOnOff(){bgm_on = !bgm_on;};
 	void SetSeOn(bool on_){se_on = on_;};
 	void SetSeOnOff(){se_on = !se_on;};
 };
@@ -101,7 +98,6 @@ extern SOUNDBUFFER* se_asspistol_reload;
 extern SOUNDBUFFER* se_axe;
 extern SOUNDBUFFER* se_axe_hit;
 extern SOUNDBUFFER* se_bow2;
-extern SOUNDBUFFER* se_bug_dead;
 extern SOUNDBUFFER* se_bullet_flesh;
 extern SOUNDBUFFER* se_club_hit;
 extern SOUNDBUFFER* se_deagle_reload;
@@ -145,12 +141,27 @@ extern SOUNDBUFFER* se_monpistol;
 extern SOUNDBUFFER* se_deagle;
 extern SOUNDBUFFER* se_shotgun;
 extern SOUNDBUFFER* se_shortshotgun;
-
-
-extern SOUNDBUFFER* bgm_dungeon_0;
-extern SOUNDBUFFER* bgm_dungeon_1;
-extern SOUNDBUFFER* bgm_dungeon_2;
-extern SOUNDBUFFER* bgm_dungeon_3;
+extern SOUNDBUFFER* se_slashed1;
+extern SOUNDBUFFER* se_slashed2;
+extern SOUNDBUFFER* se_slashed3;
+extern SOUNDBUFFER* se_slashed4;
+extern SOUNDBUFFER* se_slashed5;
+extern SOUNDBUFFER* se_slashed6;
+extern SOUNDBUFFER* se_hello1;
+extern SOUNDBUFFER* se_hello2;
+extern SOUNDBUFFER* se_hello3;
+extern SOUNDBUFFER* se_hello4;
+extern SOUNDBUFFER* se_hello5;
+extern SOUNDBUFFER* se_hello6;
+extern SOUNDBUFFER* se_hello7;
+extern SOUNDBUFFER* se_hello8;
+extern SOUNDBUFFER* se_hello9;
+extern SOUNDBUFFER* se_hello10;
+extern SOUNDBUFFER* se_hello11;
+extern SOUNDBUFFER* se_item1;
+extern SOUNDBUFFER* se_item2;
+extern SOUNDBUFFER* se_item3;
+extern SOUNDBUFFER* se_pickup;
 
 
 //#include <audiere.h>
@@ -169,14 +180,24 @@ extern SOUNDBUFFER* bgm_dungeon_3;
 //void PlayBGM(OutputStreamPtr& sound_);
 //void StopBGM(OutputStreamPtr& sound_);
 
-
+enum bgm_t
+{
+	BGM_MAIN,
+	BGM_ZOMBIE,
+	BGM_3,
+	BGM_4,
+	NR_BGM
+};
 
 
 void InitSound(HWND windowhandle_);
 
 void PlaySE(SOUNDBUFFER* sound_, bool init_ = true);
-void PlayBGM(SOUNDBUFFER* sound_);
-void StopBGM(SOUNDBUFFER* sound_);
+void PlaySE2(SOUNDBUFFER* sound_1, SOUNDBUFFER* sound_2);
+void PlaySE3(SOUNDBUFFER* sound_1, SOUNDBUFFER* sound_2, SOUNDBUFFER* sound_3);
+
+void PlayBGM(bgm_t bgm_);
+void StopBGM();
 
 void UpdateBGM();
 

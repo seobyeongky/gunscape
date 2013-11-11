@@ -20,7 +20,7 @@
 #include "sound.h"
 #include "config.h"
 #include "stringconvert.h"
-
+#include "mini_dump.h"
 
 //필요한 라이브러리
 #pragma comment(lib, "d3d9")
@@ -54,6 +54,7 @@ void ShowHello()
 
 int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, PSTR cmdLine, int showCmd)
 {
+	CDumper dumper;
 
 	//_CrtSetBreakAlloc(166);
 	//_CrtSetBreakAlloc(165);

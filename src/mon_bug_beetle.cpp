@@ -179,5 +179,5 @@ bool Mon_bug_beetle::Special_Action(Game_Manager* gm_)
 }
 void Mon_bug_beetle::Death(Game_Manager* gm_)
 {
-	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE2(se_slashed1, se_slashed4);
 }

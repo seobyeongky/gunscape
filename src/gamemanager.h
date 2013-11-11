@@ -92,8 +92,11 @@ class Game_Manager
 	// 다른 사람 카메라로 보고 있는가? 여부
 	bool otherview;
 
+	bool sv_next_lv;
+
+	void GoToNextLv();
+
 	void HandlePlayer(Player * p);
-	bool CheckCollideWithPlayersView(const coord_def  &c_);
 	bool IsValidPos(int x_, int y_);
 
 	bool	AnyonePlaying();
@@ -181,6 +184,7 @@ public:
 	void WaitDraw();
 
 	void UpdateWaitMessage();
+	bool CheckCollideWithPlayersView(const coord_def  &c_);
 
 };
 

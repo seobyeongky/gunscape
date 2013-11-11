@@ -13,7 +13,6 @@
 #include "ai.h"
 #include "map.h"
 
-
 class Main_Weapon;
 
 enum Monster_Flag
@@ -25,7 +24,10 @@ enum Monster_Flag
 	MF_BUG=1<<4, //벌레
 	MF_ROBOT=1<<5, //기계
 	MF_BURROW=1<<6, //진짜 버로우는 아니고 맵의 과부하를 줄이기위해 숨어있음
-	MF_INVISIBLE_RESIST=1<<7 //투명으로 따돌릴수 없게된다.
+	MF_INVISIBLE_RESIST=1<<7, //투명으로 따돌릴수 없게된다.
+	MF_SHOUT=1<<8,	//소리지르는 특성...?
+	MF_SCREEM=1<<9,	//소리지르는 특성...?
+	MF_GROWL=1<<10 //으르렁거리는 특성? 
 };
 
 
@@ -77,7 +79,6 @@ protected:
 	int nonmove_delay;
 
 	int target_continue;
-
 
 public:
 	Monster(monster_infor& infor_, float x_, float y_, int team_, int time_ = 0);

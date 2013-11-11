@@ -14,6 +14,7 @@
 #include "random.h"
 #include "effect_piece.h"
 #include "Map.h"
+#include "sound.h"
 
 Shot_grenade::Shot_grenade(Texture* texture_, Unit* unit_, int time_, float damage_, float power_, float max_power_, float range_, bool pentan_, int team_, coord_def pos_, coord_def target_):
 Shot_base(texture_, unit_, team_, pos_, (target_ - pos_)*2.0f/(float)time_), 
@@ -35,6 +36,7 @@ bool Shot_grenade::Action(Game_Manager* gm_)
 		UpDownSpeed(decel);
 		if(time--<=0)
 		{
+			PlaySE(se_grenade_hit, false);
 			Bomb(gm_, power, max_power, damage, range);
 			valid = false;
 		}

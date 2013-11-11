@@ -117,10 +117,10 @@ bool Character_Maker::SelectDraw(Direct_Manager* direct_)
 	}
 	rc.top=(long)(346*h_);
 	rc.left = (long)(300*w_);
-	if(soundmanager.bgm_on)
-		direct_->GetFont()->DrawTextA(NULL, "(숫자1로 배경음키고끄기) BGM: ON", -1, &rc, DT_LEFT | DT_NOCLIP, 0xffffffff);
-	else
-		direct_->GetFont()->DrawTextA(NULL, "(숫자1로 배경음키고끄기) BGM: OFF", -1, &rc, DT_LEFT | DT_NOCLIP, 0xffffffff);
+//	if(soundmanager.bgm_on)
+//		direct_->GetFont()->DrawTextA(NULL, "(숫자1로 배경음키고끄기) BGM: ON", -1, &rc, DT_LEFT | DT_NOCLIP, 0xffffffff);
+//	else
+//		direct_->GetFont()->DrawTextA(NULL, "(숫자1로 배경음키고끄기) BGM: OFF", -1, &rc, DT_LEFT | DT_NOCLIP, 0xffffffff);
 	rc.top+=(long)(16*h_);
 	if(soundmanager.se_on)
 		direct_->GetFont()->DrawTextA(NULL, "(숫자2로 효과음키고끄기) SE: ON", -1, &rc, DT_LEFT | DT_NOCLIP, 0xffffffff);

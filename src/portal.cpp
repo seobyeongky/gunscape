@@ -17,6 +17,7 @@
 #include "player.h"
 #include "ability.h"
 #include "config.h"
+#include "sound.h"
 
 extern smap<opznet::ID, cl_t> clients;
 extern opznet::ID my_id;
@@ -60,6 +61,7 @@ bool Portal::Action(Game_Manager* gm_)
 			if (time_ >= 300)
 			{
 				Effect(gm_, p);
+				time_ = -9999999;
 			}
 		}
 		else
@@ -72,6 +74,8 @@ bool Portal::Action(Game_Manager* gm_)
 }
 bool Portal::Effect(Game_Manager* gm_, Player* unit_)
 {
+	PlaySE(se_portal, false);
+
 	if(!last)
 	{
 		// 일단 리스트에서 뺀다.
@@ -80,7 +84,8 @@ bool Portal::Effect(Game_Manager* gm_, Player* unit_)
 		if (config::gamemode == MULTI_GAME)
 			gm_->unit_list.remove(unit_);
 
-		if (unit_ == gm_->player && !next_lv)
+		Player * my_player = clients[my_id].player;
+		if (unit_ == my_player && !next_lv)
 		{
 			next_lv = true;
 			gm_->NextLevel();

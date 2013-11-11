@@ -43,6 +43,7 @@ protected:
 	float angle;//움직이는 방향
 	float unit_angle; //유닛이 보고 있는 방향(angle과는 다르다.)
 
+	void PlayFoundSound();
 	
 	stack<coord_int> will_move;
 

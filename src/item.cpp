@@ -11,6 +11,7 @@
 #include "texture_list.h"
 #include "unit.h"
 #include "gamemanager.h"
+#include "sound.h"
 
 char Item::temp_str[32] = "";
 
@@ -49,6 +50,11 @@ bool Item::Draw(coord_def offset, float size_)
 
 bool Item::Action(Game_Manager* gm_)
 {
+	if (gm_->isPlayerCanHear(GetPos()))
+	{
+		PlaySE3(se_item1, se_item2, se_item3);
+	}
+
 	if(!valid)
 		return true;
 

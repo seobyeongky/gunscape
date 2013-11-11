@@ -64,11 +64,10 @@ int death_dump_ = 0;
 
 vector<pair<int, int>> dkey2num;
 
-
 Game_Manager::Game_Manager():
 level(0), state(0), scale(1.0f), heal_stack(0), sniper_mode(false), focus(0,0), player(NULL), next_portal(NULL), char_maker(NULL), Network_host(NULL), Network_client(NULL), map(NULL), key(NULL), direct(NULL),
 next_floor(false), full_text(), accum(0), command_send_ok(false), state_handle_count(0),
-wait_scene(false), otherview(false)
+wait_scene(false), otherview(false), sv_next_lv(false)
 {
 	for(int i = 0; i<SS_MAX_FLOOR; i++)
 		stage_kind[i] = SS_NORMAL;
@@ -211,10 +210,7 @@ void Game_Manager::GameMenu()
 		delete char_maker;
 	char_maker = new Character_Maker();
 	
-	StopBGM(bgm_dungeon_3);
-	StopBGM(bgm_dungeon_2);
-	StopBGM(bgm_dungeon_1);
-	StopBGM(bgm_dungeon_0);
+	StopBGM();
 	level = 0;
 	state = 0;
 }
@@ -447,7 +443,7 @@ void Game_Manager::SelectLoop()
 		if (myselection != -1) char_maker->Select(myselection);
 		if(key->GeyKeyState(DIK_1, KEY_DOWN))
 		{
-			soundmanager.SetBgmOnOff();
+//			soundmanager.SetBgmOnOff();
 		}
 		if(key->GeyKeyState(DIK_2, KEY_DOWN))
 		{
@@ -528,6 +524,36 @@ void Game_Manager::MultiGameStart()
 	state = -1;
 }
 
+void Game_Manager::GoToNextLv()
+{
+	
+
+	for (auto & cl : clients)
+	{
+		Player * p = cl.element().player;
+		if (p->isLive())
+		{
+			unit_list.push_back(p);
+		}
+	}
+
+	Player * my_player = clients[my_id].player;
+	if (my_player->isLive())
+	{
+		otherview = false;
+		player = my_player;
+	}
+
+	wait_scene = false;
+	ChatMsg_Manager::PushMessage(L"다음 스테이지로...");
+	MakeStage(level);
+	command_send_ok = true;
+	sv_next_lv = false;
+
+	PlaySE(se_gamestart, false);
+//		state_handle_count = 0;
+}
+
 void Game_Manager::ConnectToServer()
 {		
 	NetInterface::RegisterConnectedCallback([this](const opznet::server_info_t &sv_info_, opznet::ID my_id_)
@@ -554,7 +580,7 @@ void Game_Manager::ConnectToServer()
 	});
 	NetInterface::RegisterClientGoneCallback([this](const opznet::client_t &cl_info)
 	{
-		smap<opznet::ID, cl_t>::Iter it;
+/*		smap<opznet::ID, cl_t>::Iter it;
 		if (clients.find(cl_info.id, &it))
 		{
 			Player * p = (*it).element().player;
@@ -567,7 +593,7 @@ void Game_Manager::ConnectToServer()
 			clients.erase(it);
 		}
 		clients.erase(cl_info.id);
-
+		*/
 		ChatMsg_Manager::PushMessage(wstring(cl_info.name + L"님 감").c_str());
 		UpdateWaitMessage();
 	});
@@ -638,29 +664,8 @@ void Game_Manager::ConnectToServer()
 			delete char_maker;
 			char_maker = nullptr;
 		}
-
-		for (auto & cl : clients)
-		{
-			Player * p = cl.element().player;
-			if (p->isLive())
-			{
-				unit_list.push_back(p);
-			}
-		}
-
-		Player * my_player = clients[my_id].player;
-		if (my_player->isLive())
-		{
-			otherview = false;
-			player = my_player;
-		}
-
-		wait_scene = false;
-		ChatMsg_Manager::PushMessage(L"다음 스테이지로...");
-		MakeStage(level);
 		state = 1;
-		command_send_ok = true;
-//		state_handle_count = 0;
+		sv_next_lv = true;
 	});
 	NetInterface::RegisterPacketCallback(SV2CL_COMMANDS, [this](opznet::Packet &packet)
 	{
@@ -904,6 +909,7 @@ void Game_Manager::HandleCommand(Command & c)
 		break;
 
 	case COMMAND_PICK_UP:
+		PlaySE(se_pickup);
 		p->PickUp(this);
 		break;
 
@@ -1025,13 +1031,14 @@ void Game_Manager::HandleState()
 		{
 			death_dump_= 3;
 			it = unit_list.erase(it);
+			
 			if (unit->isPlayer())
 			{
 				if (reinterpret_cast<Player *>(unit) == clients[my_id].player)
 				{
 					level++;
 					opznet::Packet sendpacket;
-					sendpacket << TO_UINT16(CL2SV_REQUEST_NEXT_LEVEL);
+					sendpacket << TO_UINT16(CL2SV_I_DEAD);
 					opznet::SafeSend(sendpacket);
 				}
 			}
@@ -1049,6 +1056,11 @@ void Game_Manager::HandleState()
 		{
 			otherview = true;
 			player = GetFirstPlayingCl();
+
+			++level;
+			opznet::Packet sendpacket;
+			sendpacket << TO_UINT16(CL2SV_I_DEAD);
+			opznet::SafeSend(sendpacket);
 		}
 	}
 
@@ -1117,23 +1129,30 @@ void Game_Manager::GameLoop()
 			HandleState();
 		}
 
-		accum += time::delta;
-		if (command_send_ok && state_handle_count == 0)
+		if (state_handle_count == 0 && sv_next_lv)
 		{
-			accum = 0;
-			command_send_ok = false;
-			opznet::Packet sendpacket;
-			sendpacket	<< TO_UINT16(CL2SV_COMMANDS)
-						<< commands.size();
-			string outbuf;
-			for (auto it : commands)
+			GoToNextLv();
+		}
+		else
+		{
+			accum += time::delta;
+			if (command_send_ok && state_handle_count == 0)
 			{
-				it.AppendToString(&outbuf);
-				sendpacket << outbuf;
-				outbuf.clear();
+				accum = 0;
+				command_send_ok = false;
+				opznet::Packet sendpacket;
+				sendpacket	<< TO_UINT16(CL2SV_COMMANDS)
+							<< commands.size();
+				string outbuf;
+				for (auto it : commands)
+				{
+					it.AppendToString(&outbuf);
+					sendpacket << outbuf;
+					outbuf.clear();
+				}
+				opznet::SafeSend(sendpacket);
+				commands.clear();
 			}
-			opznet::SafeSend(sendpacket);
-			commands.clear();
 		}
 	}
 
@@ -1424,6 +1443,7 @@ Player * Game_Manager::GetFirstPlayingCl()
 		if (unit->isPlayer() && unit->isLive())
 			return reinterpret_cast<Player *>(unit);
 	}
+	assert(!"망함1");
 	return nullptr;
 }
 
@@ -1457,7 +1477,7 @@ Player * Game_Manager::GetNextPlayingCl(Player * cur)
 		}	
 	}
 
-	return nullptr;
+	return GetFirstPlayingCl();
 }
 
 Player * Game_Manager::GetPrevPlayingCl(Player * cur)
@@ -1503,5 +1523,5 @@ Player * Game_Manager::GetPrevPlayingCl(Player * cur)
 		}
 	}
 
-	return nullptr;
+	return GetFirstPlayingCl();
 }

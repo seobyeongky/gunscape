@@ -57,7 +57,7 @@ bool Effect_last_message::Action(Game_Manager* gm_)
 			while(1)
 			{
 				coord_def c_ = gm_->GetRandomPos();
-				if(!gm_->player->collution(c_,300))
+				if (!gm_->CheckCollideWithPlayersView(c_))
 				{		
 					Item* portal_ = new Portal(&tex_item_portal1, c_,true);
 					gm_->item_list.push_back(portal_);

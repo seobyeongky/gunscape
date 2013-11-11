@@ -154,5 +154,5 @@ bool Mon_bug_ant_lion::Special_Action(Game_Manager* gm_)
 }
 void Mon_bug_ant_lion::Death(Game_Manager* gm_)
 {
-	if (gm_->isPlayerCanHear(GetPos())) PlaySE(se_bug_dead);
+	if (gm_->isPlayerCanHear(GetPos())) PlaySE2(se_slashed2, se_slashed3);
 }
