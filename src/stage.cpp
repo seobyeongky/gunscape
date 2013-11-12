@@ -50,6 +50,10 @@
 #include "chatmsgmanager.h"
 #include "smap.h"
 
+#ifdef _DEBUG
+#include <stdio.h>
+#endif
+
 extern smap<opznet::ID, cl_t> clients;
 
 struct mon_struct
@@ -526,6 +530,17 @@ void Game_Manager::SetStageTypesFrom(const vector<int> stages)
 
 void Game_Manager::MakeStage(int level)
 {
+#ifdef _DEBUG
+	FILE * out = nullptr;
+	fopen_s(&out, "my log.txt", "a");
+	if (out)
+	{
+		fprintf(out, "---level : %d / ", level);
+		fprintf(out, "stage kind = %d---\n", stage_kind[level]);
+		fclose(out);
+	}
+#endif
+
 	switch(stage_kind[level]){
 	case SS_NORMAL:
 	default:
@@ -554,7 +569,6 @@ void Game_Manager::NextStage()
 	}
 	else if (config::gamemode == MULTI_GAME)
 	{
-		++level;
 		opznet::Packet sendpacket;
 		sendpacket << TO_UINT16(CL2SV_REQUEST_NEXT_LEVEL);
 		SafeSend(sendpacket);
@@ -624,7 +638,7 @@ void Game_Manager::StageInit(int level_, MAP_TYPE type_, int box_, int monster_)
 {
 	if(!player)
 		return;
-	
+
 	StopBGM();
 	bgm_t nextbgm;
 	switch(type_){

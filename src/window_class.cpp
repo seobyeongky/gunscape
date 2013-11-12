@@ -48,7 +48,7 @@ bool Window_Manager::init(HINSTANCE hinstance)
 	WndClass.hIcon = LoadIcon(hinstance, IDI_APPLICATION);
 	WndClass.hInstance = hinstance;
 	WndClass.lpfnWndProc = proc;
-	WndClass.lpszClassName = L"Gunscape Ver 0.2";
+	WndClass.lpszClassName = L"Gunscape Ver 0.3";
 	WndClass.lpszMenuName = NULL;
 	WndClass.style = CS_HREDRAW | CS_VREDRAW;
 	

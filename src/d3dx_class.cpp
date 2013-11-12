@@ -103,7 +103,7 @@ bool Direct_Manager::init(HWND windowhandle_, int width_, int height_)
 	//device->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
  //   device->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 
-	AddFontResourceExA("font\\¾Æ¸®µû-µ¸¿ò(TTF).ttf", FR_PRIVATE, 0);
+	AddFontResourceExA("font\\¾Æ¸®µû-µ¸¿ò(TTF)-Medium.ttf", FR_PRIVATE, 0);
 //	AddFontResourceEx("font\\nanum-gothic.ttf", FR_PRIVATE, 0);
 
 	D3DXFONT_DESCA fontDesc;	

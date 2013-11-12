@@ -544,7 +544,8 @@ bool Player::Action_in(Game_Manager* gm_)
 		stamina+=1.0f;
 		if(stamina > max_stamina)
 			stamina = max_stamina;
-		if(remain_ability)
+
+		if(remain_ability && !ability_select)
 		{
 			Ability::GetAbility(this, select_ability_num);
 			StartAbility();

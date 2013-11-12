@@ -223,9 +223,9 @@ namespace Server
 						{
 							Packet send_packet;
 							send_packet << TO_UINT16(SV2CL_WELCOME);
-//							send_packet << stages.size();
-	//						for (auto it : stages)
-		//						send_packet << static_cast<int>(it);
+							send_packet << stages.size();
+							for (auto it : stages)
+								send_packet << static_cast<int>(it);
 							send_packet << seed;
 							SafeSend(msg.client_info.id, send_packet);
 						}

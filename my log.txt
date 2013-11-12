@@ -1,0 +1,17 @@
+---level : 0 / stage kind = 0---
+---level : 1 / stage kind = 0---
+---level : 2 / stage kind = 0---
+---level : 3 / stage kind = 3---
+---level : 0 / stage kind = 0---
+---level : 1 / stage kind = 0---
+---level : 2 / stage kind = 0---
+---level : 3 / stage kind = 3---
+---level : 0 / stage kind = 0---
+---level : 1 / stage kind = 0---
+---level : 2 / stage kind = 0---
+---level : 4 / stage kind = 0---
+---level : 1 / stage kind = 0---
+---level : 2 / stage kind = 0---
+---level : 1 / stage kind = 0---
+---level : 2 / stage kind = 0---
+---level : 3 / stage kind = 3---

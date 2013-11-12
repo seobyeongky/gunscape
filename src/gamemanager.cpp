@@ -526,8 +526,6 @@ void Game_Manager::MultiGameStart()
 
 void Game_Manager::GoToNextLv()
 {
-	
-
 	for (auto & cl : clients)
 	{
 		Player * p = cl.element().player;
@@ -546,7 +544,7 @@ void Game_Manager::GoToNextLv()
 
 	wait_scene = false;
 	ChatMsg_Manager::PushMessage(L"다음 스테이지로...");
-	MakeStage(level);
+	MakeStage(++level);
 	command_send_ok = true;
 	sv_next_lv = false;
 
@@ -600,6 +598,16 @@ void Game_Manager::ConnectToServer()
 	NetInterface::RegisterPacketCallback(SV2CL_WELCOME, [this](opznet::Packet &packet)
 	{		
 		ChatMsg_Manager::PushMessage(L"server : Welcome!");
+
+		unsigned int nr_stage;
+		packet >> nr_stage;
+		vector<int> vec;
+		vec.resize(nr_stage);
+		for (unsigned int i = 0U; i < nr_stage; ++i)
+		{
+			packet >> vec[i];
+		}
+		SetStageTypesFrom(vec);
 
 		unsigned int seed;
 		packet >> seed;
@@ -868,12 +876,11 @@ void Game_Manager::HandleInputs()
 
 void Game_Manager::HandleCommand(Command & c)
 {
-	Player * p = nullptr;
-	if (static_cast<opznet::ID>(c.pid()) == my_id)
+	Player * p = clients[c.pid()].player;
+	if (p == nullptr)
 	{
-		p = player;
+		return;
 	}
-	else p = clients[c.pid()].player;
 
 	switch (c.type())
 	{
@@ -1036,7 +1043,6 @@ void Game_Manager::HandleState()
 			{
 				if (reinterpret_cast<Player *>(unit) == clients[my_id].player)
 				{
-					level++;
 					opznet::Packet sendpacket;
 					sendpacket << TO_UINT16(CL2SV_I_DEAD);
 					opznet::SafeSend(sendpacket);
@@ -1056,11 +1062,6 @@ void Game_Manager::HandleState()
 		{
 			otherview = true;
 			player = GetFirstPlayingCl();
-
-			++level;
-			opznet::Packet sendpacket;
-			sendpacket << TO_UINT16(CL2SV_I_DEAD);
-			opznet::SafeSend(sendpacket);
 		}
 	}
 

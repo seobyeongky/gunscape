@@ -187,7 +187,7 @@ bool Ai_Stalker::isPlayerPinch()
 			Ai_Manager* ai_ = (*it)->GetAi();
 			if(ai_){
 				if(ai_->GetState() == MS_ATTACK){
-					if(ai_->GetTarget()->isPlayer())
+					if(ai_->GetTarget() && ai_->GetTarget()->isPlayer())
 						return true;
 				}
 			}
