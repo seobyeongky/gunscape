@@ -28,25 +28,25 @@ map_dummy::map_dummy(coord_int pos_,int size_x_,int size_y_):
 pos(pos_),size_x(size_x_),size_y(size_y_), m_entrance(0,0),m_exit(0,0),
 connect_enter(false),connect_exit(false)
 {
-	if(randA(1))
+	if(randA(1,"map_dummy::map_dummy entrance selector"))
 	{
-		m_entrance.x = rand_int(-size_x+1,size_x-1);
-		m_entrance.y = (randA(1)?-size_y:size_y);
+		m_entrance.x = rand_int(-size_x+1,size_x-1,"map_dummy::map_dummy entrance x");
+		m_entrance.y = (randA(1,"map_dummy::map_dummy entrance y flip selector")?-size_y:size_y);
 	}
 	else
 	{
-		m_entrance.x = (randA(1)?-size_x:size_x);
-		m_entrance.y = rand_int(-size_y+1,size_y-1);
+		m_entrance.x = (randA(1,"map_dummy::map_dummy entrance x flip selector")?-size_x:size_x);
+		m_entrance.y = rand_int(-size_y+1,size_y-1,"map_dummy::map_dummy entrance y");
 	}
-	if(randA(1))
+	if(randA(1,"map_dummy::map_dummy exit selector"))
 	{
-		m_exit.x = rand_int(-size_x+1,size_x-1);
-		m_exit.y = (randA(1)?-size_y:size_y);
+		m_exit.x = rand_int(-size_x+1,size_x-1,"map_dummy::map_dummy exit x");
+		m_exit.y = (randA(1,"map_dummy::map_dummy exit y flip selector")?-size_y:size_y);
 	}
 	else
 	{
-		m_exit.x = (randA(1)?-size_x:size_x);
-		m_exit.y = rand_int(-size_y+1,size_y-1);
+		m_exit.x = (randA(1,"map_dummy::map_dummy exit x flip selector")?-size_x:size_x);
+		m_exit.y = rand_int(-size_y+1,size_y-1,"map_dummy::map_dummy exit y");
 	}
 	m_entrance+=pos;
 	m_exit+=pos;
@@ -116,11 +116,11 @@ void map_algorithms(Game_Manager* gm_, Mini_Map& map_, int level_, MAP_TYPE type
 	case MPT_NOMAL:
 		{
 			//map_algorithms01(gm_, map_, true,false);
-			if(level_ == 0 || rand_int(0,2))
+			if(level_ == 0 || rand_int(0,2,"map_algorithms percentage"))
 				map_algorithms01(gm_, map_, 10,false, false,12,20,3,5);
 			else 
 			{
-				switch(rand_int(1,3))
+				switch(rand_int(1,3,"map_algorithms selector"))
 				{
 				case 1:
 					map_algorithms01(gm_, map_, 10,true, false,10,15,4,5);
@@ -169,17 +169,18 @@ void map_algorithms01(Game_Manager* gm_, Mini_Map& map_, int m_size_, bool path_
 
 	
 
-	int rand_dummy = rand_int(min_num,max_num);
+	int rand_dummy = rand_int(min_num,max_num,"map_algorithms01 rand_dummy");
 	for(int i=0;i<rand_dummy;i++) //rand_dummy만큼의 맵더미를 생산
 	{
 		int repeat = 10;
 		for(int j=0;j<repeat;j++) //무한반복 제거용
 		{
 			bool success= true;
-			int r_size_x = rand_int(min_siz,max_size);
-			int r_size_y = rand_int(min_siz,max_size);
+			int r_size_x = rand_int(min_siz,max_size,"map_algorithms01 r_size_x");
+			int r_size_y = rand_int(min_siz,max_size,"map_algorithms01 r_size_y");
 			int m_size=m_size_;
-			coord_int temp_coord(randA(map_.GetMaxX()-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(map_.GetMaxY()-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
+			coord_int temp_coord(randA(map_.GetMaxX()-(r_size_x+2)*2-1-m_size*2,"map_algorithms01 temp_coord x")
+				+r_size_x+2+m_size,randA(map_.GetMaxY()-(r_size_y+2)*2-1-m_size*2,"map_algorithms01 temp_coord y")+r_size_y+2+m_size);		
 			map_dummy* temp = new map_dummy(temp_coord, r_size_x, r_size_y); //랜덤한 맵더미
 			
 			vector<map_dummy*>::iterator it;
@@ -274,17 +275,18 @@ void map_algorithms02(Game_Manager* gm_, Mini_Map& map_)
 
 	
 
-	int rand_dummy = rand_int(20,30);
+	int rand_dummy = rand_int(20,30,"map_algorithms02 rand_dummy");
 	for(int i=0;i<rand_dummy;i++) //rand_dummy만큼의 맵더미를 생산
 	{
 		int repeat = 15;
 		for(int j=0;j<repeat;j++) //무한반복 제거용
 		{
 			bool success= true;
-			int r_size_x = rand_int(2,5);
-			int r_size_y = rand_int(2,5);
+			int r_size_x = rand_int(2,5,"map_algorithms02 r_size_x");
+			int r_size_y = rand_int(2,5,"map_algorithms02 r_size_y");
 			int m_size=10;
-			coord_int temp_coord(randA(map_.GetMaxX()-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(map_.GetMaxY()-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
+			coord_int temp_coord(randA(map_.GetMaxX()-(r_size_x+2)*2-1-m_size*2,"map_algorithms02 temp_coord x")
+				+r_size_x+2+m_size,randA(map_.GetMaxY()-(r_size_y+2)*2-1-m_size*2,"map_algorithms02 temp_coord y")+r_size_y+2+m_size);		
 			map_dummy* temp = new map_dummy(temp_coord, r_size_x, r_size_y); //랜덤한 맵더미
 			
 			vector<map_dummy*>::iterator it;
@@ -342,7 +344,7 @@ void map_algorithms03(Game_Manager* gm_, Mini_Map& map_)
 
 		float angle_tic = 6*D3DX_PI/100.0f;
 		float length_tic = (((float)map_.GetMaxX()+(float)map_.GetMaxY())/6.0f-3)/100.0f;
-		float angle_ = rand_float(0,2*D3DX_PI), length_ = 0;
+		float angle_ = rand_float(0,2*D3DX_PI,"map_algorithms03 angle"), length_ = 0;
 		for(int i=0;i<100;i++)
 		{
 			angle_ += angle_tic;
@@ -357,10 +359,10 @@ void map_algorithms03(Game_Manager* gm_, Mini_Map& map_)
 					map_.SetMap(x_+j,y_+k,0);
 
 			for(int j=-2;j<=2;j+=4)
-				if(rand_int(0,9) == 0)
+				if(rand_int(0,9,"map_algorithms03 selector 0") == 0)
 					map_.SetMap(x_+j,y_,0);
 			for(int k=-2;k<=2;k+=4)
-				if(rand_int(0,5) == 0)
+				if(rand_int(0,5,"map_algorithms03 selector 1") == 0)
 					map_.SetMap(x_,y_+k,0);
 
 			if(i == 99)

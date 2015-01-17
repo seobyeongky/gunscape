@@ -34,7 +34,7 @@ void Shot_hammer::Hit(Game_Manager* gm_, Unit* unit_)
 	float power_ = power;
 	float max_power_ = max_power;
 	bool backstab_ok_ = false;
-	if(unit && unit->GetCritical() && unit->GetCritical()>rand_int(0,99))
+	if(unit && unit->GetCritical() && unit->GetCritical()>rand_int(0,99,"Shot_hammer::Hit damage"))
 	{
 		backstab_ok_ = true;
 	}

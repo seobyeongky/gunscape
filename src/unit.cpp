@@ -30,7 +30,7 @@
 
 
 Unit::Unit(string name_, Texture* texture_, float x_, float y_, int team_, int max_hp_):
-name(name_), texture(texture_), pos(x_, y_), angle(rand_float(0,D3DX_PI*2)), move_angle(angle), 
+name(name_), texture(texture_), pos(x_, y_), angle(rand_float(0,D3DX_PI*2,"Unit::Unit angle")), move_angle(angle), 
 size(3.0f), team(team_), frame(0), hp(max_hp_), max_hp(max_hp_), 
 sight(200.0f), sight_width(0.3f), delay(0), max_delay(0), focus(0.0f), speed(1.0f), 
 invisible_temp(-1), invisible(0), none_move_count(0), slow(0), bsk_slow(0), atk_apply(1.0f), atk_spd_apply(1.0f),
@@ -367,7 +367,7 @@ int Unit::SetDamage(Game_Manager* gm_, coord_def c, Damage_Type type_, float dam
 
 	
 	bool backstab_ok_ = false;
-	if(critical_ && critical_>rand_int(0,99))
+	if(critical_ && critical_>rand_int(0,99,"Unit::SetDamage backstab selector"))
 	{
 		backstab_ok_ = true;
 	}
@@ -382,7 +382,7 @@ int Unit::SetDamage(Game_Manager* gm_, coord_def c, Damage_Type type_, float dam
 
 
 
-	int final_damage_ = (int)(damage_+rand_float(0,0.99f));
+	int final_damage_ = (int)(damage_+rand_float(0,0.99f,"Unit::SetDamage final damage"));
 
 	if(!isNonLife() && final_damage_ && !isNonTarget())
 		Effect_blood(gm_, GetPos(), (int)(damage_/5+1), 1.0f);
@@ -401,7 +401,7 @@ void Unit::GiveDamage(Game_Manager* gm_, Unit* unit_, Damage_Type type_, int dam
 	float vamp_ = GetVamp(unit_->GetKind(),type_);
 	if(vamp_>0)
 	{
-		int heal_ = (int)(damage_*vamp_+rand_float(0,0.99f));
+		int heal_ = (int)(damage_*vamp_+rand_float(0,0.99f, "Unit::GiveDamage heal"));
 		if(heal_>0)
 			Heal(heal_);
 	}
@@ -414,7 +414,7 @@ int Unit::SetDelay(float delay_)
 	if(delay_ && delay > delay_)
 		return delay;
 
-	delay = (int)(delay_+rand_float(0,0.99f)); 
+	delay = (int)(delay_+rand_float(0,0.99f,"Unit::SetDelay delay")); 
 	if(delay<1)
 		delay = 1;
 	max_delay = delay;

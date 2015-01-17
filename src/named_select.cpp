@@ -52,13 +52,15 @@ void Game_Manager::NamedMake(int level_)
 {
 	for(list<named_struct>::iterator it = group.begin(); it != group.end();)
 	{
-		if(it->mins <= level_ && it->maxs >= level_ && rand_int(1,100)<=it->percent)
+		if(it->mins <= level_ && it->maxs >= level_ && rand_int(1,100,"Game_manager::NamedMake percentage")<=it->percent)
 		{
 			while(1)
 			{
-				int x_ = rand_int(0,map->GetWidth()-1);
-				int y_ = rand_int(0,map->GetHeight()-1);
-				if(!map->CollutionPos(x_,y_) && !player->collution(coord_def((float)x_,(float)y_),player->GetView()))
+				int x_ = rand_int(0,map->GetWidth()-1, "Game_Manager::NamedMake x");
+				int y_ = rand_int(0,map->GetHeight()-1, "Game_Manager::NamedMake y");
+
+				// determinstic을 위해 임시 삭제
+				if(!map->CollutionPos(x_,y_)/*  && !player->collution(coord_def((float)x_,(float)y_),player->GetView()) */)
 				{
 			        unit_list.push_back(New_Named(it->id, coord_def((float)x_, (float)y_), -1, 0));
 					break;

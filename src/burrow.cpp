@@ -75,16 +75,16 @@ void Burrow::CreateMonster(Brrow_Type type_)
 	switch(type_)
 	{
 	case BT_SMALL_ZOMBIE:
-		for(int i = rand_int(2,3) ; i>0 ; i--)
+		for(int i = rand_int(2,3,"Burrow::CreateMonster number of small zombies") ; i>0 ; i--)
 			mon_list.push_back(MON_WEAK_ZOMBIE);
 		return;
 	case BT_ZOMBIE_VIRUS:
-		for(int i = rand_int(2,3) ; i>0 ; i--)
-			mon_list.push_back(rand_int(0,1)?MON_ZOMBIE_VIRUS:MON_WEAK_ZOMBIE);
+		for(int i = rand_int(2,3,"Burrow::CreateMonster number of virus zombies") ; i>0 ; i--)
+			mon_list.push_back(rand_int(0,1,"Burrow::CreateMonster virus:weak zombie selector")?MON_ZOMBIE_VIRUS:MON_WEAK_ZOMBIE);
 		return;
 	case BT_ZOMBIE_VIRUS_SMALL:
-		for(int i = rand_int(2,3) ; i>0 ; i--)
-			mon_list.push_back(rand_int(0,1)?MON_ZOMBIE_SMALL:MON_ZOMBIE_VIRUS);
+		for(int i = rand_int(2,3,"Burrow::CreateMonster number of small virus zombies") ; i>0 ; i--)
+			mon_list.push_back(rand_int(0,1,"Burrow::CreateMonster small:virus zombie selector")?MON_ZOMBIE_SMALL:MON_ZOMBIE_VIRUS);
 		return;
 	default:
 		return;
@@ -94,8 +94,8 @@ void Burrow::SetMonPos(Game_Manager* gm_)
 {		
 	for(unsigned int i = 0; i<mon_list.size();)
 	{
-		int x_ = rand_int((int)(GetX()-range), (int)(GetX()+range));
-		int y_ = rand_int((int)(GetY()-range), (int)(GetY()+range));
+		int x_ = rand_int((int)(GetX()-range), (int)(GetX()+range), "Burrow::SetMonPos x");
+		int y_ = rand_int((int)(GetY()-range), (int)(GetY()+range), "Burrow::SetMonPos y");
 		if(x_<0 || x_>=gm_->map->GetWidth() || y_<0 || y_>=gm_->map->GetHeight()) 
 			continue;
 		if(!gm_->map->CollutionPos(x_,y_) && !gm_->map->CollutionPosToPos(coord_def((float)x_, (float)y_), GetPos()))

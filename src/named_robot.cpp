@@ -59,7 +59,7 @@ bool Named_robot::Reload(int num_)
 		{
 			SetDelay(Select_weapon(num_)->Reload(need_bullet));
 		}
-		current_weapon = rand_int(1,3);
+		current_weapon = rand_int(1,3,"Named_robot::Reload current_weapon");
 	}
 	return true;
 }

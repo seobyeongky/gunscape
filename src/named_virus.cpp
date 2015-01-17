@@ -15,7 +15,7 @@
 
 Named_virus::Named_virus(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
-count(rand_int(0,30))
+count(rand_int(0,30,"Named_virus::Named_virus count"))
 {
 
 }

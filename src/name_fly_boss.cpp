@@ -57,7 +57,7 @@ bool Named_fly_boss::Shot(Game_Manager* gm_, coord_def c, float focus_, int item
 		}
 		Unit* temp = new Mon_bug_child_fly(monster__bug_child_fly,this, target_, GetX(), GetY(), GetTeam(),200);
 		temp->SetAi(MS_NORMAL, NULL, 2);
-		temp->SetFlyAngle(GetAngle()+rand_float(-1.0f,1.0f));
+		temp->SetFlyAngle(GetAngle()+rand_float(-1.0f,1.0f,"Named_fly_boss::Shot delta angle"));
 		gm_->unit_list.push_back(temp);			
 		SetDelay(50.0f);
 		return true;

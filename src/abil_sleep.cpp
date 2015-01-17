@@ -60,7 +60,7 @@ bool Abil_sleep::EnterMap(Game_Manager* gm_, Player* player_, int level_)
 {
 	for(list<Unit*>::iterator it = gm_->unit_list.begin();it != gm_->unit_list.end();it++)
 	{
-		if(GetPercent()>=rand_int(1,100))
+		if(GetPercent()>=rand_int(1,100,"Abil_sleep::EnterMap percentage"))
 		{
 			(*it)->Sleep();
 		}

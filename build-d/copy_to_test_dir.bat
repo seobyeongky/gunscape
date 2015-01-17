@@ -1,1 +1,0 @@
-xcopy .\game-d.exe ..\test-d\bin\game.exe

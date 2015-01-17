@@ -52,8 +52,8 @@ bool Mon_big_zombie::Shot(Game_Manager* gm_, coord_def c, float focus_, int item
 				}
 				else
 				{
-					float angle__ = rand_float(0,D3DX_PI*2);
-					float range__ = rand_float(0,35.0f);
+					float angle__ = rand_float(0,D3DX_PI*2,"Mon_big_zombie::Shot angle");
+					float range__ = rand_float(0,35.0f,"Mon_big_zombie::Shot range");
 					c += coord_def(cos(angle__)*range__, sin(angle__)*range__);
 					gm_->shot_list.push_back(new Shot_rock(&tex_rock, this, 20+plus_sec_, 30, 4, 2.0f, 2.0f, 15, true, GetTeam(), GetPos(), c));
 					throws = false;
@@ -106,8 +106,8 @@ bool Mon_big_zombie::Throw(Game_Manager* gm_, coord_def c)
 					{
 						while(1)
 						{
-							float angle__ = rand_float(0,D3DX_PI*2);
-							float range__ = rand_float(0,35.0f);
+							float angle__ = rand_float(0,D3DX_PI*2,"Mon_big_zombie::Throw angle");
+							float range__ = rand_float(0,35.0f,"Mon_big_zombie::Throw range");
 							coord_def c_p_ = coord_def(cos(angle__)*range__, sin(angle__)*range__);
 							int i=-1;
 							int j=-1;

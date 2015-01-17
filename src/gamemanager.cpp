@@ -60,12 +60,10 @@ wstring wait_message;
 Game_Manager* Game_Manager::pInstance = NULL;
 HWND Game_Manager::handle = 0;
 
-int death_dump_ = 0;
-
 vector<pair<int, int>> dkey2num;
 
 Game_Manager::Game_Manager():
-level(0), state(0), scale(1.0f), heal_stack(0), sniper_mode(false), focus(0,0), player(NULL), next_portal(NULL), char_maker(NULL), Network_host(NULL), Network_client(NULL), map(NULL), key(NULL), direct(NULL),
+level(-1), state(0), scale(1.0f), heal_stack(0), sniper_mode(false), focus(0,0), player(NULL), next_portal(NULL), char_maker(NULL), Network_host(NULL), Network_client(NULL), map(NULL), key(NULL), direct(NULL),
 next_floor(false), full_text(), accum(0), command_send_ok(false), state_handle_count(0),
 wait_scene(false), otherview(false), sv_next_lv(false)
 {
@@ -211,7 +209,7 @@ void Game_Manager::GameMenu()
 	char_maker = new Character_Maker();
 	
 	StopBGM();
-	level = 0;
+	level = -1;
 	state = 0;
 }
 
@@ -297,8 +295,8 @@ coord_def Game_Manager::GetRandomPos()
 {
 	while(1)
 	{
-		int x_ = rand_int(0,map->GetWidth()-1);
-		int y_ = rand_int(0,map->GetHeight()-1);
+		int x_ = rand_int(0,map->GetWidth()-1,"Game_Manager::GetRandomPos x");
+		int y_ = rand_int(0,map->GetHeight()-1,"Game_Manager::GetRandomPos y");
 		if (IsValidPos(x_, y_))
 			return coord_def((float)x_, (float)y_);
 	}
@@ -357,7 +355,7 @@ bool Game_Manager::Heal_percent(bool box_)
 	else
 		heal_stack = 30;
 
-	int rand_ = rand_int(1,100);
+	int rand_ = rand_int(1,100,"Game_Manager::Heal_percent heal stack selector");
 	int percent_ = max(0,heal_stack-25)*10+(box_?10:1);
 
 	if(rand_<=percent_){
@@ -653,7 +651,7 @@ void Game_Manager::ConnectToServer()
 			}
 		}
 
-		if (level == 0)
+		if (level == -1)
 		{
 			for (auto & cl : clients)
 			{
@@ -689,7 +687,7 @@ void Game_Manager::ConnectToServer()
 			inbuf.clear();
 		}
 		HandleState();
-		state_handle_count = 5;
+		state_handle_count = 3;
 		command_send_ok = true;
 	});
 	
@@ -1022,13 +1020,6 @@ void Game_Manager::HandleState()
 		else
 			it++;
 	} 
-	if(death_dump_)
-	{
-		death_dump_--;
-	}
-	else
-	{
-	}
 
 	//À¯´Ö Ã³¸®
 	for(list<Unit*>::iterator it = unit_list.begin();it != unit_list.end(); )
@@ -1036,7 +1027,6 @@ void Game_Manager::HandleState()
 		Unit * unit = (*it);
 		if(unit->Action(this))
 		{
-			death_dump_= 3;
 			it = unit_list.erase(it);
 			
 			if (unit->isPlayer())

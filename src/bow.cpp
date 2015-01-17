@@ -66,8 +66,8 @@ void Bow::Passive(Game_Manager* gm_, Player* unit_, bool current_)
 		for(int i = 0;i<bunch;i++)
 		{
 			float speed__ = 1.0f+min(max(0,count-5),10)/10.0f;
-			float focus2_ = rand_float(-bow_state.focus, bow_state.focus);
-			float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.8f, 1.2f)*speed__;
+			float focus2_ = rand_float(-bow_state.focus, bow_state.focus, "Bow::Passive focus");
+			float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.8f, 1.2f, "Bow::Passive speed")*speed__;
 			float damage_ =  damage*GetDamegeApply()*(bow_state.User?bow_state.User->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_gun(&tex_gun, bow_state.User, damage_, sniper, GetPower(), GetMaxPower(), bow_state.team, bow_state.start, angle_+focus2_, speed2_, GetDistance(),slow_turn,slow_ratio,5));
 		}

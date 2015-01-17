@@ -188,6 +188,7 @@ namespace Server
 			break;
 
 		case CL2SV_COMMANDS:
+			assert(!cl_context.send && "클라이언트 중복 전송!!!");
 			if (cl_context.send)
 			{
 				ChatMsg_Manager::PushMessage(L"클라이언트(" + to_wstring((*it).key()) + L") 중복 전송");
@@ -273,7 +274,7 @@ namespace Server
 				if (IsGotAllCommands()) DelegateCommands();
 				if (NextLvOk()) SendNextLvAllow();
 			}
-			Sleep(20);
+			Sleep(1);
 		}
 
 		EndServer();

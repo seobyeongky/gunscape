@@ -48,12 +48,12 @@ void Ai_Stalker::Attack() //평상시의 움직임
 		if(target->isPlayer()){
 			if(!escape){
 				if(!left){
-					left += rand_int(-1,1);
+					left += rand_int(-1,1,"Ai_Stalker::Attack delta left");
 				}
 				else{
-					if(rand_int(0,1)<1)
-						left *= rand_int(-1,1);
-					close = rand_int(0,10);
+					if(rand_int(0,1,"Ai_Stalker::Attack selector left movement flipping selector")<1)
+						left *= rand_int(-1,1,"Ai_Stalker::Attack left movement flip selector");
+					close = rand_int(0,10,"Ai_Stalker::Attack close");
 				}
 				if(!isPlayerPinch()){
 					//플레이어의 위험을 감지한다.

@@ -1,5 +1,5 @@
 =======================================================
-	2,013년 11월 12일	22시 11분 50초의 기록
+	2,014년 6월 29일	21시 20분 56초의 기록
 =======================================================
 OPZNET server 시작
 OPZNET NetThread 실행
@@ -9,7 +9,4 @@ Greeter : TCP listener : new client accepted
 Greeter : HandleGuest : 새로운 손님(젭라)을 client로 승격 허용
 Greeter : TCP listener : 새로운 client 접속 요청
 Greeter : TCP listener : new client accepted
-Greeter : HandleGuest : 새로운 손님(BB)을 client로 승격 허용
-Greeter : TCP listener : 새로운 client 접속 요청
-Greeter : TCP listener : new client accepted
-Greeter : HandleGuest : 새로운 손님(CC)을 client로 승격 허용
+Greeter : HandleGuest : 새로운 손님(병기2)을 client로 승격 허용

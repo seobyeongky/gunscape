@@ -18,7 +18,7 @@ Shot_ice::Shot_ice(Texture* texture_, Unit* unit_, float damage_, float fire_pow
 Shot_base(texture_, unit_, team_, pos_, coord_def(cos(angle_)*speed_, sin(angle_)*speed_)), 
 damage(damage_), fire_power(fire_power_), decel(GetSpeed()/(float)time_), time(time_), valid(true), angle(angle_),
 size(1.0f), slow_turn(slow_turn_), slow_ratio(slow_ratio_),
-size_inc(size_inc_), color(D3DCOLOR_ARGB(150,0,rand_int(0,255),255))
+size_inc(size_inc_), color(D3DCOLOR_ARGB(150,0,rand_int(0,255,"Shot_ice::Shot_ice blue"),255))
 {
 }
 

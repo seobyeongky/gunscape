@@ -15,7 +15,8 @@
 
 Mon_zombie_ghost::Mon_zombie_ghost(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
-count(rand_int(0,399)), cycle(randA(1)*2-1)
+count(rand_int(0,399,"Mon_zombie_ghost::Mon_zombie_ghost count"))
+, cycle(randA(1,"Mon_zombie_ghost::Mon_zombie_ghost cycle selector")*2-1)
 {
 	if(cycle == 1)
 		SetInvisible(min(count,255));

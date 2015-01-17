@@ -35,8 +35,8 @@ float Rifle::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& st
 	{
 		for(int i = 0;i<bunch;i++)
 		{
-			float focus2_ = rand_float(-focus_, focus_);
-			float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.8f, 1.2f);
+			float focus2_ = rand_float(-focus_, focus_, "Rifle::Shot focus");
+			float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.8f, 1.2f, "Rifle::Shot speed");
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_gun(&tex_gun, User_, damage_, sniper, GetPower(), GetMaxPower(), team_, start_, angle_+focus2_, speed2_, GetDistance(),slow_turn,slow_ratio,2));
 		}

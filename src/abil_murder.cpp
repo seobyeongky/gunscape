@@ -57,7 +57,7 @@ int Abil_murder::GetHp()
 	case 2:
 		return 1;
 	case 3:
-		return rand_int(1,2);
+		return rand_int(1,2,"Abil_murder::GetHp hp gained");
 	case 4:
 		return 2;
 	case 5:

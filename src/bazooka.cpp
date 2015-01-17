@@ -34,7 +34,7 @@ float Bazooka::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& 
 	{
 		for(int i = 0;i<bunch;i++)
 		{
-			float focus2_ = rand_float(-focus_, focus_);
+			float focus2_ = rand_float(-focus_, focus_, "Bazooka::Shot focus");
 			float speed2_ = shot_speed*GetShotSpeedApply();
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_missile(&tex_missile, User_, damage_, GetPower(), GetMaxPower(), range, team_, start_, angle_+focus2_, speed2_, guided_range, guided_power, GetDistance()));

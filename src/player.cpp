@@ -52,7 +52,7 @@ bullet(4), max_bullet(4), ability_select(false), quick_select(false), quick_menu
 mon_sight_view(false), berserker(false), blood_reload(0), forget_count(600), 
 warning_time(1000), temp_invisible_turn(0), 
 mirror_damage(0), mirror_knockback(0), sniper(false), map_hack(false/*false*/), critical(0), your_switch(3),silencer(1.0f),
-goangle(0.f), walkcount(0), aimed_pos(), triggercount(0)
+goangle(0.f), walkcount(0), aimed_pos(), triggercount(0), destangle(0)
 {
 	for(int i =0 ;i<2;i++)
 		sub_weapon[i] = NULL;
@@ -1120,7 +1120,7 @@ void Player::MoveToDestAngle()
 	if (deltaangle < -D3DX_PI)
 		deltaangle += 2.f*D3DX_PI;
 
-	float anglespeed = 0.3f;
+	float anglespeed = .9f;
 	if (anglespeed > abs(deltaangle))
 	{
 		SetAngle(destangle);

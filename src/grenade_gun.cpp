@@ -49,8 +49,8 @@ float Grenade_gun::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_d
 				target_ = temp_ + start_;
 			}
 			{
-				float focus2_ = rand_float(0,sin(focus_)*distan_);
-				float rand_angle_ = rand_float(0,rand_float(0,D3DX_PI*2));
+				float focus2_ = rand_float(0,sin(focus_)*distan_,"Grenade_gun::Shot focus");
+				float rand_angle_ = rand_float(0,rand_float(0,D3DX_PI*2,"Grenade_gun::Shot inner angle"),"Grenade_gun::Shot outer angle");
 				coord_def temp_pos_ = coord_def(cos(rand_angle_)*focus2_,sin(rand_angle_)*focus2_);
 				target_+=temp_pos_;
 			}

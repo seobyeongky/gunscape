@@ -19,7 +19,8 @@
 Shot_grenade::Shot_grenade(Texture* texture_, Unit* unit_, int time_, float damage_, float power_, float max_power_, float range_, bool pentan_, int team_, coord_def pos_, coord_def target_):
 Shot_base(texture_, unit_, team_, pos_, (target_ - pos_)*2.0f/(float)time_), 
 damage(damage_), power(power_), max_power(max_power_), range(range_), pentan(pentan_), decel(-GetSpeed()/(float)time_),
-time(time_), const_time(time_), angle(rand_float(0,D3DX_PI*2)), angle_inc(rand_int(0,1)*2-1), valid(true), size(1.0f)
+time(time_), const_time(time_), angle(rand_float(0,D3DX_PI*2,"Shot_grenade::Shot_grenade angle"))
+, angle_inc(rand_int(0,1,"Shot_grenade::Shot_grenade angle_inc")*2-1), valid(true), size(1.0f)
 {
 }
 Shot_grenade::~Shot_grenade()

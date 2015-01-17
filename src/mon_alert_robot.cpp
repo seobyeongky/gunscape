@@ -17,7 +17,7 @@
 
 Mon_alert_robot::Mon_alert_robot(monster_infor& infor_, float x_, float y_, int team_, int time_):
 Monster(infor_, x_, y_, team_, time_),
-search_angle(rand_float(0,D3DX_PI*2)), count(0)
+search_angle(rand_float(0,D3DX_PI*2,"Mon_alert_robot::Mon_alert_robot search_angle")), count(0)
 {
 	SetTargetContinue(-1);
 	ApplyBackPanalty(0.0f);

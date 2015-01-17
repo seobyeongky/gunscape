@@ -31,7 +31,7 @@ float Fire2::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& st
 	float angle_ = GetAngleToTarget(start_, pos_);
 	if(UseBullet(1))
 	{
-		float focus2_ = rand_float(-focus_, focus_);
+		float focus2_ = rand_float(-focus_, focus_,"Fire2::Shot focus");
 		float speed2_ = shot_speed*GetShotSpeedApply();
 		float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 		gm_->shot_list.push_back(new Shot_refle_fire(&tex_fire, User_, damage_, fire_time, fire_damage, (int)GetDistance(), team_, start_, angle_+focus2_, speed2_, bounce));

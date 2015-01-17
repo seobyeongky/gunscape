@@ -490,7 +490,7 @@ Monster_Index GetStageMonster(int level, MAP_TYPE type_)
 	for(vector<mon_struct>::iterator it = group.begin(); it != group.end();it++)
 		total+=it->percent;
 
-	int rand_ = randA_1(total);
+	int rand_ = randA_1(total, "GetStageMonster group selector");
 	vector<mon_struct>::iterator it;
 	for(it = group.begin(); it != group.end(); it++)
 	{
@@ -509,15 +509,22 @@ void Game_Manager::MakeStageTypes()
 	for(int i = 0; i<SS_MAX_FLOOR; i++)
 		stage_kind[i] = SS_NORMAL;
 
+	int rnd0 = my_rand_int(1,3);
+	int rnd1 = my_rand_int(0,1);
+	int rnd2 = my_rand_int(1,2);
+
 	int kind_[3] = {0,0,0};
-	kind_[0] = rand_int(1,3);
-	kind_[1] = (kind_[0]==1? rand_int(2,3):(kind_[0]==2? rand_int(0,1)*2+1:rand_int(1,2)));
+	kind_[0] = rnd0;
+	kind_[1] = (kind_[0]==1? rnd1:(kind_[0]==2? rnd1*2+1:rnd2));
 	kind_[2] = 6-kind_[0]-kind_[1];
 
+	int rnd3 = my_rand_int(2,4);
+	int rnd4 = my_rand_int(6,8);
+	int rnd5 = my_rand_int(10,12);
 
-	stage_kind[rand_int(2,4)] = (SPECIAL_STAGE)kind_[0];
-	stage_kind[rand_int(6,8)] = (SPECIAL_STAGE)kind_[1];
-	stage_kind[rand_int(10,12)] = (SPECIAL_STAGE)kind_[2];
+	stage_kind[rnd3] = (SPECIAL_STAGE)kind_[0];
+	stage_kind[rnd4] = (SPECIAL_STAGE)kind_[1];
+	stage_kind[rnd5] = (SPECIAL_STAGE)kind_[2];
 	
 	stage_kind[15] = SS_LAST;
 }
@@ -532,7 +539,7 @@ void Game_Manager::MakeStage(int level)
 {
 #ifdef _DEBUG
 	FILE * out = nullptr;
-	fopen_s(&out, "my log.txt", "a");
+	fopen_s(&out, "stage_kinds.txt", "a");
 	if (out)
 	{
 		fprintf(out, "---level : %d / ", level);
@@ -544,19 +551,19 @@ void Game_Manager::MakeStage(int level)
 	switch(stage_kind[level]){
 	case SS_NORMAL:
 	default:
-		StageInit(level,MPT_NOMAL,rand_int(1,3),12);
+		StageInit(level,MPT_NOMAL,rand_int(1,3,"Game_Manager::MakeStage default stage number of boxes"),12);
 		break;
 	case SS_ZOMBIE:
-		StageInit(level,MPT_ZOMBIE,rand_int(1,3),16);
+		StageInit(level,MPT_ZOMBIE,rand_int(1,3,"Game_Manager::MakeStage zombie stage number of boxes"),16);
 		break;
 	case SS_HUMAN:
-		StageInit(level,MPT_HUMAN,rand_int(1,3),12);
+		StageInit(level,MPT_HUMAN,rand_int(1,3,"Game_Manager::MakeStage human stage number of boxes"),12);
 		break;
 	case SS_BUG:
-		StageInit(level,MPT_BUG,rand_int(1,3),12);
+		StageInit(level,MPT_BUG,rand_int(1,3,"Game_Manager::MakeStage bug stage number of boxes"),12);
 		break;
 	case SS_LAST:
-		StageInit(level,MPT_LAST,rand_int(1,3),60);
+		StageInit(level,MPT_LAST,rand_int(1,3,"Game_Manager::MakeStage last stage number of boxes"),60);
 		break;
 	}
 }
@@ -589,8 +596,8 @@ void Game_Manager::MovePlayersToStartPos(MAP_TYPE type_)
 		{			
 			while(1)
 			{
-				int dx = rand_int(-20, 20);
-				int dy = rand_int(-20, 20);
+				int dx = rand_int(-20, 20,"Game_Manager::MovePlayersToStartPos dx");
+				int dy = rand_int(-20, 20,"Game_Manager::MovePlayersToStartPos dy");
 		
 				coord_def c__ = coord_def(c_.x + dx, c_.y + dy);
 

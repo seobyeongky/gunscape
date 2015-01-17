@@ -852,7 +852,7 @@ Unit* New_Monster(Monster_Index kind_, coord_def pos_, int team_, int flag_, int
 			p_monster = &monster__bug_spider_baby;
 			temp = new Monster(*p_monster, pos_.x, pos_.y, team_, time_);
 			temp->SetInvincible(1);
-			temp->SetKnockback(4.0f, 4.0f, rand_float(0,D3DX_PI*2));
+			temp->SetKnockback(4.0f, 4.0f, rand_float(0,D3DX_PI*2,"New_Monster MON_SPIDER_BABY knockback"));
 			break;
 		case MON_BUG_FLING:
 			p_monster = &monster__bug_fling;

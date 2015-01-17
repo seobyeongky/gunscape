@@ -17,7 +17,8 @@
 Shot_fire::Shot_fire(Texture* texture_, Unit* unit_, float damage_, float fire_power_, int time_, int team_, coord_def pos_, float angle_, float speed_, float size_inc_):
 Shot_base(texture_, unit_, team_, pos_, coord_def(cos(angle_)*speed_, sin(angle_)*speed_)), 
 damage(damage_), fire_power(fire_power_), decel(GetSpeed()/(float)time_), time(time_), valid(true), angle(angle_),
-size(1.0f), size_inc(size_inc_), color(D3DCOLOR_ARGB(150,255,rand_int(0,255),rand_int(0,50)))
+size(1.0f), size_inc(size_inc_)
+, color(D3DCOLOR_ARGB(150,255,rand_int(0,255,"Shot_fire::Shot_fire blue"),rand_int(0,50,"Shot_fire::Shot_fire alpha")))
 {
 }
 

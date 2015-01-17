@@ -19,7 +19,8 @@ Shot_water::Shot_water(Texture* texture_, Unit* unit_, float damage_, float powe
 Shot_fire(texture_, unit_, damage_, 0, time_, team_, pos_, angle_, speed_, size_inc_),
 power(power_), max_power(max_power_)
 {
-	color = D3DCOLOR_ARGB(150,rand_int(0,150),rand_int(150,255),255);
+	color = D3DCOLOR_ARGB(150,rand_int(0,150,"Shot_water::Shot_water green"),
+		rand_int(150,255,"Shot_water::Shot_water blue"),255);
 }
 
 Shot_water::~Shot_water()

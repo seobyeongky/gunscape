@@ -16,7 +16,8 @@
 
 Shot_trap::Shot_trap(Texture* texture_, Unit* unit_, float slow_rate_, int slow_time_, int stop_time_, int time_, int team_, coord_def pos_):
 Shot_base(texture_, unit_, team_, pos_, coord_def()), 
-slow_rate(slow_rate_), slow_time(slow_time_), stop_time(stop_time_), time(time_), valid(true), angle(rand_float(0,D3DX_PI*2))
+slow_rate(slow_rate_), slow_time(slow_time_), stop_time(stop_time_), time(time_), valid(true)
+, angle(rand_float(0,D3DX_PI*2,"Shot_trap::Shot_trap angle"))
 {
 }
 Shot_trap::~Shot_trap()

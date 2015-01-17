@@ -37,8 +37,8 @@ float Double_pistol::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord
 		{
 			coord_def start_pos_ = start_+coord_def(cos(angle_+i/2*D3DX_PI)*distant,sin(angle_+i/2*D3DX_PI)*distant);
 			float angle2_ = GetAngleToTarget(start_pos_, pos_);
-			float focus2_ = rand_float(-focus_, focus_);
-			float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.9f, 1.1f);
+			float focus2_ = rand_float(-focus_, focus_,"Double_pistol::Shot focus");
+			float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.9f, 1.1f,"Double_pistol::Shot speed");
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_gun(&tex_gun, User_, damage_, sniper, GetPower(), GetMaxPower(), team_, start_pos_, angle2_+focus2_, speed2_, GetDistance(),0,0.0f, 2));
 		}

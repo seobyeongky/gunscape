@@ -38,10 +38,10 @@ float Sniper::Shot(Game_Manager* gm_, Unit* User_, int team_, const coord_def& s
 	{
 		for(int i = 0;i<bunch;i++)
 		{
-			float focus2_ = rand_float(-focus_, focus_);
+			float focus2_ = rand_float(-focus_, focus_,"Sniper::Shot focus");
 			if(User_->GetSniper())
 				focus2_ = 0;
-			float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.8f, 1.2f);
+			float speed2_ = shot_speed*GetShotSpeedApply()*rand_float(0.8f, 1.2f, "Sniper::Shot speed");
 			float damage_ =  damage*GetDamegeApply()*(User_?User_->GetAtkApply():1.0f);
 			gm_->shot_list.push_back(new Shot_sniper(&tex_gun, User_, damage_, sniper, GetPower(), GetMaxPower(), team_, start_, angle_+focus2_, GetDistance(), 50));
 		}

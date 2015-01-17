@@ -58,8 +58,8 @@ bool Shot_rock::Bomb(Game_Manager* gm_, float power_, float max_power_, float da
 	for(int i = 0; i< bunch ; i++)
 	{
 		coord_def temp_ = GetPos();
-		float angle__ = rand_float(0,D3DX_PI*2);
-		float range__ = rand_float(0,35.0f);
+		float angle__ = rand_float(0,D3DX_PI*2,"Shot_rock::Bomb angle");
+		float range__ = rand_float(0,35.0f,"Shot_rock::Bomb range");
 		temp_ += coord_def(cos(angle__)*range__, sin(angle__)*range__);
 		gm_->shot_list.push_back(new Shot_rock(&tex_small_rock, unit,50, damage/2, 0, power/2, max_power/2, range/2, pentan, team, GetPos(), temp_));
 	}

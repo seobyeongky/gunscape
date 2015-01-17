@@ -101,7 +101,9 @@ bool Shot_refle_fire::Action(Game_Manager* gm_)
 		count++;
 		if(count %3==0)
 		{
-			Effect_fire(gm_, GetPos()+coord_def(rand_float(-6,6),rand_float(-6,6)), 1.0f);
+			Effect_fire(gm_, GetPos()+coord_def(
+				rand_float(-6,6,"Shot_refle_fire::Action x")
+				,rand_float(-6,6,"Shot_refle_fire::Action y")), 1.0f);
 		}
 		if(time==count)
 			valid = false;

@@ -16,7 +16,10 @@
 
 Effect_Message::Effect_Message(Game_Manager* gm_, const char* message_, coord_def pos_):
 Shot_base(NULL, NULL, -1, pos_, coord_def(0, -0.5f)), 
-gm(gm_), message(message_), time(50), valid(true), color(D3DCOLOR_ARGB(255,randA(255), randA(255), randA(255)))
+gm(gm_), message(message_), time(50), valid(true)
+, color(D3DCOLOR_ARGB(255,randA(255,"Effect_Message::Effect_Message red")
+	, randA(255,"Effect_Message::Effect_Message green")
+	, randA(255,"Effect_Message::Effect_Message blue")))
 {
 }
 

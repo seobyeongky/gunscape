@@ -24,8 +24,9 @@ Game_Manager* Ai_Manager::gm = NULL;
 Map* Ai_Manager::map = NULL;
 
 Ai_Manager::Ai_Manager(monster_state state_, Monster* unit_, Unit* head_, int level_):
-state(state_), unit(unit_), head(head_), target(NULL), moving(false), search_time(0), targer_pos(), temp_pos(), level(min(5,level_)), count(rand_int(0,3000)),
-delay(0), approach(0), angle(rand_float(0,D3DX_PI*2)), unit_angle(angle)
+state(state_), unit(unit_), head(head_), target(NULL), moving(false), search_time(0), targer_pos(), temp_pos(), level(min(5,level_))
+, count(rand_int(0,3000,"Ai_Manager::Ai_Manager count")),
+delay(0), approach(0), angle(rand_float(0,D3DX_PI*2,"Ai_Manager::Ai_Manager angle")), unit_angle(angle)
 {
 	base_state_setup(state,MS_NORMAL);
 	base_state_setup(next_state,MS_NORMAL);
@@ -257,7 +258,7 @@ void Ai_Manager::Normal() //평상시의 움직임
 	unit->SetMoveAngle(unit_angle);
 	int move_ = unit->UnitMove(gm, unit->GetSpeed(unit->GetAngle())*0.3f, angle); 
 	if(move_ != 0 || count%1500 == 0)
-		angle = rand_float(0,D3DX_PI*2);
+		angle = rand_float(0,D3DX_PI*2,"Ai_Manager::Normal angle");
 }
 void Ai_Manager::Speed()
 {
@@ -290,7 +291,9 @@ bool Ai_Manager::TargetBilnding()
 			targer_pos = target->GetPos();
 		}
 		else if(state.GetState() != MS_ATTACK)
-			targer_pos = unit->GetPos() + coord_def((float)rand_int(-50,50),(float)rand_int(-50,50));
+			targer_pos = unit->GetPos() + coord_def(
+				(float)rand_int(-50,50,"Ai_Manager::TargetBilnding x")
+				,(float)rand_int(-50,50,"Ai_Manager::TargetBilnding y"));
 		target = NULL;
 		ok_ = true;
 	}

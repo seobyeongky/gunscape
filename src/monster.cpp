@@ -86,7 +86,7 @@ int Monster::SetDamage(Game_Manager* gm_, coord_def c, Damage_Type type_, float 
 		return 0;
 	
 	bool backstab_ok_ = false;
-	if(critical_ && critical_>rand_int(0,99))
+	if(critical_ && critical_>rand_int(0,99,"Monster::SetDamage backstab_ok selector"))
 	{
 		backstab_ok_ = true;
 	}
@@ -254,7 +254,7 @@ bool Monster::DropItem(Game_Manager* gm_)
 	}
 	if(gm_->GetCurrentStage() != MPT_NOMAL && gm_->GetCurrentStage() != MPT_LAST)
 	{
-		if(rand_int(0,2) < 1)
+		if(rand_int(0,2,"Monster::DropItem dropping selector") < 1)
 		{
 			gm_->item_list.push_back(new Item_bullet(GetPos(), 1000));
 			return true;

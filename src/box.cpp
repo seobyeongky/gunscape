@@ -51,18 +51,18 @@ bool Box::DropItem(Game_Manager* gm_)
 		drop_item_ = New_Instant(IK_HEAL, GetPos(), 1000);
 	}
 	else{
-		switch(rand_int(0,5))
+		switch(rand_int(0,5,"Box::DropItem main weapon selector"))
 		{
 		case 0:
-			drop_item_ = New_Main_Weapon((Main_Weapon_Kind)randA(MWK_MAX), GetPos(), -1);
+			drop_item_ = New_Main_Weapon((Main_Weapon_Kind)randA(MWK_MAX,"Box::DropItem main weapon selector"), GetPos(), -1);
 			break;
 		case 1:
 		case 2:
 		case 3:
-			drop_item_ = New_Sub_Weapon((Sub_Weapon_Kind)randA(SWK_MAX), NULL, GetPos(), -1);
+			drop_item_ = New_Sub_Weapon((Sub_Weapon_Kind)randA(SWK_MAX,"Box::DropItem sub weapon selector"), NULL, GetPos(), -1);
 			break;
 		case 4:
-			drop_item_ = New_Melee_Weapon((Melee_Kind)randA(MK_MAX), GetPos(), -1);
+			drop_item_ = New_Melee_Weapon((Melee_Kind)randA(MK_MAX,"Box::DropItem melee weapon selector"), GetPos(), -1);
 			break;
 		case 5:
 			drop_item_ = New_Instant(IK_BULLET, GetPos(), 1000);

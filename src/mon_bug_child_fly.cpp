@@ -52,7 +52,8 @@ bool Mon_bug_child_fly::Action_in(Game_Manager* gm_)
 		{
 			if(ai->GetState() == MS_NORMAL)
 			{
-				ai->Noise(coord_def((float)rand_int(0,gm_->map->GetWidth()),(float)rand_int(0,gm_->map->GetHeight())));
+				ai->Noise(coord_def((float)rand_int(0,gm_->map->GetWidth(),"Mon_bug_child_fly::Action_in noise x")
+					,(float)rand_int(0,gm_->map->GetHeight(),"Mon_bug_child_fly::Action_in noise y")));
 			}
 			ai->Action();
 		}
@@ -63,8 +64,8 @@ bool Mon_bug_child_fly::Action_in(Game_Manager* gm_)
 		fly_speed+=accel;
 		if(count<=0)
 		{
-			count = rand_int(50, 200);
-			accel = (rand_float(0.5f,2.5f) - fly_speed)/count;
+			count = rand_int(50, 200,"Mon_bug_child_fly::Action_in count");
+			accel = (rand_float(0.5f,2.5f,"Mon_bug_child_fly::Action_in accel") - fly_speed)/count;
 		}
 	}
 	else

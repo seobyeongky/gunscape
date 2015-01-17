@@ -52,7 +52,8 @@ bool Shot_virus::Action(Game_Manager* gm_)
 
 
 		if(count% (10/(int)(range/10)) == 0 && time - count > 30)
-			Effect_virus(gm_, GetPos()+coord_def(rand_float(-range,range),rand_float(-range,range)), 1.0f);
+			Effect_virus(gm_, GetPos()+coord_def(rand_float(-range,range,"Shot_virus::Action x")
+			, rand_float(-range,range,"Shot_virus::Action y")), 1.0f);
 
 
 		if(count == time)

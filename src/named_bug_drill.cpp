@@ -82,7 +82,8 @@ bool Named_bug_drill::Action_in(Game_Manager* gm_)
 			{
 				if(ai->GetState() == MS_NORMAL)
 				{			
-					ai->Noise(coord_def((float)rand_int(0,gm_->map->GetWidth()),(float)rand_int(0,gm_->map->GetHeight())));
+					ai->Noise(coord_def((float)rand_int(0,gm_->map->GetWidth(),"Named_bug_drill::Action_in x")
+						,(float)rand_int(0,gm_->map->GetHeight(),"Named_bug_drill::Action_in y")));
 				}
 				ai->Action();
 			}	
@@ -97,8 +98,8 @@ bool Named_bug_drill::Action_in(Game_Manager* gm_)
 		fly_speed+=accel;
 		if(count<=0)
 		{
-			count = rand_int(50, 200);
-			accel = (rand_float(0.5f,2.0f) - fly_speed)/count;
+			count = rand_int(50, 200,"Named_bug_drill::Action_in count");
+			accel = (rand_float(0.5f,2.0f,"Named_bug_drill::Action_in accel") - fly_speed)/count;
 		}
 	}
 	CommonAction(gm_);
@@ -155,8 +156,8 @@ bool Named_bug_drill::Shot(Game_Manager* gm_, coord_def c, float focus_, int ite
 		int ii=0;
 		for(ii=0;ii<10;ii++)
 		{
-			float angle__ = rand_float(0,D3DX_PI*2);
-			float range__ = rand_float(0,50.0f);
+			float angle__ = rand_float(0,D3DX_PI*2,"Named_bug_drill::Shot angle 0");
+			float range__ = rand_float(0,50.0f,"Named_bug_drill::Shot range 0");
 			coord_def c_p_ = coord_def(cos(angle__)*range__, sin(angle__)*range__);
 			int i=-1;
 			int j=-1;
@@ -194,8 +195,8 @@ bool Named_bug_drill::Shot(Game_Manager* gm_, coord_def c, float focus_, int ite
 
 			goal_ = GetPos()+coord_def(cos(angle_)*dis2_, sin(angle_)*dis2_);
 			
-			float angle__ = rand_float(0,D3DX_PI*2);
-			float range__ = rand_float(0,30.0f);
+			float angle__ = rand_float(0,D3DX_PI*2,"Named_bug_drill::Shot angle 1");
+			float range__ = rand_float(0,30.0f,"Named_bug_drill::Shot range 1");
 			coord_def c_p_ = coord_def(cos(angle__)*range__, sin(angle__)*range__);
 			
 			int i=-1;
